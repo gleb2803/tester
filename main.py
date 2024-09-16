@@ -8,7 +8,7 @@ import json
 
 
 root = tk.Tk()
-root.title("тестииииииииинг")
+root.title("тестииииииииинг ")
 root.geometry("2560x1440")
 
 
