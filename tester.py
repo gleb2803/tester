@@ -170,7 +170,7 @@ title.Size = UDim2.new(1,0,0,40)
 title.ZIndex = 2
 title.Font = tef
 title.FontSize = "Size18"
-title.Text = "PenguinGui v1 by glebmalish_2000 (Server) (Beta)"
+title.Text = "PenguinGui v1 by glebmalish_2000"
 title.TextColor3 = whit
 --           inside pages        --
 local acg = Instance.new("Frame")
@@ -5690,32 +5690,6 @@ label.Parent = pge1
 label.BackgroundColor3 = blak
 label.BorderColor3 = blue
 label.BorderSizePixel = 3
-label.Name = "Place Id label"
-label.Position = UDim2.new(0,0,0,264)
-label.Size = UDim2.new(0.5,0,0,25)
-label.ZIndex = 1
-label.Font = tef
-label.FontSize = "Size24"
-label.Text = "Place Id"
-label.TextColor3 = whit
-local textbox = Instance.new("TextLabel")
-textbox.Parent = pge1
-textbox.BackgroundColor3 = blak
-textbox.BorderColor3 = blue
-textbox.BorderSizePixel = 3
-textbox.Name = "Place Id"
-textbox.Position = UDim2.new(0,0,0,290)
-textbox.Size = UDim2.new(0.5,0,0,25)
-textbox.ZIndex = 1
-textbox.Font = tef
-textbox.FontSize = "Size18"
-textbox.Text = "9503966785"
-textbox.TextColor3 = whit
-local label = Instance.new("TextLabel")
-label.Parent = pge1
-label.BackgroundColor3 = blak
-label.BorderColor3 = blue
-label.BorderSizePixel = 3
 label.Name = "Music Pitch label"
 label.Position = UDim2.new(0.5,0,0,264)
 label.Size = UDim2.new(0.5,0,0,25)
@@ -5751,7 +5725,7 @@ label.Font = tef
 label.FontSize = "Size24"
 label.Text = "WalkSpeed"
 label.TextColor3 = whit
-local textbox = Instance.new("TextLabel")
+local textbox = Instance.new("TextButton")
 textbox.Parent = pge2
 textbox.BackgroundColor3 = blak
 textbox.BorderColor3 = blue
@@ -5778,7 +5752,7 @@ label.Font = tef
 label.FontSize = "Size24"
 label.Text = "JumpPower"
 label.TextColor3 = whit
-local textbox = Instance.new("TextLabel")
+local textbox = Instance.new("TextButton")
 textbox.Parent = pge2
 textbox.BackgroundColor3 = blak
 textbox.BorderColor3 = blue
@@ -5805,7 +5779,7 @@ label.Font = tef
 label.FontSize = "Size24"
 label.Text = "SpinSpeed"
 label.TextColor3 = whit
-local textbox = Instance.new("TextLabel")
+local textbox = Instance.new("TextButton")
 textbox.Parent = pge2
 textbox.BackgroundColor3 = blak
 textbox.BorderColor3 = blue
@@ -5819,6 +5793,35 @@ textbox.FontSize = "Size24"
 textbox.Text = "100"
 textbox.TextColor3 = whit
 
+local dragToggle = nil
+local dragSpeed = 0.25
+local dragStart = nil
+local startPos = nil
+local function updateInput(input)
+	local delta = input.Position - dragStart
+	local position = UDim2.new(startPos.X.Scale, startPos.X.Offset + delta.X,
+		startPos.Y.Scale, startPos.Y.Offset + delta.Y)
+	game:GetService("TweenService"):Create(ckaframe, TweenInfo.new(dragSpeed), {Position = position}):Play()
+end
+frame.Title.InputBegan:Connect(function(input)
+	if (input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch) then 
+		dragToggle = true
+		dragStart = input.Position
+		startPos = ckaframe.Position
+		input.Changed:Connect(function()
+			if input.UserInputState == Enum.UserInputState.End then
+				dragToggle = false
+			end
+		end)
+	end
+end)
+game:GetService("UserInputService").InputChanged:Connect(function(input)
+	if input.UserInputType == Enum.UserInputType.MouseMovement or input.UserInputType == Enum.UserInputType.Touch then
+		if dragToggle then
+			updateInput(input)
+		end
+	end
+end)
 
 CurrentPage = 1
 
