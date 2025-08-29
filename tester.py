@@ -5738,7 +5738,7 @@ textbox.Font = tef
 textbox.FontSize = "Size24"
 textbox.Text = "50"
 textbox.TextColor3 = whit
-textbox.Button1Down:Connect(function()
+textbox.MouseButton1Down:Connect(function()
 	local val = tonumber(textbox.Text)
 	if val >= 150 then
 		textbox.Text = "25"
@@ -5774,7 +5774,7 @@ textbox.Font = tef
 textbox.FontSize = "Size24"
 textbox.Text = "150"
 textbox.TextColor3 = whit
-textbox.Button1Down:Connect(function()
+textbox.MouseButton1Down:Connect(function()
 	local val = tonumber(textbox.Text)
 	if val >= 300 then
 		textbox.Text = "50"
@@ -5810,7 +5810,7 @@ textbox.Font = tef
 textbox.FontSize = "Size24"
 textbox.Text = "100"
 textbox.TextColor3 = whit
-textbox.Button1Down:Connect(function()
+textbox.MouseButton1Down:Connect(function()
 	local val = tonumber(textbox.Text)
 	if val >= 500 then
 		textbox.Text = "50"
