@@ -170,7 +170,7 @@ title.Size = UDim2.new(1,0,0,40)
 title.ZIndex = 2
 title.Font = tef
 title.FontSize = "Size18"
-title.Text = "PenguinGui v1 by glebmalish_2000"
+title.Text = "PenguinGui v1 by glebmalish_2000 (Server) (Beta)"
 title.TextColor3 = whit
 --           inside pages        --
 local acg = Instance.new("Frame")
@@ -5738,6 +5738,15 @@ textbox.Font = tef
 textbox.FontSize = "Size24"
 textbox.Text = "50"
 textbox.TextColor3 = whit
+textbox.Button1Down:Connect(function()
+	local val = tonumber(textbox.Text)
+	if val >= 150 then
+		textbox.Text = "25"
+	else
+		val += 25
+		textbox.Text = val
+	end
+end)
 
 local label = Instance.new("TextLabel")
 label.Parent = pge2
@@ -5765,6 +5774,15 @@ textbox.Font = tef
 textbox.FontSize = "Size24"
 textbox.Text = "150"
 textbox.TextColor3 = whit
+textbox.Button1Down:Connect(function()
+	local val = tonumber(textbox.Text)
+	if val >= 300 then
+		textbox.Text = "50"
+	else
+		val += 50
+		textbox.Text = val
+	end
+end)
 
 local label = Instance.new("TextLabel")
 label.Parent = pge2
@@ -5792,6 +5810,15 @@ textbox.Font = tef
 textbox.FontSize = "Size24"
 textbox.Text = "100"
 textbox.TextColor3 = whit
+textbox.Button1Down:Connect(function()
+	local val = tonumber(textbox.Text)
+	if val >= 500 then
+		textbox.Text = "50"
+	else
+		val += 50
+		textbox.Text = val
+	end
+end)
 
 local dragToggle = nil
 local dragSpeed = 0.25
