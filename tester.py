@@ -170,7 +170,7 @@ title.Size = UDim2.new(1,0,0,40)
 title.ZIndex = 2
 title.Font = tef
 title.FontSize = "Size18"
-title.Text = "PenguinGui v1 by glebmalish_2000"
+title.Text = "PenguinGui v1 by glebmalish_2000 (Server) (Beta)"
 title.TextColor3 = whit
 --           inside pages        --
 local acg = Instance.new("Frame")
