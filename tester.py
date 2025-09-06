@@ -5,6 +5,7 @@ whit = Color3.new(255/255,255/255,255/255)
 local cka = Instance.new("ScreenGui", game.Players./localplayer/.PlayerGui)
 cka.Name= "PenguinGui"
 cka.ResetOnSpawn = false
+cka.DisplayOrder = 1024
 local frame = Instance.new("Frame")
 frame.Parent = cka
 frame.BackgroundColor3 = blak
@@ -1805,38 +1806,39 @@ button.Parent = acg
 button.BackgroundColor3 = blak
 button.BorderColor3 = blue
 button.BorderSizePixel = 3
-button.Name = "RemoteEvent Finder"
+button.Name = "Remote Finder"
 button.Position = UDim2.new(0,0,0,165)
 button.Size = UDim2.new(0.5,0,0,30)
 button.ZIndex = 2
 button.Font = tef
 button.FontSize = "Size14"
-button.Text = "RemoteEvent Finder"
+button.Text = "Remote Finder"
 button.TextColor3 = whit
 button.TextWrapped = true
 button.MouseButton1Down:connect(function()
 	local RemoteEventObject
-	
+
 	local gui = Instance.new("ScreenGui",game.Players./localplayer/.PlayerGui)
-	gui.Name = "RemoteEvent Finder"
+	gui.Name = "Remote Finder"
 	local mainframe = Instance.new("Frame",gui)
 	mainframe.Name = "MainFrame"
 	mainframe.Position = UDim2.new(0.5,0,0.5,0)
-	mainframe.Size = UDim2.new(0,350,0,350)
+	mainframe.Size = UDim2.new(0,350,0,250)
 	mainframe.BackgroundTransparency = 0.5
 	mainframe.BackgroundColor3 = blak
 	mainframe.BorderSizePixel = 3
 	mainframe.BorderColor3 = blue
 	local scroll = Instance.new("ScrollingFrame",mainframe)
 	scroll.Position = UDim2.new(0,0,0,0)
-	scroll.Size = UDim2.new(0,200,0,300)
+	scroll.Size = UDim2.new(0,200,0,213)
 	scroll.BackgroundTransparency = 0.5
 	scroll.BackgroundColor3 = blak
 	scroll.BorderSizePixel = 3
 	scroll.BorderColor3 = blue
+	scroll.CanvasSize = UDim2.new(0,0,100,0)
 	local close = Instance.new("TextButton",mainframe)
-	close.Position = UDim2.new(0,0,0,303)
-	close.Size = UDim2.new(0,200,0,47)
+	close.Position = UDim2.new(0,0,0,217)
+	close.Size = UDim2.new(0,200,0,33)
 	close.BackgroundTransparency = 0.5
 	close.BackgroundColor3 = blak
 	close.BorderSizePixel = 3
@@ -1851,7 +1853,7 @@ button.MouseButton1Down:connect(function()
 	local infoframe = Instance.new("Frame",mainframe)
 	infoframe.Name = "InfoFrame"
 	infoframe.Position = UDim2.new(0,203,0,0)
-	infoframe.Size = UDim2.new(0,150,0,347)
+	infoframe.Size = UDim2.new(0,150,0,246)
 	infoframe.BackgroundTransparency = 0.5
 	infoframe.BackgroundColor3 = blak
 	infoframe.BorderSizePixel = 3
@@ -1869,7 +1871,7 @@ button.MouseButton1Down:connect(function()
 	infoname.Name = "InfoName"
 	infoname.TextWrapped = true
 	local fireserverbtn = Instance.new("TextButton",infoframe)
-	fireserverbtn.Position = UDim2.new(0,0,0.432,0)
+	fireserverbtn.Position = UDim2.new(0,0,0.5,0)
 	fireserverbtn.Size = UDim2.new(0,147,0,50)
 	fireserverbtn.BackgroundTransparency = 0.5
 	fireserverbtn.BackgroundColor3 = blak
@@ -1877,15 +1879,19 @@ button.MouseButton1Down:connect(function()
 	fireserverbtn.BorderColor3 = blue
 	fireserverbtn.TextColor3 = whit
 	fireserverbtn.Text = "FireServer"
-	fireserverbtn.TextSize = 18
+	fireserverbtn.TextSize = 14
 	fireserverbtn.Name = "FireServerButton"
 	fireserverbtn.MouseButton1Down:Connect(function()  
 		if RemoteEventObject ~= nil then
-			RemoteEventObject:FireServer()
+			if RemoteEventObject:IsA("RemoteEvent") then
+				RemoteEventObject:InvokeClient(game.Players./localplayer/)
+			elseif RemoteEventObject:IsA("RemoteFunction") then
+				RemoteEventObject:InvokeServer(game.Players./localplayer/)
+			end
 		end
 	end)
 	local updateBtn = Instance.new("TextButton",infoframe)
-	updateBtn.Position = UDim2.new(0,0,0.865,0)
+	updateBtn.Position = UDim2.new(0,0,0.812,0)
 	updateBtn.Size = UDim2.new(0,147,0,50)
 	updateBtn.BackgroundTransparency = 0.5
 	updateBtn.BackgroundColor3 = blak
@@ -1898,14 +1904,14 @@ button.MouseButton1Down:connect(function()
 	updateBtn.MouseButton1Down:Connect(function()
 		UpdateScrollingFrame()
 	end)
-	
+
 	function UpdateScrollingFrame ()
 		for i,v in pairs(scroll:GetChildren()) do
 			v:remove()
 		end
 		local pos = 0
 		for i,v in pairs(game:GetDescendants()) do
-			if v:IsA("RemoteEvent") then
+			if v:IsA("RemoteEvent") or v:IsA("RemoteFunction") then
 				local button = Instance.new("TextButton",scroll)
 				button.Position = UDim2.new(0,0,0,pos)
 				button.Size = UDim2.new(0,200,0,30)
@@ -1920,6 +1926,12 @@ button.MouseButton1Down:connect(function()
 				button.MouseButton1Down:Connect(function()
 					infoname.Text = "Full Name: " .. v:GetFullName()
 					RemoteEventObject = v
+					if v:IsA("RemoteEvent") then
+						fireserverbtn.Text = "FireClient"
+					elseif v:IsA("RemoteFunction") then
+						fireserverbtn.Text = "InvokeClient"
+					end
+					
 				end)
 				pos += 33
 			end
@@ -3067,324 +3079,24 @@ button.FontSize = "Size14"
 button.Text = "Sword"
 button.TextColor3 = whit
 button.MouseButton1Down:connect(function()
-	local sword = Instance.new("Tool")
-	sword.Parent = game.Players./localplayer/.Backpack
-	sword.Name = "ClassicSword"
-	sword.TextureId = "rbxasset://Textures/Sword128.png"
-	--sword.Grip.Orientation = Vector3.new(-90,-180,0)	
-	--sword.Grip.Position = Vector3.new(0,0,-1.5)
-	local handle = Instance.new("Part")
-	handle.Parent = sword
-	handle.Name = "Handle"
-	--handle.Color = Color3(99,95,98)
-	--handle.BrickColor = Color3(99,95,98)
-	--handle.Material = "Plasstic"
-	local sound = Instance.new("Sound")
-	sound.Parent = handle
-	sound.Name = "SwordLunge"
-	sound.SoundId = "http://www.roblox.com/asset/?id=12222208"
-	sound = Instance.new("Sound")
-	sound.Parent = handle
-	sound.Name = "SwordSlash"
-	sound.SoundId = "http://www.roblox.com/asset/?id=12222216"
-	sound = Instance.new("Sound")
-	sound.Parent = handle
-	sound.Name = "Unsheath"
-	sound.SoundId = "http://www.roblox.com/asset/?id=12222225"
-	local mesh = Instance.new("SpecialMesh")
-	mesh.Parent = handle
-	mesh.MeshId = "rbxasset://fonts/sword.mesh"
-	mesh.TextureId = "rbxasset://textures/SwordTexture.png"
-
-
-	sword.Equipped:Connect(function()
-		--Rescripted by Luckymaxer
-		--EUROCOW WAS HERE BECAUSE I MADE THE PARTICLES AND THEREFORE THIS ENTIRE SWORD PRETTY AND LOOK PRETTY WORDS AND I'D LIKE TO DEDICATE THIS TO MY FRIENDS AND HI LUCKYMAXER PLS FIX SFOTH SWORDS TY LOVE Y'ALl
-		--Updated for R15 avatars by StarWars
-		--Re-updated by TakeoHonorable
-		local player = game.Players./localplayer/
-		local character = player.Character or player.CharacterAdded:Wait()
-		Tool = character:WaitForChild("ClassicSword")
-		Handle = Tool:WaitForChild("Handle")
-
-		function Create(ty)
-			return function(data)
-				local obj = Instance.new(ty)
-				for k, v in pairs(data) do
-					if type(k) == 'number' then
-						v.Parent = obj
-					else
-						obj[k] = v
-					end
-				end
-				return obj
-			end
-		end
-
-		local BaseUrl = "rbxassetid://"
-
-		Players = game:GetService("Players")
-		Debris = game:GetService("Debris")
-		RunService = game:GetService("RunService")
-
-		DamageValues = {
-			BaseDamage = 5,
-			SlashDamage = 10,
-			LungeDamage = 30
-		}
-
-		--For R15 avatars
-		Animations = {
-			R15Slash = 522635514,
-			R15Lunge = 522638767
-		}
-
-		Damage = DamageValues.BaseDamage
-
-		Grips = {
-			Up = CFrame.new(0, 0, -1.70000005, 0, 0, 1, 1, 0, 0, 0, 1, 0),
-			Out = CFrame.new(0, 0, -1.70000005, 0, 1, 0, 1, -0, 0, 0, 0, -1)
-		}
-
-		Sounds = {
-			Slash = Handle:WaitForChild("SwordSlash"),
-			Lunge = Handle:WaitForChild("SwordLunge"),
-			Unsheath = Handle:WaitForChild("Unsheath")
-		}
-
-		ToolEquipped = false
-
-		--For Omega Rainbow Katana thumbnail to display a lot of particles.
-		for i, v in pairs(Handle:GetChildren()) do
-			if v:IsA("ParticleEmitter") then
-				v.Rate = 20
-			end
-		end
-
-		Tool.Grip = Grips.Up
-		Tool.Enabled = true
-
-		function IsTeamMate(Player1, Player2)
-			return (Player1 and Player2 and not Player1.Neutral and not Player2.Neutral and Player1.TeamColor == Player2.TeamColor)
-		end
-
-		function TagHumanoid(humanoid, player)
-			local Creator_Tag = Instance.new("ObjectValue")
-			Creator_Tag.Name = "creator"
-			Creator_Tag.Value = player
-			Debris:AddItem(Creator_Tag, 2)
-			Creator_Tag.Parent = humanoid
-		end
-
-		function UntagHumanoid(humanoid)
-			for i, v in pairs(humanoid:GetChildren()) do
-				if v:IsA("ObjectValue") and v.Name == "creator" then
-					v:Destroy()
-				end
-			end
-		end
-
-		function Blow(Hit)
-			if not Hit or not Hit.Parent or not CheckIfAlive() or not ToolEquipped then
-				return
-			end
-			local RightArm = Character:FindFirstChild("Right Arm") or Character:FindFirstChild("RightHand")
-			if not RightArm then
-				return
-			end
-			local RightGrip = RightArm:FindFirstChild("RightGrip")
-			if not RightGrip or (RightGrip.Part0 ~= Handle and RightGrip.Part1 ~= Handle) then
-				return
-			end
-			local character = Hit.Parent
-			if character == Character then
-				return
-			end
-			local humanoid = character:FindFirstChildOfClass("Humanoid")
-			if not humanoid or humanoid.Health == 0 then
-				return
-			end
-			local player = Players:GetPlayerFromCharacter(character)
-			if player and (player == Player or IsTeamMate(Player, player)) then
-				return
-			end
-			UntagHumanoid(humanoid)
-			TagHumanoid(humanoid, Player)
-			humanoid:TakeDamage(Damage)	
-		end
-
-
-		function Attack()
-			Damage = DamageValues.SlashDamage
-			Sounds.Slash:Play()
-
-			if Humanoid then
-				if Humanoid.RigType == Enum.HumanoidRigType.R6 then
-					local Anim = Instance.new("StringValue")
-					Anim.Name = "toolanim"
-					Anim.Value = "Slash"
-					Anim.Parent = Tool
-				elseif Humanoid.RigType == Enum.HumanoidRigType.R15 then
-					local Anim = Tool:FindFirstChild("R15Slash")
-					if Anim then
-						local Track = Humanoid:LoadAnimation(Anim)
-						Track:Play(0)
-					end
-				end
-			end	
-		end
-
-		function Lunge()
-			Damage = DamageValues.LungeDamage
-
-			Sounds.Lunge:Play()
-
-			if Humanoid then
-				if Humanoid.RigType == Enum.HumanoidRigType.R6 then
-					local Anim = Instance.new("StringValue")
-					Anim.Name = "toolanim"
-					Anim.Value = "Lunge"
-					Anim.Parent = Tool
-				elseif Humanoid.RigType == Enum.HumanoidRigType.R15 then
-					local Anim = Tool:FindFirstChild("R15Lunge")
-					if Anim then
-						local Track = Humanoid:LoadAnimation(Anim)
-						Track:Play(0)
-					end
-				end
-			end	
-	--[[
-	if CheckIfAlive() then
-		local Force = Instance.new("BodyVelocity")
-		Force.velocity = Vector3.new(0, 10, 0) 
-		Force.maxForce = Vector3.new(0, 4000, 0)
-		Debris:AddItem(Force, 0.4)
-		Force.Parent = Torso
-	end
-	]]
-
-			wait(0.2)
-			Tool.Grip = Grips.Out
-			wait(0.6)
-			Tool.Grip = Grips.Up
-
-			Damage = DamageValues.SlashDamage
-		end
-
-		Tool.Enabled = true
-		LastAttack = 0
-
-		function Activated()
-			if not Tool.Enabled or not ToolEquipped or not CheckIfAlive() then
-				return
-			end
-			Tool.Enabled = false
-			local Tick = RunService.Stepped:wait()
-			if (Tick - LastAttack < 0.2) then
-				Lunge()
-			else
-				Attack()
-			end
-			LastAttack = Tick
-			--wait(0.5)
-			Damage = DamageValues.BaseDamage
-			local SlashAnim = (Tool:FindFirstChild("R15Slash") or Create("Animation"){
-				Name = "R15Slash",
-				AnimationId = BaseUrl .. Animations.R15Slash,
-				Parent = Tool
-			})
-
-			local LungeAnim = (Tool:FindFirstChild("R15Lunge") or Create("Animation"){
-				Name = "R15Lunge",
-				AnimationId = BaseUrl .. Animations.R15Lunge,
-				Parent = Tool
-			})
-			Tool.Enabled = true
-		end
-
-		function CheckIfAlive()
-			return (((Player and Player.Parent and Character and Character.Parent and Humanoid and Humanoid.Parent and Humanoid.Health > 0 and Torso and Torso.Parent) and true) or false)
-		end
-
-		function Equipped()
-			Character = Tool.Parent
-			Player = Players:GetPlayerFromCharacter(Character)
-			Humanoid = Character:FindFirstChildOfClass("Humanoid")
-			Torso = Character:FindFirstChild("Torso") or Character:FindFirstChild("HumanoidRootPart")
-			if not CheckIfAlive() then
-				return
-			end
-			ToolEquipped = true
-			Sounds.Unsheath:Play()
-		end
-
-		function Unequipped()
-			Tool.Grip = Grips.Up
-			ToolEquipped = false
-		end
-
-		Tool.Activated:Connect(Activated)
-		Tool.Equipped:Connect(Equipped)
-		Tool.Unequipped:Connect(Unequipped)
-
-		Connection = Handle.Touched:Connect(Blow)
-	end)
+	game.InsertService:LoadAsset(47433):GetChildren()[1].Parent = game.Players./localplayer/.Backpack
 end)
 local button = Instance.new("TextButton")
 button.Parent = ws
 button.BackgroundColor3 = blak
 button.BorderColor3 = blue
 button.BorderSizePixel = 3
-button.Name = "Gun"
+button.Name = "HyperLazer Gun"
 button.Position = UDim2.new(0.5,0,0,33)
 button.Size = UDim2.new(0.5,0,0,30)
 button.ZIndex = 2
 button.Font = tef
 button.FontSize = "Size14"
-button.Text = "Gun"
+button.Text = "HyperLazer Gun"
 button.TextColor3 = whit
+button.TextWrapped = true
 button.MouseButton1Down:connect(function()
-	local tool = Instance.new("Tool",game.Players./localplayer/.Backpack)
-	tool.Name = "Gun"
-	tool.TextureId = "rbxassetid://5205790785"
-	tool.Grip = CFrame.new(0, 0, -0.5, 0,180,0,0)
-	local handle = Instance.new("Part",tool)
-	handle.Name = "Handle"
-	local mesh = Instance.new("SpecialMesh",handle)
-	mesh.MeshId = "rbxassetid://8712616442"
-	mesh.TextureId = "rbxassetid://8712616515"
-	mesh.Scale = Vector3.new(2,2,2)
-	local sound = Instance.new("Sound",handle)
-	sound.SoundId = "rbxassetid://1905367471"
-	sound.Volume = 1
-	local mouse = game.Players./localplayer/:GetMouse()
-
-	tool.Activated:Connect(function()
-		sound:Play()
-		local target = mouse.Target
-		if target ~= nil then
-			if target.Parent:WaitForChild("Humanoid",0.1) ~= nil then
-				if target.Name == "Head" then
-					local pos = target.Position
-					local hum = target.Parent:WaitForChild("Humanoid",0.1)
-					hum.Health = 0
-					target:Remove()
-					local model = Instance.new("Model",workspace)
-					model.Name = "Blood"
-					for i=1,10 do
-						local part = Instance.new("Part",model)
-						part.Color = Color3.new(1,0,0)
-						part.Size = Vector3.new(1,1,1)
-						part.Position = pos
-						part.Velocity = Vector3.new(math.random(-10,10),math.random(0,10),math.random(-10,10))
-					end
-				else
-					local hum = target.Parent:WaitForChild("Humanoid",0.1)
-					hum.Health -= 10
-				end
-			end
-		end
-	end)
+	game.InsertService:LoadAsset(130113146):GetChildren()[1].Parent = game.Players./localplayer/.Backpack
 end)
 local button = Instance.new("TextButton")
 button.Parent = ws
@@ -3522,241 +3234,7 @@ button.Text = "Subspace Tripmine"
 button.TextColor3 = whit
 button.TextWrapped = true
 button.MouseButton1Down:connect(function()
-	local tool = Instance.new("Tool",game.Players./localplayer/.Backpack)
-	tool.Name = "SubspaceTripmine"
-	tool.TextureId = "http://www.roblox.com/asset/?id=11987521"
-	local handle = Instance.new("Part",tool)
-	handle.Name = "Handle"
-	local Mesh = Instance.new("SpecialMesh",handle)
-	Mesh.TextureId = "http://www.roblox.com/asset/?id=11954766"
-	Mesh.MeshId = "http://www.roblox.com/asset/?id=11954776"
-	Mesh.Scale = Vector3.new(0.7,0.7,0.7)
-	Tool = tool
-
-	local Mines = {}
-
-	local calibration_time = 0.5 -- needs to be still/untouched for this long before calibrating
-	local cur_time = 0
-	local max_life = 120 -- these things last for 2 minutes on their own, once activated
-	local calibrated = false
-
-	local connection = nil
-
-
-	function plant(pos)
-
-		calibrated = false
-
-		local vCharacter = Tool.Parent
-		local vPlayer = game.Players:playerFromCharacter(vCharacter)
-
-		local spawnPos = vCharacter.PrimaryPart.Position
-
-
-		local bomb = Tool.Handle:Clone()
-		bomb.CanCollide = true
-		bomb.Transparency = 0
-		bomb.Position = pos
-		bomb.Size = Vector3.new(2,2,2)
-		bomb.Name = "SubspaceTripmine"
-		bomb.Locked = true
-
-
-		local creator_tag = Instance.new("ObjectValue")
-		creator_tag.Value = vPlayer
-		creator_tag.Name = "creator"
-		creator_tag.Parent = bomb
-
-		bomb.Parent = game.Workspace
-
-		Mine = bomb
-
-		DunDun = Instance.new("Sound")
-		DunDun.SoundId = "http://www.roblox.com/asset/?id=11984254"
-		DunDun.Parent = Mine
-
-		SubspaceExplosion = Instance.new("Sound")
-		SubspaceExplosion.SoundId = "http://www.roblox.com/asset/?id=11984351"
-		SubspaceExplosion.Parent = Mine
-
-		Calibrate = Instance.new("Sound")
-		Calibrate.SoundId = "http://www.roblox.com/asset/?id=11956590"
-		Calibrate.Looped = true
-		Calibrate.Parent = Mine
-		Calibrate:Play()
-
-		function activateMine(rootmine)
-			for i=0,1,0.1 do
-				rootmine.Transparency = i
-				wait(.05)
-			end
-			calibrated = true
-			Calibrate:Stop()
-		end
-
-		function pulse(rootmine)
-			DunDun:Play()
-
-			for i=.9,.5,-.1 do
-				rootmine.Transparency = i
-				wait(.05)
-			end
-
-			for i=.5,1,.1 do
-				rootmine.Transparency = i
-				wait(.05)
-			end
-		end
-
-		function explode(rootmine)
-			connection:disconnect()
-
-			for i=1,0,-.2 do
-				rootmine.Transparency = i
-				wait(.05)
-			end
-			SubspaceExplosion:Play()
-
-			local e = Instance.new("Explosion")
-			e.BlastRadius = 16
-			e.BlastPressure = 1000000
-			e.Position = rootmine.Position
-			e.Parent = rootmine
-
-			local creator = script.Parent:findFirstChild("creator")
-
-			e.Hit:connect(function(part, distance)  onPlayerBlownUp(part, distance, creator) end)
-
-
-			for i=0,1,.2 do
-				rootmine.Transparency = i
-				wait(.05)
-			end
-			wait(4)
-			rootmine:Remove()
-		end
-
-
-		function OnTouch(part)
-			if (calibrated == false) then
-				cur_time = 0
-			else
-				explode(Mine)
-			end
-		end
-
-
-		function onPlayerBlownUp(part, distance, creator)
-
-			if (part:getMass() < 300) then
-				part.BrickColor = BrickColor.new(1032)
-				local s = Instance.new("Sparkles")
-				s.Parent = part
-				game.Debris:AddItem(s, 5)
-			end
-
-
-			if creator ~= nil and part.Name == "Head" then
-				local humanoid = part.Parent.Humanoid
-				tagHumanoid(humanoid, creator)
-			end
-		end
-
-		function tagHumanoid(humanoid, creator)
-			-- tag does not need to expire iff all explosions lethal
-
-			if creator ~= nil then
-				local new_tag = creator:clone()
-				new_tag.Parent = humanoid
-			end
-		end
-
-		function untagHumanoid(humanoid)
-			if humanoid ~= nil then
-				local tag = humanoid:findFirstChild("creator")
-				if tag ~= nil then
-					tag.Parent = nil
-				end
-			end
-		end
-
-		connection = Mine.Touched:connect(OnTouch)
-
-		function update(rootmine)
-			if (calibrated == false) then
-				if (rootmine.Velocity.magnitude > .1) then
-					cur_time = 0
-				end
-
-				if (cur_time > calibration_time) then
-					activateMine(rootmine)
-				end
-			else
-				if rootmine.Transparency == 0 then
-					for i=0,1,0.1 do
-						rootmine.Transparency = i
-						wait(.05)
-					end
-				end
-				rootmine.Touched:connect(function()
-					if rootmine.Parent:FindFirstChild("Humanoid") then
-						explode(rootmine)
-					end
-				end)
-				-- calibrated mine
-				if (math.random(1,20) == 2) then
-					pulse(rootmine)
-				end
-
-				if (cur_time > max_life) then pulse(rootmine) rootmine:Remove() end
-			end
-		end
-
-
-		table.insert(Mines,Mine)
-		wait(1)
-		Mine.Touched:connect(function(part)
-			if part.Parent:WaitForChild("Humanoid",0.1) ~= nil then
-				explode(Mine)
-			end
-		end)
-	end
-
-
-	Tool.Enabled = true
-	function onActivated()
-
-		if not Tool.Enabled then
-			return
-		end
-
-		Tool.Enabled = false
-
-		local character = Tool.Parent;
-		local humanoid = character.Humanoid
-		if humanoid == nil then
-			print("Humanoid not found")
-			return 
-		end
-
-		local targetPos = humanoid.TargetPoint
-
-		Tool.Handle.Transparency = 1
-		plant(Tool.Handle.Position)
-		wait(3)
-		Tool.Handle.Transparency = 0
-		Tool.Enabled = true
-
-	end
-
-	tool.Activated:connect(onActivated)
-
-	while true do wait(0.25)
-		for i,v in Mines do
-			update(v)
-		end
-		cur_time = cur_time + 1
-	end
+	game.InsertService:LoadAsset(11999247):GetChildren()[1].Parent = game.Players./localplayer/.Backpack
 end)
 local button = Instance.new("TextButton")
 button.Parent = ws
