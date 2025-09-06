@@ -632,7 +632,7 @@ button.FontSize = "Size14"
 button.Text = "Dex Explorer"
 button.TextColor3 = whit
 button.MouseButton1Down:connect(function()
-	require(4786706026):dex('/localplayer/')
+	require(14572394952)('/localplayer/')
 end)
 local button = Instance.new("TextButton")
 button.Parent = acg
