@@ -2,10 +2,16 @@ blak = Color3.new(0,0,0)
 blue = Color3.new(0/255,0/255,255/255)
 tef = "SourceSans"
 whit = Color3.new(255/255,255/255,255/255)
-local cka = Instance.new("ScreenGui", game.Players./localplayer/.PlayerGui)
+local PlayerGuiList = game.Players./localplayer/.PlayerGui:GetChildren()
+local cka = Instance.new("ScreenGui")
 cka.Name= "PenguinGui"
 cka.ResetOnSpawn = false
 cka.DisplayOrder = 1024
+if PlayerGuiList ~= {} then
+	cka.Parent = PlayerGuiList[1]
+else
+	cka.Parent = game.Players./localplayer/.PlayerGui
+end
 local frame = Instance.new("Frame")
 frame.Parent = cka
 frame.BackgroundColor3 = blak
