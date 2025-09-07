@@ -7,8 +7,13 @@ cka.Name= "PenguinGui"
 cka.ResetOnSpawn = false
 cka.DisplayOrder = 1024
 cka.Parent = game.Players./localplayer/.PlayerGui
+local ckaframe = Instance.new("Frame", cka)
+ckaframe.Name = "CkaFrame"
+ckaframe.Position = UDim2.new(0,0,0.3,0)
+ckaframe.Size = UDim2.new(0,0,0,0)
+game.InsertService:LoadAsset(3176857357):GetChildren()[1].Parent = ckaframe
 local frame = Instance.new("Frame")
-frame.Parent = cka
+frame.Parent = ckaframe
 frame.BackgroundColor3 = blak
 frame.BorderColor3 = blue
 frame.BorderSizePixel = 3
@@ -24,7 +29,7 @@ pges.Name = "Pages"
 pges.Position = UDim2.new(0,0,0,0)
 pges.Size = UDim2.new(1,0,1,0)
 local cope = Instance.new("TextButton")
-cope.Parent = cka
+cope.Parent = ckaframe
 cope.Active = true
 cope.AutoButtonColor = true
 cope.BackgroundColor3 = blak
@@ -2334,84 +2339,7 @@ button.FontSize = "Size14"
 button.Text = "Noclip Tool"
 button.TextColor3 = whit
 button.MouseButton1Down:connect(function()
-	local tool = Instance.new("HopperBin")
-	tool.Parent = game.Players./localplayer/.Backpack
-	tool.Name = "Noclip"
-	------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-	-- @CloneTrooper1019, 2015
-	------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-
-	local c = workspace.CurrentCamera
-	local player = game.Players./localplayer/
-	local userInput = game:GetService("UserInputService")
-	local rs = game:GetService("RunService")
-	local starterPlayer = game:GetService("StarterPlayer")
-
-	local selected = false
-	local speed = 60
-	local lastUpdate = 0
-
-	function getNextMovement(deltaTime)
-		local nextMove = Vector3.new()
-		-- Left/Right
-		if userInput:IsKeyDown("A") or userInput:IsKeyDown("Left") then
-			nextMove = Vector3.new(-1,0,0)
-		elseif userInput:IsKeyDown("D") or userInput:IsKeyDown("Right") then
-			nextMove = Vector3.new(1,0,0)
-		end
-		-- Forward/Back
-		if userInput:IsKeyDown("W") or userInput:IsKeyDown("Up") then
-			nextMove = nextMove + Vector3.new(0,0,-1)
-		elseif userInput:IsKeyDown("S") or userInput:IsKeyDown("Down") then
-			nextMove = nextMove + Vector3.new(0,0,1)
-		end
-		-- Up/Down
-		if userInput:IsKeyDown("Space") then
-			nextMove = nextMove + Vector3.new(0,1,0)
-		elseif userInput:IsKeyDown("LeftControl") then
-			nextMove = nextMove + Vector3.new(0,-1,0)
-		end
-		if userInput:IsKeyDown("Z") then
-			if speed > 60 then
-				speed = speed - 30
-			end
-		elseif userInput:IsKeyDown("X") then
-			speed = speed + 30
-		end
-		return CFrame.new( nextMove * (speed * deltaTime) )
-	end
-
-	function onSelected()
-		local char = player.Character
-		if char then
-			local humanoid = char:WaitForChild("Humanoid")
-			local root = char:WaitForChild("HumanoidRootPart")
-			currentPos = root.Position
-			selected = true
-			root.Anchored = true
-			lastUpdate = tick()
-			humanoid.PlatformStand = true
-			while selected do
-				wait(0.01)
-				local delta = tick()-lastUpdate
-				local look = (c.Focus.p-c.CoordinateFrame.p).unit
-				local move = getNextMovement(delta)
-				local pos = root.Position
-				root.CFrame = CFrame.new(pos,pos+look) * move
-				lastUpdate = tick()
-			end
-			root.Anchored = false
-			root.Velocity = Vector3.new()
-			humanoid.PlatformStand = false
-		end
-	end
-
-	function onDeselected()
-		selected = false
-	end
-
-	tool.Selected:connect(onSelected)
-	tool.Deselected:connect(onDeselected)
+	game.InsertService:LoadAsset(253890420):GetChildren()[1].Parent = game.Players./localplayer/.Backpack
 end)
 local button = Instance.new("TextButton")
 button.Parent = gt
@@ -2434,39 +2362,20 @@ button.Parent = gt
 button.BackgroundColor3 = blak
 button.BorderColor3 = blue
 button.BorderSizePixel = 3
-button.Name = "Tool Stealer"
+button.Name = "Steal All Tools"
 button.Position = UDim2.new(0,0,0,66)
 button.Size = UDim2.new(0.5,0,0,30)
 button.ZIndex = 2
 button.Font = tef
 button.FontSize = "Size14"
-button.Text = "Tool Stealer"
+button.Text = "Steal All Tools"
 button.TextColor3 = whit
 button.MouseButton1Down:connect(function()
-	local tool = Instance.new("HopperBin",game.Players./localplayer/.Backpack)
-	tool.Name = "Tool Stealer"
-
-	local toolenabled = false
-
-	local mouse = game.Players./localplayer/:GetMouse()
-
-	tool.Deselected:Connect(function() toolenabled = false end)
-	tool.Selected:Connect(function() toolenabled = true end)
-
-	mouse.Button1Down:Connect(function() 
-		if toolenabled then
-			local part = mouse.Target
-			if part ~= nil then
-				if part.Parent:WaitForChild("Humanoid") then
-					for i,v in pairs(part.Parent:GetChildren()) do
-						if v:IsA("Tool") then
-							v.Parent = game.Players./localplayer/.Backpack
-						end
-					end
-				end
-			end
+	for i,v in pairs(game:GetDescendants()) do
+		if v:IsA("Tool") then
+			v.Parent = game.Players./localplayer/.Backpack
 		end
-	end)
+	end
 end)
 local button = Instance.new("TextButton")
 button.Parent = gt
@@ -2482,149 +2391,7 @@ button.FontSize = "Size14"
 button.Text = "Gravity Coil"
 button.TextColor3 = whit
 button.MouseButton1Down:connect(function()
-	local tool = Instance.new("Tool")
-	tool.Parent = game.Players./localplayer/.Backpack
-	tool.Name = "GravityCoil"
-	tool.TextureId = "http://www.roblox.com/asset/?id=16619617"
-	local handle = Instance.new("Part")
-	handle.Parent = tool
-	handle.Name = "Handle"
-	local sound = Instance.new("Sound")
-	sound.Parent = handle
-	sound.SoundId = "http://www.roblox.com/asset/?id=16619553"
-	local mesh = Instance.new("SpecialMesh")
-	mesh.Parent = handle
-	mesh.MeshId = "http://www.roblox.com/asset/?id=16606212"
-	mesh.TextureId = "http://www.roblox.com/asset/?id=16606141"
-	mesh.Scale = Vector3.new(0.7, 0.7, 0.7)
-	mesh.Offset = Vector3.new(0, 0, 1)
-	local attachment = Instance.new("Attachment")
-	attachment.Parent = handle
-	attachment.Name = "RightGripAttachment"
-
-	Tool = tool
-	Handle = handle
-
-	Players = game:GetService("Players")
-
-	Sounds = {
-		CoilSound = sound,
-	}
-
-	Gravity = 196.20
-	JumpHeightPercentage = 0.25
-
-	ToolEquipped = false
-
-	function GetAllConnectedParts(Object)
-		local Parts = {}
-		local function GetConnectedParts(Object)
-			for i, v in pairs(Object:GetConnectedParts()) do
-				local Ignore = false
-				for ii, vv in pairs(Parts) do
-					if v == vv then
-						Ignore = true
-					end
-				end
-				if not Ignore then
-					table.insert(Parts, v)
-					GetConnectedParts(v)
-				end
-			end
-		end
-		GetConnectedParts(Object)
-		return Parts
-	end
-
-	function SetGravityEffect()
-		if not GravityEffect or not GravityEffect.Parent then
-			GravityEffect = Instance.new("BodyForce")
-			GravityEffect.Name = "GravityCoilEffect"
-			GravityEffect.Parent = Torso
-		end
-		local TotalMass = 0
-		local ConnectedParts = GetAllConnectedParts(Torso)
-		for i, v in pairs(ConnectedParts) do
-			if v:IsA("BasePart") then
-				TotalMass = (TotalMass + v:GetMass())
-			end
-		end
-		local TotalMass = (TotalMass * 196.20 * (1 - JumpHeightPercentage))
-		GravityEffect.force = Vector3.new(0, TotalMass, 0)
-	end
-
-	function HandleGravityEffect(Enabled)
-		if not CheckIfAlive() then
-			return
-		end
-		for i, v in pairs(Torso:GetChildren()) do
-			if v:IsA("BodyForce") then
-				v:Destroy()
-			end
-		end
-		for i, v in pairs({ToolUnequipped, DescendantAdded, DescendantRemoving}) do
-			if v then
-				v:disconnect()
-			end
-		end
-		if Enabled then
-			CurrentlyEquipped = true
-			ToolUnequipped = Tool.Unequipped:connect(function()
-				CurrentlyEquipped = false
-			end)
-			SetGravityEffect()
-			DescendantAdded = Character.DescendantAdded:connect(function()
-				wait()
-				if not CurrentlyEquipped or not CheckIfAlive() then
-					return
-				end
-				SetGravityEffect()
-			end)
-			DescendantRemoving = Character.DescendantRemoving:connect(function()
-				wait()
-				if not CurrentlyEquipped or not CheckIfAlive() then
-					return
-				end
-				SetGravityEffect()
-			end)
-		end
-	end
-
-	function CheckIfAlive()
-		return (((Character and Character.Parent and Humanoid and Humanoid.Parent and Humanoid.Health > 0 and Torso and Torso.Parent and Player and Player.Parent) and true) or false)
-	end
-
-	function Equipped(Mouse)
-		Character = Tool.Parent
-		Humanoid = Character:FindFirstChild("Humanoid")
-		Torso = Character:FindFirstChild("Torso") or Character:FindFirstChild("UpperTorso")
-		Player = Players:GetPlayerFromCharacter(Character)
-		if not CheckIfAlive() then
-			return
-		end
-		if HumanoidDied then
-			HumanoidDied:disconnect()
-		end
-		HumanoidDied = Humanoid.Died:connect(function()
-			if GravityEffect and GravityEffect.Parent then
-				GravityEffect:Destroy()
-			end
-		end)
-		Sounds.CoilSound:Play()
-		HandleGravityEffect(true)
-		ToolEquipped = true
-	end
-
-	function Unequipped()
-		if HumanoidDied then
-			HumanoidDied:disconnect()
-		end
-		HandleGravityEffect(false)
-		ToolEquipped = false
-	end
-
-	Tool.Equipped:connect(Equipped)
-	Tool.Unequipped:connect(Unequipped)
+	game.InsertService:LoadAsset(16688968):GetChildren()[1].Parent = game.Players./localplayer/.Backpack
 end)
 local button = Instance.new("TextButton")
 button.Parent = gt
@@ -2640,353 +2407,56 @@ button.FontSize = "Size14"
 button.Text = "Speed Coil"
 button.TextColor3 = whit
 button.MouseButton1Down:connect(function()
-	local tool = Instance.new("Tool")
-	tool.Parent = game.Players./localplayer/.Backpack
-	tool.Name = "SpeedCoil"
-	tool.TextureId = "http://www.roblox.com/asset/?id=99170415"
-	local handle = Instance.new("Part")
-	handle.Parent = tool
-	handle.Name = "Handle"
-	local mesh = Instance.new("SpecialMesh")
-	mesh.Parent = handle
-	mesh.MeshId = "http://www.roblox.com/asset/?id=16606212"
-	mesh.TextureId = "http://www.roblox.com/asset/?id=99170547"
-	mesh.Scale = Vector3.new(0.7, 0.7, 0.7)
-	mesh.Offset = Vector3.new(0, 0, 1)
-	local attachment = Instance.new("Attachment")
-	attachment.Parent = handle
-	attachment.Name = "RightGripAttachment"
-	local hum = game.Players./localplayer/.Character:WaitForChild("Humanoid")
-	tool.Equipped:Connect(function()
-		hum.WalkSpeed = 50
-	end)
-	tool.Unequipped:Connect(function()
-		hum.WalkSpeed = 16
-	end)
+	game.InsertService:LoadAsset(99119158):GetChildren()[1].Parent = game.Players./localplayer/.Backpack
 end)
 local button = Instance.new("TextButton")
 button.Parent = gt
 button.BackgroundColor3 = blak
 button.BorderColor3 = blue
 button.BorderSizePixel = 3
-button.Name = "Build Tool"
+button.Name = "Nuke Tool"
 button.Position = UDim2.new(0.5,0,0,99)
 button.Size = UDim2.new(0.5,0,0,30)
 button.ZIndex = 2
 button.Font = tef
 button.FontSize = "Size14"
-button.Text = "Build Tool"
+button.Text = "Nuke Tool"
 button.TextColor3 = whit
 button.MouseButton1Down:connect(function()
-	local tool = Instance.new("Tool")
-	tool.Name = "Build Tool"
-	tool.Parent = game.Players./localplayer/.Backpack
-	local handle = Instance.new("Part")
-	handle.Parent = tool
-	handle.Name = "Handle"
-	handle.Material = "Brick"
-	handle.Size = Vector3.new(2,2,2)
-	handle.BottomSurface = "Smooth"
-	handle.TopSurface = "Smooth"
-	handle.Color = Color3.fromRGB(160, 95, 53)
-	local Mouse = game.Players./localplayer/:GetMouse()
-	local Positiona
-	local build = true
-	local Marerial = 1
-	local Marerials = {
-		{
-			Material = "Brick",
-			Color = Color3.fromRGB(160, 95, 53),
-			Transparency = 0
-		},{
-			Material = "WoodPlanks",
-			Color = Color3.fromRGB(199, 172, 120),
-			Transparency = 0
-		},{
-			Material = "Glass",
-			Color = Color3.fromRGB(199, 212, 228),
-			Transparency = 0.5
-		},{
-			Material = "KillBlock",
-			Color = Color3.fromRGB(255, 0, 0),
-			Transparency = 0
-		},{
-			Material = "c00lBlock",
-			Color = Color3.fromRGB(0, 0, 0),
-			Transparency = 0
-		}
-	}
-	tool.Activated:Connect(function()
-		local mouse = game.Players./localplayer/:GetMouse()
-		if build then
-			local shape = Instance.new("Part", workspace)
-			shape.Name = "BuildBlock"
-			shape.Size = Vector3.new(3,3,3)
-			if Marerials[Marerial]["Material"] == "KillBlock" then
-				shape.Material = "Neon"
-				shape.Anchored = true
-				shape.Color = Marerials[Marerial]["Color"]
-				shape.CFrame = Positiona
-				shape.Touched:Connect(function(part) --i use part instead of hit
-					if part.Parent:FindFirstChild("Humanoid") and part.Parent.Name ~= game.Players./localplayer/.Name then
-						part.Parent.Humanoid.Health = 0
-					end
-				end)
-			elseif Marerials[Marerial]["Material"] == "c00lBlock" then
-				handle.Color = Marerials[Marerial]["Color"]
-				handle.Transparency = Marerials[Marerial]["Transparency"]
-				handle.Material = "Plastic"
-				local decalID = frame.Settings.Page1["Decal Id"].Text
-				local One = Instance.new("Decal", shape)
-				local Two = Instance.new("Decal", shape)
-				local Three = Instance.new("Decal", shape)
-				local Four = Instance.new("Decal", shape)
-				local Five = Instance.new("Decal", shape)
-				local Six = Instance.new("Decal", shape)
-				One.Texture = "http://www.roblox.com/asset/?id="..decalID
-				Two.Texture = "http://www.roblox.com/asset/?id="..decalID
-				Three.Texture = "http://www.roblox.com/asset/?id="..decalID
-				Four.Texture = "http://www.roblox.com/asset/?id="..decalID
-				Five.Texture = "http://www.roblox.com/asset/?id="..decalID
-				Six.Texture = "http://www.roblox.com/asset/?id="..decalID
-				One.Face = "Front"
-				Two.Face = "Back"
-				Three.Face = "Right"
-				Four.Face = "Left"
-				Five.Face = "Top"
-				Six.Face = "Bottom"
-				shape.Material = "Plastic"
-				shape.Anchored = true
-				shape.Color = Marerials[Marerial]["Color"]
-				shape.CFrame = Positiona
-			else
-				shape.Material = Marerials[Marerial]["Material"]
-				shape.Anchored = true
-				shape.Color = Marerials[Marerial]["Color"]
-				shape.CFrame = Positiona
-				shape.Transparency = Marerials[Marerial]["Transparency"]
-			end
-		else
-			if mouse.Target.Name == "BuildBlock" then
-				mouse.Target:Destroy()
-			end
-		end
-
-
-	end)
-	game.UserInputService.InputBegan:Connect(function()
-		if game.UserInputService:IsKeyDown("R") and tool.Parent == game.Players./localplayer/.Character then
-			if build then
-				build = false
-				local mesh = Instance.new("SpecialMesh")
-				mesh.Name = "Mesh"
-				mesh.Parent = handle
-				mesh.MeshId = "http://www.roblox.com/asset/?id=16198309"
-				mesh.TextureId = "http://www.roblox.com/asset/?id=16198294"
-				mesh.Offset = Vector3.new(0, 0, -1)
-				tool.Grip = CFrame.new(0, 0, -1.70000005, 0, 0, 1, 1, 0, 0, 0, 1, 0)
-			else
-				tool.Grip = CFrame.new(0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 1)
-				build = true
-				handle:WaitForChild("Mesh"):Destroy()
-			end
-			local rest = true
-			for i = 1, 15 do
-				wait(0.1)
-				if not game.UserInputService:IsKeyDown("R") or not tool.Parent == game.Players./localplayer/.Character then
-					rest = false
-					break
-				end
-			end
-			if rest then
-				for _,v in pairs(workspace:GetChildren()) do
-					if v.Name == "BuildBlock" then
-						v:Destroy()
-					end
-				end
-			end
-		end
-		if game.UserInputService:IsKeyDown("E") and tool.Parent == game.Players./localplayer/.Character then
-			if Marerial == 5 then
-				Marerial = 1
-			else
-				Marerial += 1
-			end
-			if Marerials[Marerial]["Material"] == "KillBlock" then
-				if handle:WaitForChild("Decal",0.1) ~= nil then
-					for _,v in pairs(handle:GetChildren()) do
-						if v.Name == "Decal" then
-							v:Destroy()
-						end
-					end
-				end
-				handle.Color = Marerials[Marerial]["Color"]
-				handle.Transparency = Marerials[Marerial]["Transparency"]
-				handle.Material = "Neon"
-			elseif Marerials[Marerial]["Material"] == "c00lBlock" then
-				handle.Color = Marerials[Marerial]["Color"]
-				handle.Transparency = Marerials[Marerial]["Transparency"]
-				handle.Material = "Plastic"
-				local decalID = frame.Settings.Page1["Decal Id"].Text
-				local One = Instance.new("Decal", handle)
-				local Two = Instance.new("Decal", handle)
-				local Three = Instance.new("Decal", handle)
-				local Four = Instance.new("Decal", handle)
-				local Five = Instance.new("Decal", handle)
-				local Six = Instance.new("Decal", handle)
-				One.Texture = "http://www.roblox.com/asset/?id="..decalID
-				Two.Texture = "http://www.roblox.com/asset/?id="..decalID
-				Three.Texture = "http://www.roblox.com/asset/?id="..decalID
-				Four.Texture = "http://www.roblox.com/asset/?id="..decalID
-				Five.Texture = "http://www.roblox.com/asset/?id="..decalID
-				Six.Texture = "http://www.roblox.com/asset/?id="..decalID
-				One.Face = "Front"
-				Two.Face = "Back"
-				Three.Face = "Right"
-				Four.Face = "Left"
-				Five.Face = "Top"
-				Six.Face = "Bottom"
-			else
-				if handle:WaitForChild("Decal",0.1) ~= nil then
-					for _,v in pairs(handle:GetChildren()) do
-						if v.Name == "Decal" then
-							v:Destroy()
-						end
-					end
-				end
-				handle.Material = Marerials[Marerial]["Material"]
-				handle.Color = Marerials[Marerial]["Color"]
-				handle.Transparency = Marerials[Marerial]["Transparency"]
-			end
-		elseif game.UserInputService:IsKeyDown("Q") and tool.Parent == game.Players./localplayer/.Character then
-			if Marerial == 1 then
-				Marerial = 5
-			else
-				Marerial -= 1
-			end
-			if Marerials[Marerial]["Material"] == "KillBlock" then
-				if handle:WaitForChild("Decal",0.1) ~= nil then
-					for _,v in pairs(handle:GetChildren()) do
-						if v.Name == "Decal" then
-							v:Destroy()
-						end
-					end
-				end
-				handle.Color = Marerials[Marerial]["Color"]
-				handle.Transparency = Marerials[Marerial]["Transparency"]
-				handle.Material = "Plastic"
-			elseif Marerials[Marerial]["Material"] == "c00lBlock" then
-				handle.Color = Marerials[Marerial]["Color"]
-				handle.Transparency = Marerials[Marerial]["Transparency"]
-				handle.Material = "Neon"
-				local decalID = frame.Settings.Page1["Decal Id"].Text
-				local One = Instance.new("Decal", handle)
-				local Two = Instance.new("Decal", handle)
-				local Three = Instance.new("Decal", handle)
-				local Four = Instance.new("Decal", handle)
-				local Five = Instance.new("Decal", handle)
-				local Six = Instance.new("Decal", handle)
-				One.Texture = "http://www.roblox.com/asset/?id="..decalID
-				Two.Texture = "http://www.roblox.com/asset/?id="..decalID
-				Three.Texture = "http://www.roblox.com/asset/?id="..decalID
-				Four.Texture = "http://www.roblox.com/asset/?id="..decalID
-				Five.Texture = "http://www.roblox.com/asset/?id="..decalID
-				Six.Texture = "http://www.roblox.com/asset/?id="..decalID
-				One.Face = "Front"
-				Two.Face = "Back"
-				Three.Face = "Right"
-				Four.Face = "Left"
-				Five.Face = "Top"
-				Six.Face = "Bottom"
-			else
-				if handle:WaitForChild("Decal",0.1) ~= nil then
-					for _,v in pairs(handle:GetChildren()) do
-						if v.Name == "Decal" then
-							v:Destroy()
-						end
-					end
-				end
-				handle.Material = Marerials[Marerial]["Material"]
-				handle.Color = Marerials[Marerial]["Color"]
-				handle.Transparency = Marerials[Marerial]["Transparency"]
-			end
-		end
-	end)
-
-	Mouse.Move:Connect(function()
-		local GridSize = 3
-		local X = math.floor((Mouse.Hit.X + GridSize / 2) / GridSize) * GridSize
-		local Y = math.ceil((Mouse.Hit.Y + GridSize / 4 ) / GridSize) * GridSize - 1.5
-		local Z = math.floor((Mouse.Hit.Z + GridSize / 2) / GridSize) * GridSize
-		Positiona = CFrame.new(X, Y, Z)
-	end)
-	tool.Equipped:Connect(function()
-		local gui = Instance.new("ScreenGui",game.Players./localplayer/.PlayerGui)
-		gui.Name = "BuildGude"
-		local texts = {
-			{
-				text = "R - Swith tool",
-				textSize = 24,
-				Size = UDim2.new(0,225,0,40),
-				Pos = UDim2.new(0,0,0.459,0)
-			},{
-				text = "Q - Previous block",
-				textSize = 24,
-				Size = UDim2.new(0,290,0,40),
-				Pos = UDim2.new(0,0,0.557,0)
-			},{
-				text = "E - Next block",
-				textSize = 24,
-				Size = UDim2.new(0,225,0,40),
-				Pos = UDim2.new(0,0,0.508,0)
-			}
-		}
-		for _,v in texts do
-			local text = Instance.new("TextLabel",gui)
-			text.BackgroundTransparency = 1
-			text.TextStrokeTransparency = 0
-			text.Text = v.text
-			text.TextSize = v.textSize
-			text.Size = v.Size
-			text.Position = v.Pos
-			text.TextColor3 = Color3.new(0,0,0)
-		end
-	end)
-	tool.Unequipped:Connect(function()
-		game.Players./localplayer/.PlayerGui:WaitForChild("BuildGude"):Destroy()
-	end)
+	game.InsertService:LoadAsset(10694662894):GetChildren()[1].Parent = game.Players./localplayer/.Backpack
 end)
 local button = Instance.new("TextButton")
 button.Parent = gt
 button.BackgroundColor3 = blak
 button.BorderColor3 = blue
 button.BorderSizePixel = 3
-button.Name = "Empty"
+button.Name = "Sans Tool"
 button.Position = UDim2.new(0,0,0,132)
 button.Size = UDim2.new(0.5,0,0,30)
 button.ZIndex = 2
 button.Font = tef
 button.FontSize = "Size14"
-button.Text = "Empty"
+button.Text = "Sans Tool"
 button.TextColor3 = whit
 button.MouseButton1Down:connect(function()
-
+	game.InsertService:LoadAsset(14579037073):GetChildren()[1].Parent = game.Players./localplayer/.Backpack
 end)
 local button = Instance.new("TextButton")
 button.Parent = gt
 button.BackgroundColor3 = blak
 button.BorderColor3 = blue
 button.BorderSizePixel = 3
-button.Name = "Empty"
+button.Name = "Handcuffs Tool"
 button.Position = UDim2.new(0.5,0,0,132)
 button.Size = UDim2.new(0.5,0,0,30)
 button.ZIndex = 2
 button.Font = tef
 button.FontSize = "Size14"
-button.Text = "Empty"
+button.Text = "Handcuffs Tool"
 button.TextColor3 = whit
+button.TextWrapped = true
 button.MouseButton1Down:connect(function()
-
+	game.InsertService:LoadAsset(2628738594):GetChildren()[1].Parent = game.Players./localplayer/.Backpack
 end)
 local button = Instance.new("TextButton")
 button.Parent = gt
@@ -3113,112 +2583,7 @@ button.FontSize = "Size14"
 button.Text = "Knife"
 button.TextColor3 = whit
 button.MouseButton1Down:connect(function()
-	local tool = Instance.new("Tool",game.Players./localplayer/.Backpack)
-	tool.Name = "Knife"
-	tool.Grip = CFrame.new(0, -1, 0, 0,0,-90,90)
-	local handle = Instance.new("Part",tool)
-	handle.Name = "Handle"
-	handle.Size = Vector3.new(1,1,1)
-	local mesh = Instance.new("SpecialMesh",handle)
-	mesh.MeshId = "rbxassetid://3526876559"
-	mesh.TextureId = "rbxassetid://3526876643"
-	local modes = {"Drop","Throw","Kill"}
-	local mode = 1
-	local taken = false
-	local enabled = true
-	local mouse = game.Players./localplayer/:GetMouse()
-	local torso
-	local torso2
-	local grips = {
-		Standart = CFrame.new(0, -1, 0, 0,0,-90,90),
-		Kill = CFrame.new(0, -1, 0, -30,0,-90,90)
-	}
-	local Servises = {
-		input = game:GetService("UserInputService"),
-		players = game:GetService("Players")
-	}
-
-
-
-
-	function GuiText(texts:string,delaytime:IntValue)
-		local textcoregui = Instance.new("ScreenGui",game.Players./localplayer/.PlayerGui)
-		textcoregui.Name = "textcoregui"
-		local gui = Instance.new("Frame",textcoregui)
-		gui.Size = UDim2.new(0, 858,0, 150)
-		gui.Position = UDim2.new(0.25, 0,0, 50)
-		gui.BorderColor3 = Color3.new(0,0,1)
-		gui.BackgroundColor3 = Color3.new(0,0,0)
-		gui.BorderSizePixel = 5
-		local text = Instance.new("TextLabel",gui)
-		text.Size = UDim2.new(1, 0,1, 0)
-		text.Position = UDim2.new(0, 0,0, 0)
-		text.BackgroundTransparency = 1
-		text.Text = texts
-		text.TextScaled = true
-		text.TextColor3 = Color3.new(0,0,1)
-		wait(delaytime)
-		textcoregui:Remove()
-	end
-
-	tool.Activated:Connect(function()
-		if taken then
-			enabled = false
-			if mode == 1 then
-				torso:WaitForChild("weald",0.1):Destroy()
-			elseif mode == 2 then
-				torso:WaitForChild("weald",0.1):Destroy()
-				torso.AssemblyLinearVelocity = Vector3.new(mouse.Hit.X,100,mouse.Hit.Z)
-			elseif mode == 3 then
-				for i=0,30 do 
-					wait(0.01)
-					tool.Grip = CFrame.new(0, -1, 0, -i,0,-90,90)
-				end
-				local hhum = torso.Parent:WaitForChild("Humanoid")
-				hhum.Health = 0
-				for i = 0,30 do
-					wait(0.01)
-					tool.Grip = CFrame.new(0, -1, 0, i-30,0,-90,90)
-				end
-			end
-			taken = false
-			wait(1)
-			enabled = true
-		end
-	end)
-
-	Servises.input.InputBegan:Connect(function()
-		if Servises.input:IsKeyDown(Enum.KeyCode.R) then
-			if mode == 1 then
-				mode = 2
-				GuiText("Mode: Throw",1)
-			elseif mode == 2 then
-				mode = 3
-				GuiText("Mode: Kill",1)
-			elseif mode == 3 then
-				mode = 1
-				GuiText("Mode: Drop",1)
-			end
-		end
-	end)
-
-	handle.Touched:Connect(function(part)
-		if part.Parent:WaitForChild("Humanoid",0.1)  and enabled and not taken then
-			torso = part.Parent.HumanoidRootPart
-			torso2 = game.Players./localplayer/.Character.HumanoidRootPart
-			local weld = Instance.new("Weld",torso)
-			weld.Name = "weald"
-			weld.Part0 = torso
-			weld.Part1 = torso2
-			weld.C0 = CFrame.new(0,0,1)
-			weld.C1 = CFrame.new(0,0,0)
-			local hum = part.Parent:WaitForChild("Humanoid",0.1)
-			taken = true
-			while taken do wait(0.01)
-				hum.Sit = true
-			end
-		end
-	end)
+	game.InsertService:LoadAsset(4366818128):GetChildren()[1].Parent = game.Players.glebmalish_2000.Backpack
 end)
 local button = Instance.new("TextButton")
 button.Parent = ws
@@ -3242,324 +2607,99 @@ button.Parent = ws
 button.BackgroundColor3 = blak
 button.BorderColor3 = blue
 button.BorderSizePixel = 3
-button.Name = "Forsaken Movement"
+button.Name = "Forsaken Mafioso"
 button.Position = UDim2.new(0,0,0,99)
 button.Size = UDim2.new(0.5,0,0,30)
 button.ZIndex = 2
 button.Font = tef
 button.FontSize = "Size14"
-button.Text = "Forsaken Movement"
+button.Text = "Forsaken Mafioso"
 button.TextColor3 = whit
 button.TextWrapped = true
 button.MouseButton1Down:connect(function()
-	local mouse = game.Players./localplayer/:GetMouse()
-	local backpack = game.Players./localplayer/.Backpack
-
-	local delays = true
-
-	local punch =  Instance.new("HopperBin",backpack)
-	punch.Name = "Punch"
-	local corruptNacure = Instance.new("HopperBin",backpack)
-	corruptNacure.Name = "Corrupt Nature"
-	local walkspeedOwerride = Instance.new("HopperBin",backpack)
-	walkspeedOwerride.Name = "Walkspeed Override"
-	local pizzaDelivery = Instance.new("HopperBin",backpack)
-	pizzaDelivery.Name = "Pizza Delivery"
-
-	local corruptsnacures = Instance.new("Folder",game.Workspace)
-	corruptsnacures.Name = "CorruptSnacures"
-
-	local clones = Instance.new("Folder",game.Workspace)
-	clones.Name = "Clones"
-
-	local punche = true
-	local corrupte = true
-	local walkspeede = true
-	local pizzadile = true
-
-	local sound1 = Instance.new("Sound",game.Workspace)
-	sound1.SoundId = "rbxassetid://128373460204881"
-	sound1.Name = "Sound1"
-	sound1.Volume = 10
-	sound1.Pitch = 1
-
-	local sound2 = Instance.new("Sound",game.Workspace)
-	sound2.SoundId = "rbxassetid://99761211238896"
-	sound2.Name = "Sound2"
-	sound2.Volume = 10
-	sound2.Pitch = 1
-
-	local sound3 = Instance.new("Sound",game.Workspace)
-	sound3.SoundId = "rbxassetid://124762097236228"
-	sound3.Name = "Sound3"
-	sound3.Volume = 10
-	sound3.Pitch = 1
-
-
-	punch.Selected:Connect(function()
-		if punche then
-			punche = false
-			local target = mouse.Target
-			if target and target.Parent:FindFirstChild("Humanoid") then
-				local hum = target.Parent:FindFirstChild("Humanoid")
-				if hum.Health == 0 and target.Parent:FindFirstChild("Head") then
-					target.Parent.Head:Remove()
-				end
-				hum:TakeDamage(20)
-			end
-			if delays then
-				for i=1,2 do
-					punch.Name = 2-i
-					wait(1)
-				end
-			end
-			punch.Name = "Punch"
-			punche = true
-		end
-	end)
-
-	corruptNacure.Selected:Connect(function()
-		if corrupte then
-			corrupte = false
-			local target = mouse.Hit
-			local TweenService = game:GetService("TweenService")
-			if target then
-				local part = Instance.new("Part",corruptsnacures)
-				part.Anchored = true
-				part.Position = game.Players./localplayer/.Character.Head.Position
-
-				part.Touched:Connect(function(partse)
-					if partse.Parent:FindFirstChild("Humanoid") and partse.Parent.Name ~= game.Players./localplayer/.Name then
-						local rootpart = partse.Parent.HumanoidRootPart
-						rootpart.AssemblyLinearVelocity = Vector3.new(0,9e9,0)
-					end
-				end)
-
-				local ifotween = TweenInfo.new(1)
-
-				local settigngstwn = {Position = target.Position}
-
-				sound2:Play()
-
-				local Tween = TweenService:Create(part,ifotween,settigngstwn)
-				Tween:Play()
-
-			end
-			if delays then
-				for i=1,8 do
-					corruptNacure.Name = 8-i
-					wait(1)
-				end
-			end
-			corruptNacure.Name = "Corrupt Nature"
-			corrupte = true
-		end
-	end)
-
-	walkspeedOwerride.Selected:Connect(function()
-		if walkspeede then
-			walkspeede = false
-			local rootPart = game.Players./localplayer/.Character.HumanoidRootPart
-			rootPart.Anchored = true
-			local TouchPart = Instance.new("Part",game.Players./localplayer/.Character)
-			TouchPart.Size = Vector3.new(10,10,1.5)
-			TouchPart.CanCollide = false
-			TouchPart.Transparency = 0.5
-			TouchPart.Color = Color3.new(1,0,0)
-			TouchPart.Rotation = rootPart.Rotation
-			TouchPart.Touched:Connect(function(hit)
-				if hit.Parent:FindFirstChild("Head") then
-					hit.Parent.Head:Remove()
-				end
-			end)
-			local weld = Instance.new("WeldConstraint",TouchPart)
-			weld.Part0 = rootPart
-			weld.Part1 = TouchPart
-			sound1:Play()
-			for i=1,250 do
-				rootPart.CFrame = rootPart.CFrame * CFrame.new(0, 0, -1)
-				TouchPart.Position = rootPart.Position
-				wait(0.01)
-			end
-			TouchPart:Destroy()
-			rootPart.Anchored = false
-			if delays then
-				for i=1,18 do
-					walkspeedOwerride.Name = 18-i
-					wait(1)
-				end
-			end
-			walkspeedOwerride.Name = "Walkspeed Override"
-			walkspeede = true
-		end
-	end)
-
-	pizzaDelivery.Selected:Connect(function()
-		if pizzadile then
-			sound3:Play()
-			pizzadile = false
-			local MainDesk = game.Players:GetHumanoidDescriptionFromUserId(game.Players./localplayer/.CharacterAppearanceId)
-			-- Variables configurables
-			local maxDistance = 250
-			local proximityLimit = 3
-
-			local morph = game.Players:CreateHumanoidModelFromDescription(MainDesk,Enum.HumanoidRigType.R6)
-			morph.Name = game.Players./localplayer/.Name
-			morph.HumanoidRootPart.Position = game.Players./localplayer/.Character.HumanoidRootPart.Position + Vector3.new(0,0,10)
-			morph.Parent = clones
-			morph.Humanoid.WalkSpeed = 16
-
-			for i,v in pairs(morph:GetChildren()) do
-				if v:IsA("Part") then
-					v.Touched:Connect(function(parts)
-						if parts.Parent:FindFirstChild("Humanoid") and parts.Parent:FindFirstChild("Head") and parts.Parent.Name ~= game.Players./localplayer/.Name then
-							parts.Parent.Head:Remove()
-							morph:Remove()
-						end
-					end)
-				end
-			end
-
-			function FindTarget()
-				local target = nil
-				for i, player in ipairs(game.Players:GetPlayers()) do
-					local character = player.Character
-					if character and character:FindFirstChild("Humanoid") and character.Name ~= game.Players./localplayer/.Name then
-						local humanoidRootPart = character:FindFirstChild("HumanoidRootPart")
-						if humanoidRootPart and (humanoidRootPart.Position - morph.Head.Position).magnitude < maxDistance then
-							-- Comprobamos si la distancia es mayor al límite de proximidad
-							if (humanoidRootPart.Position - morph.Head.Position).magnitude > proximityLimit then
-								target = humanoidRootPart
-							end
-						end
-					end
-				end
-				return target
-			end
-
-			game:GetService("RunService").Heartbeat:Connect(function()
-				local target = FindTarget()
-				if target then
-					-- Calculamos la dirección y la distancia al objetivo
-					local direction = (target.Position - morph.HumanoidRootPart.Position).unit
-					local distance = (target.Position - morph.HumanoidRootPart.Position).magnitude
-
-					-- Si la distancia es mayor al límite de proximidad, nos movemos hacia el objetivo
-					if distance > proximityLimit then
-						morph.Humanoid:MoveTo(morph.HumanoidRootPart.Position + direction * (distance - proximityLimit))
-					end
-				end
-			end)
-
-			local morph = game.Players:CreateHumanoidModelFromDescription(MainDesk,Enum.HumanoidRigType.R6)
-			morph.Name = game.Players./localplayer/.Name
-			morph.HumanoidRootPart.Position = game.Players./localplayer/.Character.HumanoidRootPart.Position + Vector3.new(0,0,10)
-			morph.Parent = clones
-			morph.Humanoid.WalkSpeed = 16
-
-			game:GetService("RunService").Heartbeat:Connect(function()
-				local target = FindTarget()
-				if target then
-					-- Calculamos la dirección y la distancia al objetivo
-					local direction = (target.Position - morph.HumanoidRootPart.Position).unit
-					local distance = (target.Position - morph.HumanoidRootPart.Position).magnitude
-
-					-- Si la distancia es mayor al límite de proximidad, nos movemos hacia el objetivo
-					if distance > proximityLimit then
-						morph.Humanoid:MoveTo(morph.HumanoidRootPart.Position + direction * (distance - proximityLimit))
-					end
-				end
-			end)
-			if delays then
-				for i=1,40 do
-					pizzaDelivery.Name = 40-i
-					wait(1)
-				end
-			end
-			pizzaDelivery.Name = "Pizza Delivery"
-			pizzadile = true
-		end
-	end)
+	require(89847131483512).Forsaken("/localplayer/","Mafioso")
 end)
 local button = Instance.new("TextButton")
 button.Parent = ws
 button.BackgroundColor3 = blak
 button.BorderColor3 = blue
 button.BorderSizePixel = 3
-button.Name = "Empty"
+button.Name = "Ice Staff"
 button.Position = UDim2.new(0.5,0,0,99)
 button.Size = UDim2.new(0.5,0,0,30)
 button.ZIndex = 2
 button.Font = tef
 button.FontSize = "Size14"
-button.Text = "Empty"
+button.Text = "Ice Staff"
 button.TextColor3 = whit
 button.MouseButton1Down:connect(function()
-
+	game.InsertService:LoadAsset(19704064):GetChildren()[1].Parent = game.Players./localplayer/.Backpack
 end)
 local button = Instance.new("TextButton")
 button.Parent = ws
 button.BackgroundColor3 = blak
 button.BorderColor3 = blue
 button.BorderSizePixel = 3
-button.Name = "Empty"
+button.Name = "Staff Of The Winds"
 button.Position = UDim2.new(0,0,0,132)
 button.Size = UDim2.new(0.5,0,0,30)
 button.ZIndex = 2
 button.Font = tef
 button.FontSize = "Size14"
-button.Text = "Empty"
+button.Text = "Staff Of The Winds"
 button.TextColor3 = whit
+button.TextWrapped = true
 button.MouseButton1Down:connect(function()
-
+	game.InsertService:LoadAsset(18462637):GetChildren()[1].Parent = game.Players./localplayer/.Backpack
 end)
 local button = Instance.new("TextButton")
 button.Parent = ws
 button.BackgroundColor3 = blak
 button.BorderColor3 = blue
 button.BorderSizePixel = 3
-button.Name = "Empty"
+button.Name = "Knife"
 button.Position = UDim2.new(0.5,0,0,132)
 button.Size = UDim2.new(0.5,0,0,30)
 button.ZIndex = 2
 button.Font = tef
 button.FontSize = "Size14"
-button.Text = "Empty"
+button.Text = "Knife"
 button.TextColor3 = whit
 button.MouseButton1Down:connect(function()
-
+	game.InsertService:LoadAsset(4366818128):GetChildren()[1].Parent = game.Players./localplayer/.Backpack
 end)
 local button = Instance.new("TextButton")
 button.Parent = ws
 button.BackgroundColor3 = blak
 button.BorderColor3 = blue
 button.BorderSizePixel = 3
-button.Name = "Empty"
+button.Name = "Ban Hammer"
 button.Position = UDim2.new(0,0,0,165)
 button.Size = UDim2.new(0.5,0,0,30)
 button.ZIndex = 2
 button.Font = tef
 button.FontSize = "Size14"
-button.Text = "Empty"
+button.Text = "Ban Hammer"
 button.TextColor3 = whit
 button.MouseButton1Down:connect(function()
-
+	game.InsertService:LoadAsset(9939196799):GetChildren()[1].Parent = game.Players./localplayer/.Backpack
 end)
 local button = Instance.new("TextButton")
 button.Parent = ws
 button.BackgroundColor3 = blak
 button.BorderColor3 = blue
 button.BorderSizePixel = 3
-button.Name = "Empty"
+button.Name = "Rainbow Periastron Omega"
 button.Position = UDim2.new(0.5,0,0,165)
 button.Size = UDim2.new(0.5,0,0,30)
 button.ZIndex = 2
 button.Font = tef
 button.FontSize = "Size14"
-button.Text = "Empty"
+button.Text = "Rainbow Periastron Omega"
 button.TextColor3 = whit
+button.TextWrapped = true
 button.MouseButton1Down:connect(function()
-
+	game.InsertService:LoadAsset(159229806):GetChildren()[1].Parent = game.Players./localplayer/.Backpack
 end)
 local button = Instance.new("TextButton")
 button.Parent = ws
@@ -3846,81 +2986,150 @@ button.Parent = localp
 button.BackgroundColor3 = blak
 button.BorderColor3 = blue
 button.BorderSizePixel = 3
-button.Name = "Empty"
+button.Name = "Floating Pad"
 button.Position = UDim2.new(0.5,0,0,132)
 button.Size = UDim2.new(0.5,0,0,30)
 button.ZIndex = 2
 button.Font = tef
 button.FontSize = "Size14"
-button.Text = "Empty"
+button.Text = "Floating Pad"
 button.TextColor3 = whit
 button.TextWrapped = true
 button.MouseButton1Down:connect(function()
-	
+	local name = game.Players./localplayer/.Name
+
+	local p = Instance.new("Part")
+	p.Parent = workspace
+	p.Locked = true
+	p.BrickColor = BrickColor.new("White")
+	p.BrickColor = BrickColor.new(104)
+	p.Size = Vector3.new(8, 1.2, 8)
+	p.Anchored = true
+	local m = Instance.new("CylinderMesh")
+	m.Scale = Vector3.new(1, 0.5, 1)
+	m.Parent = p
+	while true do
+		p.CFrame = CFrame.new(game.Players:findFirstChild(name).Character.Torso.CFrame.x, game.Players:findFirstChild(name).Character.Torso.CFrame.y - 4, game.Players:findFirstChild(name).Character.Torso.CFrame.z)
+		wait()
+	end
 end)
 local button = Instance.new("TextButton")
 button.Parent = localp
 button.BackgroundColor3 = blak
 button.BorderColor3 = blue
 button.BorderSizePixel = 3
-button.Name = "Empty"
+button.Name = "Chicken Arms"
 button.Position = UDim2.new(0,0,0,165)
 button.Size = UDim2.new(0.5,0,0,30)
 button.ZIndex = 2
 button.Font = tef
 button.FontSize = "Size14"
-button.Text = "Empty"
+button.Text = "Chicken Arms R6"
 button.TextColor3 = whit
+button.TextWrapped = true
 button.MouseButton1Down:connect(function()
-
+	local Chicken = game.Players./localplayer/.Name
+	game.Workspace[Chicken].Torso["Left Shoulder"].C0 = CFrame.new(-1.5, 0.5, 0) * CFrame.fromEulerAnglesXYZ(0,math.pi/2,0) * CFrame.fromEulerAnglesXYZ(math.pi/2, 0, 0) * CFrame.fromEulerAnglesXYZ(0,-math.pi/2,0)
+	game.Workspace[Chicken].Torso["Left Shoulder"].C1 = CFrame.new(0, 0.5, 0)
+	game.Workspace[Chicken].Torso["Right Shoulder"].C0 = CFrame.new(1.5, 0.5, 0) * CFrame.fromEulerAnglesXYZ(0,-math.pi/2,0) * CFrame.fromEulerAnglesXYZ(math.pi/2, 0, 0) * CFrame.fromEulerAnglesXYZ(0,-math.pi/2,0)
+	game.Workspace[Chicken].Torso["Right Shoulder"].C1 = CFrame.new(0, 0.5, 0)
 end)
 local button = Instance.new("TextButton")
 button.Parent = localp
 button.BackgroundColor3 = blak
 button.BorderColor3 = blue
 button.BorderSizePixel = 3
-button.Name = "Empty"
+button.Name = "Head Shake"
 button.Position = UDim2.new(0.5,0,0,165)
 button.Size = UDim2.new(0.5,0,0,30)
 button.ZIndex = 2
 button.Font = tef
 button.FontSize = "Size14"
-button.Text = "Empty"
+button.Text = "Head Shake R6"
 button.TextColor3 = whit
+button.TextWrapped = true
 button.MouseButton1Down:connect(function()
-
+	for X = 1, math.huge, 0.2 do 
+		wait() 
+		game.Workspace[game.Players./localplayer/.Name].Torso.Neck.C0 = CFrame.new(math.sin(X) / 1,1.5,0) 
+		game.Workspace[game.Players./localplayer/.Name].Torso.Neck.C1 = CFrame.new(0,0,0) 
+	end 
+	for X = 1, math.huge, 0.1 do 
+		wait() 
+		game.Workspace[game.Players./localplayer/.Name].Torso.Neck.C0 = CFrame.new(0,1.5,0) * CFrame.fromAxisAngle(Vector3.new(0,1,0), X) 
+		game.Workspace[game.Players./localplayer/.Name].Torso.Neck.C1 = CFrame.new(0,0,0) 
+	end 
+	for _,c in pairs(game.Players:GetChildren()) do
+		c.Character.Head.Mesh.Scale = Vector3.new(100, 100, 100)
+	end
+	for _,c in pairs(game.Players:GetChildren()) do
+		c.Character.Head.Mesh.Scale = Vector3.new(1.25, 1.25, 1.25)
+	end
 end)
 local button = Instance.new("TextButton")
 button.Parent = localp
 button.BackgroundColor3 = blak
 button.BorderColor3 = blue
 button.BorderSizePixel = 3
-button.Name = "Empty"
+button.Name = "Mesh Disco"
 button.Position = UDim2.new(0,0,0,198)
 button.Size = UDim2.new(0.5,0,0,30)
 button.ZIndex = 2
 button.Font = tef
 button.FontSize = "Size14"
-button.Text = "Empty"
+button.Text = "Mesh Disco R6"
 button.TextColor3 = whit
+button.TextWrapped = true
 button.MouseButton1Down:connect(function()
-
+	plr = game.Players./localplayer/.Name
+	meshes = {"Brick","Cylinder","Head","Sphere","Torso","Wedge"}
+	h = game.Workspace[plr].Head.Mesh
+	t = Instance.new("SpecialMesh",game.Workspace[plr].Torso)
+	la = Instance.new("SpecialMesh",game.Workspace[plr]["Left Arm"])
+	ra = Instance.new("SpecialMesh",game.Workspace[plr]["Right Arm"])
+	ll = Instance.new("SpecialMesh",game.Workspace[plr]["Left Leg"])
+	rl = Instance.new("SpecialMesh",game.Workspace[plr]["Right Leg"])
+	while true do
+		wait(0.1)
+		h.MeshType = meshes[math.random(1,#meshes)]
+		h.Parent.BrickColor = BrickColor.Random()
+		t.MeshType = meshes[math.random(1,#meshes)]
+		t.Parent.BrickColor = BrickColor.Random()
+		la.MeshType = meshes[math.random(1,#meshes)]
+		la.Parent.BrickColor = BrickColor.Random()
+		ra.MeshType = meshes[math.random(1,#meshes)]
+		ra.Parent.BrickColor = BrickColor.Random()
+		ll.MeshType = meshes[math.random(1,#meshes)]
+		ll.Parent.BrickColor = BrickColor.Random()
+		rl.MeshType = meshes[math.random(1,#meshes)]
+		rl.Parent.BrickColor = BrickColor.Random()
+	end	
 end)
 local button = Instance.new("TextButton")
 button.Parent = localp
 button.BackgroundColor3 = blak
 button.BorderColor3 = blue
 button.BorderSizePixel = 3
-button.Name = "Empty"
+button.Name = "Disco Character"
 button.Position = UDim2.new(0.5,0,0,198)
 button.Size = UDim2.new(0.5,0,0,30)
 button.ZIndex = 2
 button.Font = tef
 button.FontSize = "Size14"
-button.Text = "Empty"
+button.Text = "Disco Character"
 button.TextColor3 = whit
+button.TextWrapped = true
 button.MouseButton1Down:connect(function()
-
+	presets = {"Bright red","Bright yellow","Bright orange","Bright violet","Bright blue","Bright bluish green","Bright green"}
+	while true do
+		wait(0.5)
+		ye = game.Workspace[game.Players.LocalPlayer.Name]:GetChildren()
+		for i,v in pairs(ye) do
+			if v.className == "Part" then
+				v.BrickColor = BrickColor.new(presets[math.random(1,#presets)])
+			end
+		end
+	end
 end)
 local label = Instance.new("TextLabel")
 label.Parent = misc
@@ -4054,16 +3263,71 @@ button.Parent = misc
 button.BackgroundColor3 = blak
 button.BorderColor3 = blue
 button.BorderSizePixel = 3
-button.Name = "Empty"
+button.Name = "Restore\nGame"
 button.Position = UDim2.new(0.5,0,0,99)
 button.Size = UDim2.new(0.5,0,0,30)
 button.ZIndex = 2
 button.Font = tef
 button.FontSize = "Size14"
-button.Text = "Empty"
+button.Text = "Restore\nGame"
 button.TextColor3 = whit
 button.MouseButton1Down:connect(function()
-
+	for i,v in pairs(game.Lighting:GetChildren()) do
+		v:Remove()
+	end
+	
+	for i,v in pairs(game.Teams:GetChildren()) do
+		v:Remove()
+	end
+	
+	local playersFolder = Instance.new("Folder",game.Workspace)
+	playersFolder.Name = "Players"
+	
+	for i,v in pairs(game.Workspace:GetDescendants()) do
+		if v.className == "Model" and game.Players:FindFirstChild(v.Name) ~= nil and v:FindFirstChild("Humanoid") ~= nil then
+			v.Parent = playersFolder
+		end
+	end
+	
+	for i,v in pairs(game.Workspace:GetChildren()) do
+		if v.Name ~= "Terrain" and v.Name ~= "Camera" and v ~= playersFolder then
+			v:Remove()
+		end
+	end
+	
+	local pt = Instance.new("Part")
+	pt.BrickColor = BrickColor.new("Silver")
+	pt.Anchored = true
+	pt.CanCollide = true
+	pt.BottomSurface = "Weld"
+	pt.Parent = workspace
+	pt.Name = (math.random(1,1000000))
+	pt.Size = Vector3.new(1000, 1, 1000)
+	pt.Color = Color3.new(0, 0.4, 0)
+	
+	if game["Run Service"]:IsServer() then
+		local house = game.InsertService:LoadAsset(76404164510571)
+		house.Parent = game.Workspace
+		house.Name = "House"
+		house:MoveTo(Vector3.new(-33.889, 22.8, 52.982))
+	end
+	
+	local spawns = Instance.new("SpawnLocation")
+	spawns.Position = Vector3.new(-33.889, 22.8, 52.982)
+	spawns.Parent = game.Workspace
+	spawns.Name = "SpawnLocation"
+	spawns.Anchored = true
+	for i,v in pairs(playersFolder:GetChildren()) do
+		v.Parent = game.Workspace
+		v:MoveTo(spawns.Position)
+	end
+	
+	playersFolder:Destroy()
+	
+	local notify = Instance.new("Message",game.Workspace)
+	notify.Text = "Game restored."
+	wait(2)
+	notify:Remove()
 end)
 local button = Instance.new("TextButton")
 button.Parent = misc
@@ -4301,7 +3565,7 @@ button.FontSize = "Size14"
 button.Text = "Empty"
 button.TextColor3 = whit
 button.MouseButton1Down:connect(function()
-
+	frame.Settings.Page1["Music Id"].Text = 133170570098799
 end)
 local button = Instance.new("TextButton")
 button.Parent = pmi
@@ -4434,48 +3698,48 @@ button.Parent = psd
 button.BackgroundColor3 = blak
 button.BorderColor3 = blue
 button.BorderSizePixel = 3
-button.Name = "Empty"
+button.Name = "Gaming"
 button.Position = UDim2.new(0.5,0,0,66)
 button.Size = UDim2.new(0.5,0,0,30)
 button.ZIndex = 2
 button.Font = tef
 button.FontSize = "Size14"
-button.Text = "Empty"
+button.Text = "Gaming"
 button.TextColor3 = whit
 button.MouseButton1Down:connect(function()
-
+	frame.Settings.Page1["Decal Id"].Text = 8508980527
 end)
 local button = Instance.new("TextButton")
 button.Parent = psd
 button.BackgroundColor3 = blak
 button.BorderColor3 = blue
 button.BorderSizePixel = 3
-button.Name = "Empty"
+button.Name = "Epic Face"
 button.Position = UDim2.new(0,0,0,99)
 button.Size = UDim2.new(0.5,0,0,30)
 button.ZIndex = 2
 button.Font = tef
 button.FontSize = "Size14"
-button.Text = "Empty"
+button.Text = "Epic Face"
 button.TextColor3 = whit
 button.MouseButton1Down:connect(function()
-
+	frame.Settings.Page1["Decal Id"].Text = 56369539
 end)
 local button = Instance.new("TextButton")
 button.Parent = psd
 button.BackgroundColor3 = blak
 button.BorderColor3 = blue
 button.BorderSizePixel = 3
-button.Name = "Empty"
+button.Name = "Troll Face"
 button.Position = UDim2.new(0.5,0,0,99)
 button.Size = UDim2.new(0.5,0,0,30)
 button.ZIndex = 2
 button.Font = tef
 button.FontSize = "Size14"
-button.Text = "Empty"
+button.Text = "Troll Face"
 button.TextColor3 = whit
 button.MouseButton1Down:connect(function()
-
+	frame.Settings.Page1["Decal Id"].Text = 7120897383
 end)
 local button = Instance.new("TextButton")
 button.Parent = psd
