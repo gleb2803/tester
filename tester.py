@@ -2986,13 +2986,13 @@ button.TextWrapped = true
 button.MouseButton1Down:connect(function()
 	local name = game.Players./localplayer/.Name
 
-	if game.Workspace:FindFirstChild("FloatingPad;" + name) then
-		game.Workspace:FindFirstChild("FloatingPad;" + name):Destroy()
+	if game.Workspace:FindFirstChild("FloatingPad;" .. name) then
+		game.Workspace:FindFirstChild("FloatingPad;" .. name):Destroy()
 		return
 	end
 	
 	local p = Instance.new("Part")
-	p.Name = "FloatingPad;" + name
+	p.Name = "FloatingPad;" .. name
 	p.Parent = workspace
 	p.Locked = true
 	p.BrickColor = BrickColor.new("White")
