@@ -428,8 +428,8 @@ button.MouseButton1Down:connect(function()
 			if v:IsA("Decal") and v.Texture ~= "http://www.roblox.com/asset/?id="..decalID then
 				v.Parent = nil
 			elseif v:IsA("BasePart") and v.Name ~= "HumanoidRootPart" then
-				v.Material = "Plastic"
-				v.Transparency = 0
+				--v.Material = "Plastic"
+				--v.Transparency = 0
 				local One = Instance.new("Decal", v)
 				local Two = Instance.new("Decal", v)
 				local Three = Instance.new("Decal", v)
@@ -3238,7 +3238,7 @@ button.Size = UDim2.new(0.5,0,0,30)
 button.ZIndex = 2
 button.Font = tef
 button.FontSize = "Size14"
-button.Text = "Restore Skybox"
+button.Text = "Restore\nSkybox"
 button.TextColor3 = whit
 button.TextWrapped = true
 button.MouseButton1Down:connect(function()
@@ -3251,7 +3251,7 @@ button.Parent = misc
 button.BackgroundColor3 = blak
 button.BorderColor3 = blue
 button.BorderSizePixel = 3
-button.Name = "Restore\nGame"
+button.Name = "Restore Game"
 button.Position = UDim2.new(0.5,0,0,99)
 button.Size = UDim2.new(0.5,0,0,30)
 button.ZIndex = 2
@@ -3322,32 +3322,40 @@ button.Parent = misc
 button.BackgroundColor3 = blak
 button.BorderColor3 = blue
 button.BorderSizePixel = 3
-button.Name = "Empty"
+button.Name = "Restore Decals"
 button.Position = UDim2.new(0,0,0,132)
 button.Size = UDim2.new(0.5,0,0,30)
 button.ZIndex = 2
 button.Font = tef
 button.FontSize = "Size14"
-button.Text = "Empty"
+button.Text = "Restore\nDecals"
 button.TextColor3 = whit
 button.MouseButton1Down:connect(function()
-
+	for _,v in pairs(game:GetDescendants()) do
+	if v:IsA("Decal") then
+		v.Parent = nil
+	end
+end
 end)
 local button = Instance.new("TextButton")
 button.Parent = misc
 button.BackgroundColor3 = blak
 button.BorderColor3 = blue
 button.BorderSizePixel = 3
-button.Name = "Empty"
+button.Name = "Restore Particles"
 button.Position = UDim2.new(0.5,0,0,132)
 button.Size = UDim2.new(0.5,0,0,30)
 button.ZIndex = 2
 button.Font = tef
 button.FontSize = "Size14"
-button.Text = "Empty"
+button.Text = "Restore\nParticles"
 button.TextColor3 = whit
 button.MouseButton1Down:connect(function()
-
+	for _,v in pairs(game:GetDescendants()) do
+	if v:IsA("ParticleEmitter") then
+		v.Parent = nil
+	end
+end
 end)
 local button = Instance.new("TextButton")
 button.Parent = misc
