@@ -3944,7 +3944,7 @@ button.MouseButton1Down:connect(function()
 		game.StarterPlayer.StarterCharacterScripts.DiscoAllScript:Destroy()
 		return
 	end
-	game.InsertService:LoadAsset(116203155246012):GetChildren()[1].Parent = game.StarterPlayer.StarterCharacterScripts
+	game.InsertService:LoadAsset(130320595834716):GetChildren()[1].Parent = game.StarterPlayer.StarterCharacterScripts
 end)
 local button = Instance.new("TextButton")
 button.Parent = pgi
