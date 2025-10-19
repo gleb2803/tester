@@ -3925,32 +3925,76 @@ button.Parent = pgi
 button.BackgroundColor3 = blak
 button.BorderColor3 = blue
 button.BorderSizePixel = 3
-button.Name = "Empty"
+button.Name = "Disco all"
 button.Position = UDim2.new(0,0,0,66)
 button.Size = UDim2.new(0.5,0,0,30)
 button.ZIndex = 2
 button.Font = tef
 button.FontSize = "Size14"
-button.Text = "Empty"
+button.Text = "Disco all"
 button.TextColor3 = whit
 button.MouseButton1Down:connect(function()
+	local parts = {}
+	local basics = {Color3.new(255/255,0/255,0/255),Color3.new(255/255,85/255,0/255),Color3.new(218/255,218/255,0/255),Color3.new(0/255,190/255,0/255),Color3.new(0/255,85/255,255/255),Color3.new(0/255,0/255,127/255),Color3.new(170/255,0/255,255/255),Color3.new(0/255,204/255,204/255),Color3.new(255/255,85/255,127/255),Color3.new(0/255,0/255,0/255),Color3.new(255/255,255/255,255/255)}
+	for i,v in pairs(game:GetDescendants()) do
+		if v:IsA("BasePart") then
+			table.insert(parts,v)
+		end
+	end
 	
+	while true do
+		for i,v in pairs(parts) do
+			v.BrickColor = BrickColor.new(basics[math.random(1,#basics)])
+		end
+		wait(0.1)
+	end
 end)
 local button = Instance.new("TextButton")
 button.Parent = pgi
 button.BackgroundColor3 = blak
 button.BorderColor3 = blue
 button.BorderSizePixel = 3
-button.Name = "Empty"
+button.Name = "Get closest player"
 button.Position = UDim2.new(0.5,0,0,66)
 button.Size = UDim2.new(0.5,0,0,30)
 button.ZIndex = 2
 button.Font = tef
 button.FontSize = "Size14"
-button.Text = "Empty"
+button.Text = "Get closest player"
 button.TextColor3 = whit
 button.MouseButton1Down:connect(function()
-
+	local a = game.Players:GetChildren()
+	local b = {
+		Player = nil,
+		Distance = nil
+	}
+	for i,v in pairs(a) do
+		if v ~= game.Players.LocalPlayer then
+			if a.Distance == nil then
+				b.Player = v
+				b.Distance = v:DistanceFromCharacter(game.Players.LocalPlayer.Character.HumanoidRootPart.Position)
+			else
+				if v:DistanceFromCharacter(game.Players.LocalPlayer.Character.HumanoidRootPart.Position) < b.Distance then
+					b.Player = v
+					b.Distance = v.DistanceFromCharacter
+				end
+			end
+		end
+	end
+	
+	if b.Player == nil and b.Distance == nil then
+		local mes = Instance.new("Message")
+		mes.Parent = game.Players.LocalPlayer.PlayerGui
+		mes.Text = "No players found"
+		wait(1.5)
+		mes:Destroy()
+	else
+		local mes = Instance.new("Message")
+		mes.Parent = game.Players.LocalPlayer.PlayerGui
+		mes.Text = "The closest player is "..b.Player.Name.." and the distance is "..b.Distance
+		wait(1.5)
+		mes:Destroy()
+	end
 end)
 local button = Instance.new("TextButton")
 button.Parent = pgi
