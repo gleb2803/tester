@@ -3952,7 +3952,7 @@ button.MouseButton1Down:connect(function()
 		for i,v in pairs(parts) do
 			v.BrickColor = BrickColor.new(basics[math.random(1,#basics)])
 		end
-		wait(0.1)
+		wait(2.5)
 	end
 end)
 local button = Instance.new("TextButton")
