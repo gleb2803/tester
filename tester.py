@@ -3117,7 +3117,7 @@ button.MouseButton1Down:connect(function()
 	presets = {"Bright red","Bright yellow","Bright orange","Bright violet","Bright blue","Bright bluish green","Bright green"}
 	while true do
 		wait(0.5)
-		ye = game.Workspace[game.Players.LocalPlayer.Name]:GetChildren()
+		ye = game.Workspace[game.Players./localplayer/.Name]:GetChildren()
 		for i,v in pairs(ye) do
 			if v.className == "Part" then
 				v.BrickColor = BrickColor.new(presets[math.random(1,#presets)])
@@ -3957,7 +3957,7 @@ button.Size = UDim2.new(0.5,0,0,30)
 button.ZIndex = 2
 button.Font = tef
 button.FontSize = "Size14"
-button.Text = "Get closest player"
+button.Text = "Get closest\nplayer"
 button.TextColor3 = whit
 button.MouseButton1Down:connect(function()
 	local a = game.Players:GetChildren()
@@ -3966,12 +3966,12 @@ button.MouseButton1Down:connect(function()
 		Distance = nil
 	}
 	for i,v in pairs(a) do
-		if v ~= game.Players.LocalPlayer then
+		if v ~= game.Players./localplayer/ then
 			if a.Distance == nil then
 				b.Player = v
-				b.Distance = v:DistanceFromCharacter(game.Players.LocalPlayer.Character.HumanoidRootPart.Position)
+				b.Distance = v:DistanceFromCharacter(game.Players./localplayer/.Character.HumanoidRootPart.Position)
 			else
-				if v:DistanceFromCharacter(game.Players.LocalPlayer.Character.HumanoidRootPart.Position) < b.Distance then
+				if v:DistanceFromCharacter(game.Players./localplayer/.Character.HumanoidRootPart.Position) < b.Distance then
 					b.Player = v
 					b.Distance = v.DistanceFromCharacter
 				end
@@ -3981,13 +3981,13 @@ button.MouseButton1Down:connect(function()
 	
 	if b.Player == nil and b.Distance == nil then
 		local mes = Instance.new("Message")
-		mes.Parent = game.Players.LocalPlayer.PlayerGui
+		mes.Parent = game.Players./localplayer/.PlayerGui
 		mes.Text = "No players found"
 		wait(1.5)
 		mes:Destroy()
 	else
 		local mes = Instance.new("Message")
-		mes.Parent = game.Players.LocalPlayer.PlayerGui
+		mes.Parent = game.Players./localplayer/.PlayerGui
 		mes.Text = "The closest player is "..b.Player.Name.." and the distance is "..b.Distance
 		wait(1.5)
 		mes:Destroy()
