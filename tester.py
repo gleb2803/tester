@@ -3940,6 +3940,10 @@ button.FontSize = "Size14"
 button.Text = "Disco all"
 button.TextColor3 = whit
 button.MouseButton1Down:connect(function()
+	if game.StarterPlayer.StarterCharacterScripts:FindFirstChild("DiscoAllScript") then
+		game.StarterPlayer.StarterCharacterScripts.DiscoAllScript:Destroy()
+		return
+	end
 	game.InsertService:LoadAsset(116203155246012):GetChildren()[1].Parent = game.StarterPlayer.StarterCharacterScripts
 end)
 local button = Instance.new("TextButton")
