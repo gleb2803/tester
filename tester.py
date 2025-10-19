@@ -2986,7 +2986,13 @@ button.TextWrapped = true
 button.MouseButton1Down:connect(function()
 	local name = game.Players./localplayer/.Name
 
+	if game.Workspace:FindFirstChild("FloatingPad;" + name) then
+		game.Workspace:FindFirstChild("FloatingPad;" + name):Destroy()
+		return
+	end
+	
 	local p = Instance.new("Part")
+	p.Name = "FloatingPad;" + name
 	p.Parent = workspace
 	p.Locked = true
 	p.BrickColor = BrickColor.new("White")
@@ -2996,9 +3002,9 @@ button.MouseButton1Down:connect(function()
 	local m = Instance.new("CylinderMesh")
 	m.Scale = Vector3.new(1, 0.5, 1)
 	m.Parent = p
-	while true do
+	while p ~= nil do
 		p.CFrame = CFrame.new(game.Players:findFirstChild(name).Character.Torso.CFrame.x, game.Players:findFirstChild(name).Character.Torso.CFrame.y - 4, game.Players:findFirstChild(name).Character.Torso.CFrame.z)
-		wait()
+		task.wait()
 	end
 end)
 local button = Instance.new("TextButton")
