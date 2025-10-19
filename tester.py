@@ -587,25 +587,14 @@ button.TextColor3 = whit
 button.TextWrapped = true
 button.MouseButton1Down:connect(function()
 	local ImageId = frame.Settings.Page1["Decal Id"].Text
-	function exPro(root)
-		for _, v in pairs(root:GetChildren()) do
-			if v:IsA("ParticleEmitter") and v.Texture ~= "http://www.roblox.com/asset/?id="..ImageId then
-				v.Parent = nil
-			elseif v:IsA("BasePart") and v.Name ~= "HumanoidRootPart" then
-				v.Transparency = 0
-				local pe = Instance.new("ParticleEmitter",v)
-				v.Texture = "http://www.roblox.com/asset/?id="..ImageId
-			end
-			exPro(v)
+	local MusicId = frame.Settings.Page1["Music Id"].Text
+	for _,v in pairs(game.Workspace:GetDescendants()) do
+		if v:IsA("BasePart") then
+			local Particles = Instance.new("ParticleEmitter")
+			Particles.Parent = v
+			Particles.Texture = "rbxassetid://"..ImageId
 		end
 	end
-	function asdf(root)
-		for _, v in pairs(root:GetChildren()) do
-			asdf(v)
-		end
-	end
-	exPro(game.Workspace)
-	asdf(game.Workspace)
 end)
 
 local label = Instance.new("TextLabel")
@@ -3209,10 +3198,10 @@ button.MouseButton1Down:connect(function()
 	s.SoundId = "rbxassetid://"..frame.Settings.Page1["Music Id"].Text
 	s.Volume = 1
 	s.Looped = true
-	if frame.Settings.Page1["Music Id"].Text == 72089843969979 then
+	s.Pitch = frame.Settings.Page1["Music Pitch"].Text
+	if frame.Settings.Page1["Music Id"].Text == "72089843969979" then
 		s.PlaybackSpeed = 0.19
 	end
-	s.Pitch = frame.Settings.Page1["Music Pitch"].Text
 	s:Play()
 	wait(.1)
 	s:Play()
