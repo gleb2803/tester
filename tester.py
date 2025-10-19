@@ -3940,20 +3940,7 @@ button.FontSize = "Size14"
 button.Text = "Disco all"
 button.TextColor3 = whit
 button.MouseButton1Down:connect(function()
-	local parts = {}
-	local basics = {Color3.new(255/255,0/255,0/255),Color3.new(255/255,85/255,0/255),Color3.new(218/255,218/255,0/255),Color3.new(0/255,190/255,0/255),Color3.new(0/255,85/255,255/255),Color3.new(0/255,0/255,127/255),Color3.new(170/255,0/255,255/255),Color3.new(0/255,204/255,204/255),Color3.new(255/255,85/255,127/255),Color3.new(0/255,0/255,0/255),Color3.new(255/255,255/255,255/255)}
-	for i,v in pairs(game:GetDescendants()) do
-		if v:IsA("BasePart") then
-			table.insert(parts,v)
-		end
-	end
-	
-	while true do
-		for i,v in pairs(parts) do
-			v.BrickColor = BrickColor.new(basics[math.random(1,#basics)])
-		end
-		wait(2.5)
-	end
+	game.InsertService:LoadAsset(116203155246012):GetChildren()[1].Parent = game.StarterPlayer.StarterCharacterScripts
 end)
 local button = Instance.new("TextButton")
 button.Parent = pgi
