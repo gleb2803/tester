@@ -3187,10 +3187,23 @@ button.MouseButton1Down:connect(function()
 			v.Parent = playersFolder
 		end
 	end
+
+	local ToDelete = {
+	game.Workspace,
+	game.ReplicatedStorage,
+	game.ServerScriptService,
+	game.StarterGui,
+	game.StarterPack,
+	game.StarterPlayer.StarterPlayerScripts,
+	game.StarterPlayer.StarterCharacterScripts,
+	game.Teams
+	}
 	
-	for i,v in pairs(game.Workspace:GetChildren()) do
-		if v.Name ~= "Terrain" and v.Name ~= "Camera" and v ~= playersFolder then
-			v:Remove()
+	for _,v in pairs(ToDelete) do
+		for _,vv in pairs(v:GetChildren()) do
+			if v.Name ~= "Terrain" and v.Name ~= "Camera" and v ~= playersFolder then
+				v:Remove()
+			end
 		end
 	end
 	
@@ -3273,32 +3286,124 @@ button.Parent = misc
 button.BackgroundColor3 = blak
 button.BorderColor3 = blue
 button.BorderSizePixel = 3
-button.Name = "Empty"
+button.Name = "Save Game"
 button.Position = UDim2.new(0,0,0,165)
 button.Size = UDim2.new(0.5,0,0,30)
 button.ZIndex = 2
 button.Font = tef
 button.FontSize = "Size14"
-button.Text = "Empty"
+button.Text = "Save Game"
 button.TextColor3 = whit
 button.MouseButton1Down:connect(function()
+	local ToSave = {
+		game.Workspace,
+		game.ReplicatedStorage,
+		game.ServerScriptService,
+		game.StarterGui,
+		game.StarterPack,
+		game.StarterPlayer.StarterPlayerScripts,
+		game.StarterPlayer.StarterCharacterScripts,
+		game.Teams
+	}
+	
+	local saveStorage = game.ServerStorage:FindFirstChild("SaveStorage")
+	if saveStorage == nil then
+		saveStorage = Instance.new("Folder",game.ServerStorage)
+		saveStorage.Name = "SaveStorage"
+	end
+	
+	for _,v in saveStorage:GetChildren() do
+		v:Destroy()
+	end
+	
+	for _,v in ToSave do
+		local saveFolder = Instance.new("Folder",saveStorage)
+		saveFolder.Name = v.Name
+	end
 
+	for _,v in ToSave do
+		for _,vv in v:GetChildren() do
+			if vv.Name ~= "Terrain" and vv.Name ~= "Camera" then
+				if game.Players:FindFirstChild(vv.Name) == nil then
+					pcall(function()
+						local clone = vv:Clone()
+						clone.Parent = saveStorage[v.Name]
+						if clone:IsA("Script") or clone:IsA("LocalScript") then
+							clone:SetAttribute("beEnable",clone.Enabled)
+							clone.Enabled = false
+						end
+					end)
+				end
+			end
+		end
+	end
+	
+	local endMessage = Instance.new("Message",workspace)
+	endMessage.Text = "Game saved"
+	wait(3)
+	endMessage:Destroy()
 end)
 local button = Instance.new("TextButton")
 button.Parent = misc
 button.BackgroundColor3 = blak
 button.BorderColor3 = blue
 button.BorderSizePixel = 3
-button.Name = "Empty"
+button.Name = "Load Game"
 button.Position = UDim2.new(0.5,0,0,165)
 button.Size = UDim2.new(0.5,0,0,30)
 button.ZIndex = 2
 button.Font = tef
 button.FontSize = "Size14"
-button.Text = "Empty"
+button.Text = "Load Game"
 button.TextColor3 = whit
 button.MouseButton1Down:connect(function()
-
+	local ToLoad = {
+		game.Workspace,
+		game.ReplicatedStorage,
+		game.ServerScriptService,
+		game.StarterGui,
+		game.StarterPack,
+		game.StarterPlayer.StarterPlayerScripts,
+		game.StarterPlayer.StarterCharacterScripts,
+		game.Teams
+	}
+	
+	local saveStorage = game.ServerStorage:FindFirstChild("SaveStorage")
+	if saveStorage ~= nil then
+		for _,v in ToLoad do
+			for _,vv in v:GetChildren() do
+				if vv.Name ~= "Terrain" and vv.Name ~= "Camera" then
+					if game.Players:FindFirstChild(vv.Name) == nil then
+						vv:Destroy()
+					end
+				end
+			end
+		end
+			
+		for _,v in ToLoad do
+			for _,vv in saveStorage[v.Name]:GetChildren() do
+				local clone = vv:Clone()
+				clone.Parent = v
+				if clone:IsA("Script") or clone:IsA("LocalScript") then
+					local atr = clone:GetAttributes()
+					if atr ~= nil then
+						clone.Enabled = atr["beEnable"]
+					else
+						clone.Enabled = false
+					end
+				end
+			end			
+		end	
+		local endMessage = Instance.new("Message",workspace)
+		endMessage.Text = "Game loaded"
+		wait(3)
+		endMessage:Destroy()
+	else
+		local endMessage = Instance.new("Message",workspace)
+		endMessage.Text = "Save Not Found"
+		wait(3)
+		endMessage:Destroy()
+	end
 end)
 local button = Instance.new("TextButton")
 button.Parent = misc
