@@ -2927,11 +2927,11 @@ button.Text = "Chicken Arms R6"
 button.TextColor3 = whit
 button.TextWrapped = true
 button.MouseButton1Down:connect(function()
-	local Chicken = game.Players./localplayer/.Name
-	game.Workspace[Chicken].Torso["Left Shoulder"].C0 = CFrame.new(-1.5, 0.5, 0) * CFrame.fromEulerAnglesXYZ(0,math.pi/2,0) * CFrame.fromEulerAnglesXYZ(math.pi/2, 0, 0) * CFrame.fromEulerAnglesXYZ(0,-math.pi/2,0)
-	game.Workspace[Chicken].Torso["Left Shoulder"].C1 = CFrame.new(0, 0.5, 0)
-	game.Workspace[Chicken].Torso["Right Shoulder"].C0 = CFrame.new(1.5, 0.5, 0) * CFrame.fromEulerAnglesXYZ(0,-math.pi/2,0) * CFrame.fromEulerAnglesXYZ(math.pi/2, 0, 0) * CFrame.fromEulerAnglesXYZ(0,-math.pi/2,0)
-	game.Workspace[Chicken].Torso["Right Shoulder"].C1 = CFrame.new(0, 0.5, 0)
+	local Chicken = game.Players./localplayer/.Character
+	Chicken.Torso["Left Shoulder"].C0 = CFrame.new(-1.5, 0.5, 0) * CFrame.fromEulerAnglesXYZ(0,math.pi/2,0) * CFrame.fromEulerAnglesXYZ(math.pi/2, 0, 0) * CFrame.fromEulerAnglesXYZ(0,-math.pi/2,0)
+	Chicken.Torso["Left Shoulder"].C1 = CFrame.new(0, 0.5, 0)
+	Chicken.Torso["Right Shoulder"].C0 = CFrame.new(1.5, 0.5, 0) * CFrame.fromEulerAnglesXYZ(0,-math.pi/2,0) * CFrame.fromEulerAnglesXYZ(math.pi/2, 0, 0) * CFrame.fromEulerAnglesXYZ(0,-math.pi/2,0)
+	Chicken.Torso["Right Shoulder"].C1 = CFrame.new(0, 0.5, 0)
 end)
 local button = Instance.new("TextButton")
 button.Parent = localp
@@ -2955,8 +2955,8 @@ button.MouseButton1Down:connect(function()
 	end 
 	for X = 1, math.huge, 0.1 do 
 		wait() 
-		game.Workspace[game.Players./localplayer/.Name].Torso.Neck.C0 = CFrame.new(0,1.5,0) * CFrame.fromAxisAngle(Vector3.new(0,1,0), X) 
-		game.Workspace[game.Players./localplayer/.Name].Torso.Neck.C1 = CFrame.new(0,0,0) 
+		game.Players./localplayer/.Character.Name.Torso.Neck.C0 = CFrame.new(0,1.5,0) * CFrame.fromAxisAngle(Vector3.new(0,1,0), X) 
+		game.Players./localplayer/.Character.Name.Torso.Neck.C1 = CFrame.new(0,0,0) 
 	end 
 	for _,c in pairs(game.Players:GetChildren()) do
 		c.Character.Head.Mesh.Scale = Vector3.new(100, 100, 100)
@@ -2980,15 +2980,15 @@ button.Text = "Mesh Disco R6"
 button.TextColor3 = whit
 button.TextWrapped = true
 button.MouseButton1Down:connect(function()
-	plr = game.Players./localplayer/.Name
+	plr = game.Players./localplayer/.Character
 	meshes = {"Brick","Cylinder","Head","Sphere","Torso","Wedge"}
 	h = game.Workspace[plr].Head.Mesh
 	t = Instance.new("SpecialMesh",game.Workspace[plr].Torso)
-	la = Instance.new("SpecialMesh",game.Workspace[plr]["Left Arm"])
-	ra = Instance.new("SpecialMesh",game.Workspace[plr]["Right Arm"])
-	ll = Instance.new("SpecialMesh",game.Workspace[plr]["Left Leg"])
-	rl = Instance.new("SpecialMesh",game.Workspace[plr]["Right Leg"])
-	while true do
+	la = Instance.new("SpecialMesh",plr["Left Arm"])
+	ra = Instance.new("SpecialMesh",plr["Right Arm"])
+	ll = Instance.new("SpecialMesh",plr["Left Leg"])
+	rl = Instance.new("SpecialMesh",plr["Right Leg"])
+	while plr.Humanoid.Health ~= 0 do
 		wait(0.1)
 		h.MeshType = meshes[math.random(1,#meshes)]
 		h.Parent.BrickColor = BrickColor.Random()
@@ -3020,9 +3020,9 @@ button.TextColor3 = whit
 button.TextWrapped = true
 button.MouseButton1Down:connect(function()
 	presets = {"Bright red","Bright yellow","Bright orange","Bright violet","Bright blue","Bright bluish green","Bright green"}
-	while true do
+	while game.Players./localplayer/.Character.Health ~= 0 do
 		wait(0.5)
-		ye = game.Workspace[game.Players./localplayer/.Name]:GetChildren()
+		ye = game.Players./localplayer/.Character:GetChildren()
 		for i,v in pairs(ye) do
 			if v.className == "Part" then
 				v.BrickColor = BrickColor.new(presets[math.random(1,#presets)])
