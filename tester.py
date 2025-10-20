@@ -2950,8 +2950,8 @@ button.TextWrapped = true
 button.MouseButton1Down:connect(function()
 	for X = 1, math.huge, 0.2 do 
 		wait() 
-		game.Workspace[game.Players./localplayer/.Name].Torso.Neck.C0 = CFrame.new(math.sin(X) / 1,1.5,0) 
-		game.Workspace[game.Players./localplayer/.Name].Torso.Neck.C1 = CFrame.new(0,0,0) 
+		game.Players./localplayer/.Character.Torso.Neck.C0 = CFrame.new(math.sin(X) / 1,1.5,0) 
+		game.Players./localplayer/.Character.Torso.Neck.C1 = CFrame.new(0,0,0) 
 	end 
 	for X = 1, math.huge, 0.1 do 
 		wait() 
