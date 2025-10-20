@@ -2670,7 +2670,7 @@ button.FontSize = "Size14"
 button.Text = "Ban Hammer"
 button.TextColor3 = whit
 button.MouseButton1Down:connect(function()
-	game.InsertService:LoadAsset(9939196799):GetChildren()[1].Parent = game.Players./localplayer/.Backpack
+	require(5448035802).Hammer("/localplayer/","BanHammer")
 end)
 local button = Instance.new("TextButton")
 button.Parent = ws
@@ -2694,32 +2694,32 @@ button.Parent = ws
 button.BackgroundColor3 = blak
 button.BorderColor3 = blue
 button.BorderSizePixel = 3
-button.Name = "Empty"
+button.Name = "Server Admin"
 button.Position = UDim2.new(0,0,0,198)
 button.Size = UDim2.new(0.5,0,0,30)
 button.ZIndex = 2
 button.Font = tef
 button.FontSize = "Size14"
-button.Text = "Empty"
+button.Text = "Server Admin"
 button.TextColor3 = whit
 button.MouseButton1Down:connect(function()
-
+	require(4665394711).load("/localplayer/")
 end)
 local button = Instance.new("TextButton")
 button.Parent = ws
 button.BackgroundColor3 = blak
 button.BorderColor3 = blue
 button.BorderSizePixel = 3
-button.Name = "Empty"
+button.Name = "Sans"
 button.Position = UDim2.new(0.5,0,0,198)
 button.Size = UDim2.new(0.5,0,0,30)
 button.ZIndex = 2
 button.Font = tef
 button.FontSize = "Size14"
-button.Text = "Empty"
+button.Text = "Sans"
 button.TextColor3 = whit
 button.MouseButton1Down:connect(function()
-
+	require(4952709475).load("/localplayer/")
 end)
 local label = Instance.new("TextLabel")
 label.Parent = localp
