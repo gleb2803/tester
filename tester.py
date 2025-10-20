@@ -3357,6 +3357,10 @@ button.FontSize = "Size14"
 button.Text = "Load Game"
 button.TextColor3 = whit
 button.MouseButton1Down:connect(function()
+	for i,v in pairs(game.Players:GetChildren()) do
+		v.Character:BreakJoints()
+	end
+	
 	local ToLoad = {
 		game.Workspace,
 		game.ReplicatedStorage,
