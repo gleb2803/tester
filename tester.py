@@ -3420,32 +3420,32 @@ button.Parent = misc
 button.BackgroundColor3 = blak
 button.BorderColor3 = blue
 button.BorderSizePixel = 3
-button.Name = "Empty"
+button.Name = "Time Day"
 button.Position = UDim2.new(0,0,0,198)
 button.Size = UDim2.new(0.5,0,0,30)
 button.ZIndex = 2
 button.Font = tef
 button.FontSize = "Size14"
-button.Text = "Empty"
+button.Text = "Time Day"
 button.TextColor3 = whit
 button.MouseButton1Down:connect(function()
-
+	game.Lighting.ClockTime = 12
 end)
 local button = Instance.new("TextButton")
 button.Parent = misc
 button.BackgroundColor3 = blak
 button.BorderColor3 = blue
 button.BorderSizePixel = 3
-button.Name = "Empty"
+button.Name = "Time Night"
 button.Position = UDim2.new(0.5,0,0,198)
 button.Size = UDim2.new(0.5,0,0,30)
 button.ZIndex = 2
 button.Font = tef
 button.FontSize = "Size14"
-button.Text = "Empty"
+button.Text = "Time Night"
 button.TextColor3 = whit
 button.MouseButton1Down:connect(function()
-
+	game.Lighting.ClockTime = 0
 end)
 local label = Instance.new("TextLabel")
 label.Parent = pmi
