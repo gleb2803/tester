@@ -3357,10 +3357,6 @@ button.FontSize = "Size14"
 button.Text = "Load Game"
 button.TextColor3 = whit
 button.MouseButton1Down:connect(function()
-	for i,v in pairs(game.Players:GetChildren()) do
-		v.Character:BreakJoints()
-	end
-	
 	local ToLoad = {
 		game.Workspace,
 		game.ReplicatedStorage,
@@ -3373,11 +3369,19 @@ button.MouseButton1Down:connect(function()
 	}
 	
 	local saveStorage = game.ServerStorage:FindFirstChild("SaveStorage")
+	local plrFolder = game.Workspace:FindFirstChild("Players")
+	if plrFolder == nil then
+		plrFolder = Instance.new("Folder",game.Workspace)
+		plrFolder.Name = "Players"
+	end
+	for _,v in pairs(game.Players:GetChildren()) do
+		v.Character.Parent = plrFolder
+	end
 	if saveStorage ~= nil then
 		for _,v in ToLoad do
 			for _,vv in v:GetChildren() do
 				if vv.Name ~= "Terrain" and vv.Name ~= "Camera" then
-					if game.Players:FindFirstChild(vv.Name) == nil then
+					if vv ~= plrFolder then
 						vv:Destroy()
 					end
 				end
