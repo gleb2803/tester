@@ -3303,7 +3303,8 @@ button.MouseButton1Down:connect(function()
 		game.StarterPack,
 		game.StarterPlayer.StarterPlayerScripts,
 		game.StarterPlayer.StarterCharacterScripts,
-		game.Teams
+		game.Teams,
+		game.Lighting
 	}
 	
 	local saveStorage = game.ServerStorage:FindFirstChild("SaveStorage")
@@ -3365,7 +3366,8 @@ button.MouseButton1Down:connect(function()
 		game.StarterPack,
 		game.StarterPlayer.StarterPlayerScripts,
 		game.StarterPlayer.StarterCharacterScripts,
-		game.Teams
+		game.Teams,
+		game.Lighting
 	}
 	
 	local saveStorage = game.ServerStorage:FindFirstChild("SaveStorage")
