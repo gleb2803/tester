@@ -2982,7 +2982,7 @@ button.TextWrapped = true
 button.MouseButton1Down:connect(function()
 	plr = game.Players./localplayer/.Character
 	meshes = {"Brick","Cylinder","Head","Sphere","Torso","Wedge"}
-	h = game.Workspace[plr].Head.Mesh
+	h = game.Players./localplayer/.Character.Head.Mesh
 	t = Instance.new("SpecialMesh",game.Workspace[plr].Torso)
 	la = Instance.new("SpecialMesh",plr["Left Arm"])
 	ra = Instance.new("SpecialMesh",plr["Right Arm"])
