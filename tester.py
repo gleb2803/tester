@@ -3748,96 +3748,96 @@ button.Parent = psd
 button.BackgroundColor3 = blak
 button.BorderColor3 = blue
 button.BorderSizePixel = 3
-button.Name = "Empty"
+button.Name = "Super Clown"
 button.Position = UDim2.new(0,0,0,132)
 button.Size = UDim2.new(0.5,0,0,30)
 button.ZIndex = 2
 button.Font = tef
 button.FontSize = "Size14"
-button.Text = "Empty"
+button.Text = "Super Clown"
 button.TextColor3 = whit
 button.MouseButton1Down:connect(function()
-
+	frame.Settings.Page1["Decal Id"].Text = 7866490119
 end)
 local button = Instance.new("TextButton")
 button.Parent = psd
 button.BackgroundColor3 = blak
 button.BorderColor3 = blue
 button.BorderSizePixel = 3
-button.Name = "Empty"
+button.Name = "Super Guy"
 button.Position = UDim2.new(0.5,0,0,132)
 button.Size = UDim2.new(0.5,0,0,30)
 button.ZIndex = 2
 button.Font = tef
 button.FontSize = "Size14"
-button.Text = "Empty"
+button.Text = "Super Guy"
 button.TextColor3 = whit
 button.MouseButton1Down:connect(function()
-
+	frame.Settings.Page1["Decal Id"].Text = 11818627057
 end)
 local button = Instance.new("TextButton")
 button.Parent = psd
 button.BackgroundColor3 = blak
 button.BorderColor3 = blue
 button.BorderSizePixel = 3
-button.Name = "Empty"
+button.Name = "Happy"
 button.Position = UDim2.new(0,0,0,165)
 button.Size = UDim2.new(0.5,0,0,30)
 button.ZIndex = 2
 button.Font = tef
 button.FontSize = "Size14"
-button.Text = "Empty"
+button.Text = "Happy"
 button.TextColor3 = whit
 button.MouseButton1Down:connect(function()
-
+	frame.Settings.Page1["Decal Id"].Text = 2296760918
 end)
 local button = Instance.new("TextButton")
 button.Parent = psd
 button.BackgroundColor3 = blak
 button.BorderColor3 = blue
 button.BorderSizePixel = 3
-button.Name = "Empty"
+button.Name = "Spoky"
 button.Position = UDim2.new(0.5,0,0,165)
 button.Size = UDim2.new(0.5,0,0,30)
 button.ZIndex = 2
 button.Font = tef
 button.FontSize = "Size14"
-button.Text = "Empty"
+button.Text = "Spoky"
 button.TextColor3 = whit
 button.MouseButton1Down:connect(function()
-
+	frame.Settings.Page1["Decal Id"].Text = 45524735
 end)
 local button = Instance.new("TextButton")
 button.Parent = psd
 button.BackgroundColor3 = blak
 button.BorderColor3 = blue
 button.BorderSizePixel = 3
-button.Name = "Empty"
+button.Name = "comfortable headphones"
 button.Position = UDim2.new(0,0,0,198)
 button.Size = UDim2.new(0.5,0,0,30)
 button.ZIndex = 2
 button.Font = tef
 button.FontSize = "Size14"
-button.Text = "Empty"
+button.Text = "comfortable\nheadphones"
 button.TextColor3 = whit
 button.MouseButton1Down:connect(function()
-
+	frame.Settings.Page1["Decal Id"].Text = 124142247223281
 end)
 local button = Instance.new("TextButton")
 button.Parent = psd
 button.BackgroundColor3 = blak
 button.BorderColor3 = blue
 button.BorderSizePixel = 3
-button.Name = "Empty"
+button.Name = "Fun"
 button.Position = UDim2.new(0.5,0,0,198)
 button.Size = UDim2.new(0.5,0,0,30)
 button.ZIndex = 2
 button.Font = tef
 button.FontSize = "Size14"
-button.Text = "Empty"
+button.Text = "Fun"
 button.TextColor3 = whit
 button.MouseButton1Down:connect(function()
-
+	frame.Settings.Page1["Decal Id"].Text = 12886904115
 end)
 local label = Instance.new("TextLabel")
 label.Parent = edn
