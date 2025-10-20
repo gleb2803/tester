@@ -3574,64 +3574,64 @@ button.Parent = pmi
 button.BackgroundColor3 = blak
 button.BorderColor3 = blue
 button.BorderSizePixel = 3
-button.Name = "Empty"
+button.Name = "Chil"
 button.Position = UDim2.new(0,0,0,165)
 button.Size = UDim2.new(0.5,0,0,30)
 button.ZIndex = 2
 button.Font = tef
 button.FontSize = "Size14"
-button.Text = "Empty"
+button.Text = "Chil"
 button.TextColor3 = whit
 button.MouseButton1Down:connect(function()
-
+	frame.Settings.Page1["Music Id"].Text = 1848354536
 end)
 local button = Instance.new("TextButton")
 button.Parent = pmi
 button.BackgroundColor3 = blak
 button.BorderColor3 = blue
 button.BorderSizePixel = 3
-button.Name = "Empty"
+button.Name = "Raining Tacos"
 button.Position = UDim2.new(0.5,0,0,165)
 button.Size = UDim2.new(0.5,0,0,30)
 button.ZIndex = 2
 button.Font = tef
 button.FontSize = "Size14"
-button.Text = "Empty"
+button.Text = "Raining Tacos"
 button.TextColor3 = whit
 button.MouseButton1Down:connect(function()
-
+	frame.Settings.Page1["Music Id"].Text = 142376088
 end)
 local button = Instance.new("TextButton")
 button.Parent = pmi
 button.BackgroundColor3 = blak
 button.BorderColor3 = blue
 button.BorderSizePixel = 3
-button.Name = "Empty"
+button.Name = "Elevator"
 button.Position = UDim2.new(0,0,0,198)
 button.Size = UDim2.new(0.5,0,0,30)
 button.ZIndex = 2
 button.Font = tef
 button.FontSize = "Size14"
-button.Text = "Empty"
+button.Text = "Elevator"
 button.TextColor3 = whit
 button.MouseButton1Down:connect(function()
-
+	frame.Settings.Page1["Music Id"].Text = 1841647093
 end)
 local button = Instance.new("TextButton")
 button.Parent = pmi
 button.BackgroundColor3 = blak
 button.BorderColor3 = blue
 button.BorderSizePixel = 3
-button.Name = "Empty"
+button.Name = "ROBLOX PHONK"
 button.Position = UDim2.new(0.5,0,0,198)
 button.Size = UDim2.new(0.5,0,0,30)
 button.ZIndex = 2
 button.Font = tef
 button.FontSize = "Size14"
-button.Text = "Empty"
+button.Text = "ROBLOX PHONK"
 button.TextColor3 = whit
 button.MouseButton1Down:connect(function()
-
+	frame.Settings.Page1["Music Id"].Text = 136932193331774
 end)
 local label = Instance.new("TextLabel")
 label.Parent = psd
