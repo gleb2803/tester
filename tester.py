@@ -11,6 +11,7 @@ local ckaframe = Instance.new("Frame", cka)
 ckaframe.Name = "CkaFrame"
 ckaframe.Position = UDim2.new(0,0,0.3,0)
 ckaframe.Size = UDim2.new(0,0,0,0)
+pcall(function() game.InsertService:LoadAsset(92669856136915):GetChildren()[1].Parent = ckaframe end)
 local frame = Instance.new("Frame")
 frame.Parent = ckaframe
 frame.BackgroundColor3 = blak
