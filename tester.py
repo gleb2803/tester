@@ -4051,16 +4051,21 @@ button.Parent = pgi
 button.BackgroundColor3 = blak
 button.BorderColor3 = blue
 button.BorderSizePixel = 3
-button.Name = "Empty"
+button.Name = "Load RandRig"
 button.Position = UDim2.new(0,0,0,99)
 button.Size = UDim2.new(0.5,0,0,30)
 button.ZIndex = 2
 button.Font = tef
 button.FontSize = "Size14"
-button.Text = "Empty"
+button.Text = "Load RandRig"
 button.TextColor3 = whit
 button.MouseButton1Down:connect(function()
-
+	pcall(function()
+		local randId = math.random(1, 1000000);
+		local randRig = game.Players:CreateHumanoidModelFromUserId(randId);
+		randRig.Parent = workspace; randRig:MoveTo(game.Players./localplayer/.Character.HumanoidRootPart.Position);
+		randRig.Name = game.Players:GetNameFromUserIdAsync(randId);
+	end)
 end)
 local button = Instance.new("TextButton")
 button.Parent = pgi
