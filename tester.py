@@ -3205,7 +3205,7 @@ button.MouseButton1Down:connect(function()
 	local ToDelete = {
 	game.Workspace,
 	game.ReplicatedStorage,
-	game.ServerScriptService,
+	--game.ServerScriptService,
 	game.StarterGui,
 	game.StarterPack,
 	game.StarterPlayer.StarterPlayerScripts,
@@ -3312,7 +3312,7 @@ button.MouseButton1Down:connect(function()
 	local ToSave = {
 		game.Workspace,
 		game.ReplicatedStorage,
-		game.ServerScriptService,
+		--game.ServerScriptService,
 		game.StarterGui,
 		game.StarterPack,
 		game.StarterPlayer.StarterPlayerScripts,
@@ -3375,7 +3375,7 @@ button.MouseButton1Down:connect(function()
 	local ToLoad = {
 		game.Workspace,
 		game.ReplicatedStorage,
-		game.ServerScriptService,
+		--game.ServerScriptService,
 		game.StarterGui,
 		game.StarterPack,
 		game.StarterPlayer.StarterPlayerScripts,
