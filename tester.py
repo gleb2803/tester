@@ -918,7 +918,7 @@ button.MouseButton1Down:connect(function()
 	--/explode <Player>
 	--/sit <Player>
 
-	local prefix = "/"
+	local prefix = "%"
 
 	game.Chat:Chat(game.Players./localplayer/.Character.Head,"Blob Admin Loaded",Enum.ChatColor.Green)
 
