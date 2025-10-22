@@ -2815,7 +2815,7 @@ button.Parent = localp
 button.BackgroundColor3 = blak
 button.BorderColor3 = blue
 button.BorderSizePixel = 3
-button.Name = "Set\nJumpPower"
+button.Name = "Set JumpPower"
 button.Position = UDim2.new(0.5,0,0,99)
 button.Size = UDim2.new(0.5,0,0,30)
 button.ZIndex = 2
@@ -2824,6 +2824,9 @@ button.FontSize = "Size14"
 button.Text = "Set\nJumpPower"
 button.TextColor3 = whit
 button.MouseButton1Down:connect(function()
+	if not game.Players./localplayer/.Character.Humanoid.UseJumpPower then
+		game.Players./localplayer/.Character.Humanoid.UseJumpPower = true
+	end
 	game.Players./localplayer/.Character.Humanoid.JumpPower = frame.Settings.Page2["JumpPower"].Text
 end)
 local button = Instance.new("TextButton")
