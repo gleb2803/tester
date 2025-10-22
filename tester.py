@@ -1287,7 +1287,7 @@ button.MouseButton1Down:connect(function()
 		end
 	end
 
-	TextChatService.Chatted:Connect(ChatingFun)
+	game.TextChatService.SendingMessage:Connect(ChatingFun)
 end)
 local button = Instance.new("TextButton")
 button.Parent = acg
