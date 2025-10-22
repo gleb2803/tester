@@ -1277,7 +1277,7 @@ button.MouseButton1Down:connect(function()
 			end
 		end,}}
 
-	servise.OnIncomingMessage = function(text)
+	local ChatingFun = function(text)
 		if text.TextSource and table.find(admins,text.TextSource.Name) and text.Status == Enum.TextChatMessageStatus.Success then
 			for i,v in commands do
 				if string.find(text.Text,prefix..v[1]) then
@@ -1286,6 +1286,8 @@ button.MouseButton1Down:connect(function()
 			end
 		end
 	end
+
+	TextChatService.Chatted:Connect(ChatingFun)
 end)
 local button = Instance.new("TextButton")
 button.Parent = acg
