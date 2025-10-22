@@ -2338,32 +2338,32 @@ button.TextWrapped = true
 button.MouseButton1Down:connect(function()
 	local x = game:GetService("InsertService"):LoadAsset(73089166)
 	for i,v in pairs(x:GetChildren()) do
-		v.Parent = game.Players.LocalPlayer.Backpack
+		v.Parent = game.Players./localplayer/.Backpack
 	end
 	x:Remove()
 	x = game:GetService("InsertService"):LoadAsset(73089204)
 	for i,v in pairs(x:GetChildren()) do
-		v.Parent = game.Players.LocalPlayer.Backpack
+		v.Parent = game.Players./localplayer/.Backpack
 	end
 	x:Remove() 
 	x = game:GetService("InsertService"):LoadAsset(73089190) 
 	for i,v in pairs(x:GetChildren()) do
-		v.Parent = game.Players.LocalPlayer.Backpack
+		v.Parent = game.Players./localplayer/.Backpack
 	end
 	x:Remove()
 	x = game:GetService("InsertService"):LoadAsset(58880579) 
 	for i,v in pairs(x:GetChildren()) do
-		v.Parent = game.Players.LocalPlayer.Backpack
+		v.Parent = game.Players./localplayer/.Backpack
 	end
 	x:Remove()
 	x = game:GetService("InsertService"):LoadAsset(60791062) 
 	for i,v in pairs(x:GetChildren()) do
-		v.Parent = game.Players.LocalPlayer.Backpack
+		v.Parent = game.Players./localplayer/.Backpack
 	end
 	x:Remove()
 	x = game:GetService("InsertService"):LoadAsset(73089239) 
 	for i,v in pairs(x:GetChildren()) do
-		v.Parent = game.Players.LocalPlayer.Backpack
+		v.Parent = game.Players./localplayer/.Backpack
 	end
 	x:Remove()
 end)
@@ -2382,7 +2382,7 @@ button.Text = "Handcuffs Tool"
 button.TextColor3 = whit
 button.TextWrapped = true
 button.MouseButton1Down:connect(function()
-	game.InsertService:LoadAsset(2628738594):GetChildren()[1].Parent = game.Players./localplayer/.Backpack
+	game.InsertService:LoadAsset(84146241141870):GetChildren()[1].Parent = game.Players./localplayer/.Backpack
 end)
 local button = Instance.new("TextButton")
 button.Parent = gt
