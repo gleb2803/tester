@@ -3031,7 +3031,7 @@ button.TextColor3 = whit
 button.TextWrapped = true
 button.MouseButton1Down:connect(function()
 	presets = {"Bright red","Bright yellow","Bright orange","Bright violet","Bright blue","Bright bluish green","Bright green"}
-	while game.Players./localplayer/.Character.Health ~= 0 do
+	while game.Players./localplayer/.Character..Humanoid.Health ~= 0 do
 		wait(0.5)
 		ye = game.Players./localplayer/.Character:GetChildren()
 		for i,v in pairs(ye) do
