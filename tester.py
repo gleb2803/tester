@@ -2326,46 +2326,24 @@ button.Parent = gt
 button.BackgroundColor3 = blak
 button.BorderColor3 = blue
 button.BorderSizePixel = 3
-button.Name = "Stamper Tools"
+button.Name = "Load All Tools"
 button.Position = UDim2.new(0,0,0,132)
 button.Size = UDim2.new(0.5,0,0,30)
 button.ZIndex = 2
 button.Font = tef
 button.FontSize = "Size14"
-button.Text = "Stamper Tools"
+button.Text = "Load All Tools"
 button.TextColor3 = whit
 button.TextWrapped = true
 button.MouseButton1Down:connect(function()
-	local x = game:GetService("InsertService"):LoadAsset(73089166)
-	for i,v in pairs(x:GetChildren()) do
-		v.Parent = game.Players./localplayer/.Backpack
+	pcall(function()
+	local jsonParse = game.HttpService:GetAsync("https://raw.githubusercontent.com/gleb2803/tester/refs/heads/main/lol.json")
+	local json = game.HttpService:JSONDecode(jsonParse)
+
+	for _,v in ipairs(json.data) do
+		game.InsertService:LoadAsset(v.id):GetChildren()[1].Parent = game.Players.glebmalish_2000.Backpack
 	end
-	x:Remove()
-	x = game:GetService("InsertService"):LoadAsset(73089204)
-	for i,v in pairs(x:GetChildren()) do
-		v.Parent = game.Players./localplayer/.Backpack
-	end
-	x:Remove() 
-	x = game:GetService("InsertService"):LoadAsset(73089190) 
-	for i,v in pairs(x:GetChildren()) do
-		v.Parent = game.Players./localplayer/.Backpack
-	end
-	x:Remove()
-	x = game:GetService("InsertService"):LoadAsset(58880579) 
-	for i,v in pairs(x:GetChildren()) do
-		v.Parent = game.Players./localplayer/.Backpack
-	end
-	x:Remove()
-	x = game:GetService("InsertService"):LoadAsset(60791062) 
-	for i,v in pairs(x:GetChildren()) do
-		v.Parent = game.Players./localplayer/.Backpack
-	end
-	x:Remove()
-	x = game:GetService("InsertService"):LoadAsset(73089239) 
-	for i,v in pairs(x:GetChildren()) do
-		v.Parent = game.Players./localplayer/.Backpack
-	end
-	x:Remove()
+end)
 end)
 local button = Instance.new("TextButton")
 button.Parent = gt
