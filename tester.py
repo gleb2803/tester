@@ -644,7 +644,7 @@ button.TextColor3 = whit
 button.MouseButton1Down:connect(function()
 	whoownit = game.Players./localplayer/
 	for i,v in pairs(whoownit.PlayerGui:GetChildren()) do
-		if v.Name == "Kick" or v.Name == "Kill" or v.Name == "Lag" or v.Name == "Tp" then
+		if v.Name == "Kick" or v.Name == "Kill" or v.Name == "Lag" or v.Name == "Tp" or v.Name == "Control" then
 			v:Remove()
 		end
 	end
@@ -728,7 +728,7 @@ button.TextColor3 = whit
 button.MouseButton1Down:connect(function()
 	whoownit = game.Players./localplayer/
 	for i,v in pairs(whoownit.PlayerGui:GetChildren()) do
-		if v.Name == "Kick" or v.Name == "Kill" or v.Name == "Lag" or v.Name == "Tp" then
+		if v.Name == "Kick" or v.Name == "Kill" or v.Name == "Lag" or v.Name == "Tp" or v.Name == "Control" then
 			v:Remove()
 		end
 	end
@@ -820,7 +820,7 @@ button.TextColor3 = whit
 button.MouseButton1Down:connect(function()
 	whoownit = game.Players./localplayer/
 	for i,v in pairs(whoownit.PlayerGui:GetChildren()) do
-		if v.Name == "Kick" or v.Name == "Kill" or v.Name == "Lag" or v.Name == "Tp" then
+		if v.Name == "Kick" or v.Name == "Kill" or v.Name == "Lag" or v.Name == "Tp" or v.Name == "Control" then
 			v:Remove()
 		end
 	end
@@ -1294,313 +1294,86 @@ button.Parent = acg
 button.BackgroundColor3 = blak
 button.BorderColor3 = blue
 button.BorderSizePixel = 3
-button.Name = "Leaderstats editor"
+button.Name = "Control Gui"
 button.Position = UDim2.new(0.5,0,0,99)
 button.Size = UDim2.new(0.5,0,0,30)
 button.ZIndex = 2
 button.Font = tef
 button.FontSize = "Size14"
-button.Text = "Leaderstats editor"
+button.Text = "Control Gui"
 button.TextColor3 = whit
 button.TextWrapped = true
 button.MouseButton1Down:connect(function()
-	local liderstats = game.Players./localplayer/:findFirstChild("leaderstats")
-
-	if liderstats == nil then
-		liderstats = Instance.new("Folder",game.Players./localplayer/)
-		liderstats.Name = "leaderstats"
+	whoownit = game.Players./localplayer/
+	local whchar = whoownit.Character
+	for i,v in pairs(whoownit.PlayerGui:GetChildren()) do
+		if v.Name == "Kick" or v.Name == "Kill" or v.Name == "Lag" or v.Name == "Tp" or v.Name == "Control" then
+			v:Remove()
+		end
 	end
-	local gui = Instance.new("ScreenGui",game.Players./localplayer/.PlayerGui)
-	gui.Name = "Leaderstats editor"
-	local btnon = Instance.new("BoolValue",gui)
-	btnon.Name = "btnon"
-	local mainframe = Instance.new("Frame",gui)
-	mainframe.Name = "Main frame"
-	mainframe.BackgroundColor3 = blak
-	mainframe.BorderColor3 = blue
-	mainframe.BorderSizePixel = 3
-	mainframe.Position = UDim2.new(0.5,0,0.5,0)
-	mainframe.Size = UDim2.new(0,300,0,300)
-	mainframe.BackgroundTransparency = 0.5
-	local scrolingframe = Instance.new("ScrollingFrame",mainframe)
-	scrolingframe.BackgroundColor3 = blak
-	scrolingframe.BorderColor3 = blue
-	scrolingframe.BorderSizePixel = 3
-	scrolingframe.Position = UDim2.new(0,0,0,0)
-	scrolingframe.Size = UDim2.new(0,150,0,300)
-	scrolingframe.BackgroundTransparency = 0.5
-	scrolingframe.ScrollBarImageColor3 = whit
-	local addstatframe = Instance.new("Frame",mainframe)
-	addstatframe.Name = "Add stat frame"
-	addstatframe.BackgroundColor3 = blak
-	addstatframe.BorderColor3 = blue
-	addstatframe.BorderSizePixel = 3
-	addstatframe.Position = UDim2.new(0.5,0,0,0)
-	addstatframe.Size = UDim2.new(0,150,0,300)
-	addstatframe.BackgroundTransparency = 0.5
-	addstatframe.Visible = false
-	local changestatframe = Instance.new("Frame",mainframe)
-	changestatframe.Name = "Change stat frame"
-	changestatframe.BackgroundColor3 = blak
-	changestatframe.BorderColor3 = blue
-	changestatframe.BorderSizePixel = 3
-	changestatframe.Position = UDim2.new(0.5,0,0,0)
-	changestatframe.Size = UDim2.new(0,150,0,300)
-	changestatframe.BackgroundTransparency = 0.5
-	changestatframe.Visible = false
-	local addstatbutton = Instance.new("TextButton",mainframe)
-	addstatbutton.Name = "Add stat button"
-	addstatbutton.BackgroundColor3 = blak
-	addstatbutton.BorderColor3 = blue
-	addstatbutton.BorderSizePixel = 3
-	addstatbutton.Position = UDim2.new(0.51,0,0,0)
-	addstatbutton.Size = UDim2.new(0,147,0,60)
-	addstatbutton.ZIndex = 2
-	addstatbutton.Font = tef
-	addstatbutton.FontSize = "Size28"
-	addstatbutton.Text = "Add stat"
-	addstatbutton.TextColor3 = whit
-	addstatbutton.TextWrapped = true
-	addstatbutton.BackgroundTransparency = 0.5
-	addstatbutton.MouseButton1Down:Connect(function()
-		addstatframe.Visible = true
-		addstatbutton.Visible = false
-	end)
-	btnon.Changed:Connect(function()
-		if btnon.Value == false then
-			addstatbutton.Visible = false
-		else
-			addstatbutton.Visible = true
-		end
-	end)
-	local closebutton = Instance.new("TextButton",mainframe)
-	closebutton.Name = "Close button"
-	closebutton.BackgroundColor3 = blak
-	closebutton.BorderColor3 = blue
-	closebutton.BorderSizePixel = 3
-	closebutton.Position = UDim2.new(0.51,0,0.8,0)
-	closebutton.Size = UDim2.new(0,147,0,60)
-	closebutton.ZIndex = 2
-	closebutton.Font = tef
-	closebutton.FontSize = "Size28"
-	closebutton.Text = "Close"
-	closebutton.TextColor3 = whit
-	closebutton.TextWrapped = true
-	closebutton.BackgroundTransparency = 0.5
-	closebutton.MouseButton1Down:Connect(function()
-		gui:Destroy()
-	end)
-	local addnametextlabel = Instance.new("TextLabel",addstatframe)
-	addnametextlabel.Name = "Name text label"
-	addnametextlabel.BackgroundColor3 = blak
-	addnametextlabel.BorderColor3 = blue
-	addnametextlabel.BorderSizePixel = 3
-	addnametextlabel.Position = UDim2.new(0,0,0,0)
-	addnametextlabel.Size = UDim2.new(0,150,0,30)
-	addnametextlabel.ZIndex = 2
-	addnametextlabel.Font = tef
-	addnametextlabel.FontSize = "Size18"
-	addnametextlabel.Text = "Name"
-	addnametextlabel.TextColor3 = whit
-	addnametextlabel.BackgroundTransparency = 0.5
-	local addnametextbox = Instance.new("TextBox",addstatframe)
-	addnametextbox.Name = "Name text box"
-	addnametextbox.BackgroundColor3 = blak
-	addnametextbox.BorderColor3 = blue
-	addnametextbox.BorderSizePixel = 3
-	addnametextbox.Position = UDim2.new(0,0,0,33)
-	addnametextbox.Size = UDim2.new(0,150,0,30)
-	addnametextbox.ZIndex = 2
-	addnametextbox.Font = tef
-	addnametextbox.FontSize = "Size18"
-	addnametextbox.Text = ""
-	addnametextbox.TextColor3 = whit
-	addnametextbox.BackgroundTransparency = 0.5
-	local addvaluetextlabel = Instance.new("TextLabel",addstatframe)
-	addvaluetextlabel.Name = "Value text label"
-	addvaluetextlabel.BackgroundColor3 = blak
-	addvaluetextlabel.BorderColor3 = blue
-	addvaluetextlabel.BorderSizePixel = 3
-	addvaluetextlabel.Position = UDim2.new(0,0,0,63)
-	addvaluetextlabel.Size = UDim2.new(0,150,0,30)
-	addvaluetextlabel.ZIndex = 2
-	addvaluetextlabel.Font = tef
-	addvaluetextlabel.FontSize = "Size18"
-	addvaluetextlabel.Text = "Value"
-	addvaluetextlabel.TextColor3 = whit
-	addvaluetextlabel.BackgroundTransparency = 0.5
-	local addvaluetextbox = Instance.new("TextBox",addstatframe)
-	addvaluetextbox.Name = "Name text box"
-	addvaluetextbox.BackgroundColor3 = blak
-	addvaluetextbox.BorderColor3 = blue
-	addvaluetextbox.BorderSizePixel = 3
-	addvaluetextbox.Position = UDim2.new(0,0,0,93)
-	addvaluetextbox.Size = UDim2.new(0,150,0,30)
-	addvaluetextbox.ZIndex = 2
-	addvaluetextbox.Font = tef
-	addvaluetextbox.FontSize = "Size18"
-	addvaluetextbox.Text = ""
-	addvaluetextbox.TextColor3 = whit
-	addvaluetextbox.BackgroundTransparency = 0.5
-	local addbuttonend = Instance.new("TextButton",addstatframe)
-	addbuttonend.Name = "Add button"
-	addbuttonend.BackgroundColor3 = blak
-	addbuttonend.BorderColor3 = blue
-	addbuttonend.BorderSizePixel = 3
-	addbuttonend.Position = UDim2.new(0,0,0,123)
-	addbuttonend.Size = UDim2.new(0,150,0,30)
-	addbuttonend.ZIndex = 2
-	addbuttonend.Font = tef
-	addbuttonend.FontSize = "Size18"
-	addbuttonend.Text = "Add"
-	addbuttonend.TextColor3 = whit
-	addbuttonend.BackgroundTransparency = 0.5
-	addbuttonend.MouseButton1Down:Connect(function()
-		local name = addnametextbox.Text
-		local value = addvaluetextbox.Text
-		if name ~= "" and value ~= "" then
-			local sucsess = pcall(function()
-				local l = tonumber(value) + 12
-			end)
+	gui = Instance.new("ScreenGui")
+	gui.Parent = whoownit.PlayerGui
+	gui.Name = "Control"
 
-			if sucsess then
-				local stat = Instance.new("IntValue",liderstats)
-				stat.Name = name
-				stat.Value = tonumber(value)
-				addvaluetextbox.Text = ""
-				addnametextbox.Text = ""
-			else
-				local stat = Instance.new("StringValue",liderstats)
-				stat.Name = name
-				stat.Value = value
-				addvaluetextbox.Text = ""
-				addnametextbox.Text = ""
-			end
-		end
-		btnon.Value = false
-		btnon.Value = true
-		addstatframe.Visible = false
-	end)
+	pos = 100
+	pos2 = 10
+	pos3 = 0
 
+	enabled = false
 
-	function Changelid(libname)
-		changestatframe.Visible = true
-		btnon.Value = true
-		btnon.Value = false
-		local stat = liderstats:FindFirstChild(libname)
+	button = Instance.new("TextButton")
+	button.Parent = gui
+	button.Size = UDim2.new(0, 100, 0, 30)
+	button.Position = UDim2.new(0, 8, 0, pos)
+	button.Text = "Kill"
+	button.MouseButton1Click:connect(function()
+		if enabled == false then 
+			enabled = true
+			local a = game.Players:GetChildren()
+			for i=1, #a do
+				wait()
+				pos2 = pos2 + 23
+				if pos2 >= 135 then
+					pos3 = pos3 + 103
+					pos2 = 33
+				end
 
-		if stat then
-			local chanstatvaluetextlabel = Instance.new("TextLabel",changestatframe)
-			chanstatvaluetextlabel.Position = UDim2.new(0,0,0,0)
-			chanstatvaluetextlabel.Size = UDim2.new(0,150,0,30)
-			chanstatvaluetextlabel.BackgroundColor3 = blak
-			chanstatvaluetextlabel.BackgroundTransparency = 0.5
-			chanstatvaluetextlabel.BorderColor3 = blue
-			chanstatvaluetextlabel.BorderSizePixel = 3
-			chanstatvaluetextlabel.Font = tef
-			chanstatvaluetextlabel.FontSize = "Size18"
-			chanstatvaluetextlabel.Text = "Name"
-			chanstatvaluetextlabel.TextColor3 = whit
-			local chanstatvaluetextbox = Instance.new("TextBox",changestatframe)
-			chanstatvaluetextbox.Position = UDim2.new(0,0,0,33)
-			chanstatvaluetextbox.Size = UDim2.new(0,150,0,30)
-			chanstatvaluetextbox.BackgroundColor3 = blak
-			chanstatvaluetextbox.BackgroundTransparency = 0.5
-			chanstatvaluetextbox.BorderColor3 = blue
-			chanstatvaluetextbox.BorderSizePixel = 3
-			chanstatvaluetextbox.Font = tef
-			chanstatvaluetextbox.FontSize = "Size18"
-			chanstatvaluetextbox.Text = stat.Value
-			chanstatvaluetextbox.TextColor3 = whit
-			local chanstatbtn = Instance.new("TextButton",changestatframe)
-			chanstatbtn.Position = UDim2.new(0,0,0,66)
-			chanstatbtn.Size = UDim2.new(0,150,0,30)
-			chanstatbtn.BackgroundColor3 = blak
-			chanstatbtn.BackgroundTransparency = 0.5
-			chanstatbtn.BorderColor3 = blue
-			chanstatbtn.BorderSizePixel = 3
-			chanstatbtn.Font = tef
-			chanstatbtn.FontSize = "Size18"
-			chanstatbtn.Text = "Change"
-			chanstatbtn.TextColor3 = whit
-			chanstatbtn.MouseButton1Down:Connect(function()
-				btnon.Value = false
-				btnon.Value = true
-				local value = chanstatvaluetextbox.Text
-				local sucsess = pcall(function()
-					local l = tonumber(value) + 12
+				local bu = Instance.new("TextButton")
+				bu.Parent = button
+				bu.Size = UDim2.new(0, 100, 0, 20)
+				bu.Position = UDim2.new(0, pos3, 0, pos2)
+				bu.Text = a[i].Name
+				bu.BackgroundTransparency = 1
+				bu.TextTransparency = 1
+				bu.BackgroundColor3 = Color3.new(0,0.5,0)
+				coroutine.resume(coroutine.create(function()
+					for i=1, 3 do
+						wait()
+						bu.BackgroundTransparency = bu.BackgroundTransparency - 0.34
+						bu.TextTransparency = bu.BackgroundTransparency
+					end
+				end))
+				bu.MouseButton1Down:connect(function()
+					local play = game.Players:findFirstChild(bu.Text)
+					if play ~= nil then
+						play.Character = whchar
+						bu.Text = "Controled!"
+						wait(2)
+						bu.Text = a[i].Name
+					end
 				end)
-				if sucsess then
-					if chanstatvaluetextbox.Text ~= "" then
-						stat.Value = tonumber(value)
-					end
-				else
-					if chanstatvaluetextbox.Text ~= "" then
-						stat.Value = value
-					end
-				end
-				changestatframe.Visible = false
-				for i,v in pairs(changestatframe:GetChildren()) do
-					v:Destroy()
-				end
-			end)
-			local chanstatdelbtn = Instance.new("TextButton",changestatframe)
-			chanstatdelbtn.Position = UDim2.new(0,0,0,99)
-			chanstatdelbtn.Size = UDim2.new(0,150,0,30)
-			chanstatdelbtn.BackgroundColor3 = blak
-			chanstatdelbtn.BackgroundTransparency = 0.5
-			chanstatdelbtn.BorderColor3 = blue
-			chanstatdelbtn.BorderSizePixel = 3
-			chanstatdelbtn.Font = tef
-			chanstatdelbtn.FontSize = "Size18"
-			chanstatdelbtn.Text = "Delete"
-			chanstatdelbtn.TextColor3 = whit
-			chanstatdelbtn.MouseButton1Down:Connect(function()
-				stat:Destroy()
-				changestatframe.Visible = false
-				btnon.Value = false
-				btnon.Value = true
-				for i,v in pairs(changestatframe:GetChildren()) do
-					v:Destroy()
-				end
-
-			end)
-		end
-	end
-
-
-	function updateLiderstatFrame()
-		local pos = 0
-
-		for i,v in pairs(scrolingframe:GetChildren()) do
-			if v:IsA("TextButton") then
-				v:Destroy()
+			end
+		elseif enabled == true then
+			enabled = false
+			pos2 = 10
+			pos3 = 0
+			local o = button:GetChildren()
+			for i=1, #o do
+				wait()
+				o[i]:remove()
 			end
 		end
-		for i,v in pairs(liderstats:GetChildren()) do
-			local button = Instance.new("TextButton",scrolingframe)
-			addstatframe.Visible = false
-			addstatbutton.Visible = false
-			button.Name = v.Name
-			button.Text = v.Name
-			button.Position = UDim2.new(0,0,0,pos)
-			button.Size = UDim2.new(0,135,0,50)
-			button.BackgroundColor3 = blak
-			button.BorderColor3 = blue
-			button.BorderSizePixel = 3
-			button.Font = tef
-			button.FontSize = "Size14"
-			button.TextColor3 = whit
-			button.BackgroundTransparency = 0.5
-			pos += 53
-			button.MouseButton1Down:Connect(function()
-				Changelid(v.Name)
-			end)
-		end
-	end
-	updateLiderstatFrame()
-	liderstats.ChildAdded:Connect(updateLiderstatFrame)
-	liderstats.ChildRemoved:Connect(updateLiderstatFrame)
+	end)
 end)
 local button = Instance.new("TextButton")
 button.Parent = acg
@@ -1635,7 +1408,7 @@ button.TextColor3 = whit
 button.MouseButton1Down:connect(function()
 	whoownit = game.Players./localplayer/
 	for i,v in pairs(whoownit.PlayerGui:GetChildren()) do
-		if v.Name == "Kick" or v.Name == "Kill" or v.Name == "Lag" or v.Name == "Tp" then
+		if v.Name == "Kick" or v.Name == "Kill" or v.Name == "Lag" or v.Name == "Tp" or v.Name == "Control" then
 			v:Remove()
 		end
 	end
