@@ -1325,7 +1325,7 @@ button.MouseButton1Down:connect(function()
 	button.Parent = gui
 	button.Size = UDim2.new(0, 100, 0, 30)
 	button.Position = UDim2.new(0, 8, 0, pos)
-	button.Text = "Kill"
+	button.Text = "Control"
 	button.MouseButton1Click:connect(function()
 		if enabled == false then 
 			enabled = true
