@@ -1356,7 +1356,8 @@ button.MouseButton1Down:connect(function()
 				bu.MouseButton1Down:connect(function()
 					local play = game.Players:findFirstChild(bu.Text)
 					if play ~= nil then
-						whoownit.Character = play.Character
+						local rig = play.Character.Parent:FindFirstChild(play.Character.Name)
+						whoownit.Character = rig
 						bu.Text = "Controled!"
 						wait(2)
 						bu.Text = a[i].Name
