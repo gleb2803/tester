@@ -3826,16 +3826,31 @@ button.Parent = pgi
 button.BackgroundColor3 = blak
 button.BorderColor3 = blue
 button.BorderSizePixel = 3
-button.Name = "Empty"
+button.Name = "Reset Rig"
 button.Position = UDim2.new(0.5,0,0,99)
 button.Size = UDim2.new(0.5,0,0,30)
 button.ZIndex = 2
 button.Font = tef
 button.FontSize = "Size14"
-button.Text = "Empty"
+button.Text = "Reset Rig"
 button.TextColor3 = whit
 button.MouseButton1Down:connect(function()
-
+	pcall(function()
+		local plrRig = game.Players:CreateHumanoidModelFromUserId(game.Players.glebmalish_2000.UserId)
+		if game.Players.glebmalish_2000.Character ~= nil then
+			local rigParent = game.Players.glebmalish_2000.Character.Parent
+			plrRig.Parent = rigParent
+			game.Players.glebmalish_2000.Character:remove()
+			game.Players.glebmalish_2000.Character = plrRig
+			wait(1)
+			plrRig.Humanoid.Health = 0
+		else
+			plrRig.Parent = game.Workspace
+			game.Players.glebmalish_2000.Character = plrRig
+			wait(1)
+			plrRig.Humanoid.Health = 0
+		end
+	end)
 end)
 local button = Instance.new("TextButton")
 button.Parent = pgi
