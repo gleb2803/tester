@@ -361,6 +361,7 @@ button.Text = "Set Skybox"
 button.TextColor3 = whit
 button.TextWrapped = true
 button.MouseButton1Down:connect(function()
+	for _,v in pairs(game.Lighting:GetChildren()) do if v:IsA("Sky") then v:Destroy() end end
 	local s = Instance.new("Sky")
 	s.Name = "Sky"
 	s.Parent = game.Lighting
@@ -588,9 +589,13 @@ button.TextColor3 = whit
 button.TextWrapped = true
 button.MouseButton1Down:connect(function()
 	local ImageId = frame.Settings.Page1["Decal Id"].Text
-	local MusicId = frame.Settings.Page1["Music Id"].Text
+
 	for _,v in pairs(game.Workspace:GetDescendants()) do
-		if v:IsA("BasePart") then
+		if v:IsA("ParticleEmitter") then
+			if v.Texture ~= "rbxassetid://"..ImageId then
+				v.Parent = nil
+			end
+		elseif v:IsA("BasePart") then
 			local Particles = Instance.new("ParticleEmitter")
 			Particles.Parent = v
 			Particles.Texture = "rbxassetid://"..ImageId
