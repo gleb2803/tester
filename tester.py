@@ -3821,9 +3821,16 @@ button.Text = "Load RandRig"
 button.TextColor3 = whit
 button.MouseButton1Down:connect(function()
 	pcall(function()
+		local folder = workspace:FindFirstChild("RandRigs")
+		if folder == nil then
+			folder = Instance.new("Folder")
+			folder.Name = "RandRigs"
+			folder.Parent = workspace;
+		end
 		local randId = math.random(1, 1000000);
 		local randRig = game.Players:CreateHumanoidModelFromUserId(randId);
-		randRig.Parent = workspace; randRig:MoveTo(game.Players./localplayer/.Character.HumanoidRootPart.Position);
+		randRig.Parent = folder;
+		randRig:MoveTo(game.Players./localplayer/.Character.HumanoidRootPart.Position);
 		randRig.Name = game.Players:GetNameFromUserIdAsync(randId);
 	end)
 end)
