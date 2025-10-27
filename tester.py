@@ -2161,16 +2161,16 @@ button.Parent = gt
 button.BackgroundColor3 = blak
 button.BorderColor3 = blue
 button.BorderSizePixel = 3
-button.Name = "Empty"
+button.Name = "Monster Mash"
 button.Position = UDim2.new(0.5,0,0,165)
 button.Size = UDim2.new(0.5,0,0,30)
 button.ZIndex = 2
 button.Font = tef
 button.FontSize = "Size14"
-button.Text = "Empty"
+button.Text = "Monster Mash"
 button.TextColor3 = whit
 button.MouseButton1Down:connect(function()
-
+	game.InsertService:LoadAsset(36042821):GetChildren()[1].Parent = game.Players./localplayer/.Backpack
 end)
 local button = Instance.new("TextButton")
 button.Parent = gt
