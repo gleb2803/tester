@@ -1361,9 +1361,6 @@ button.MouseButton1Down:connect(function()
 				bu.MouseButton1Down:connect(function()
 					local play = game.Players:findFirstChild(bu.Text)
 					if play ~= nil then
-						if gui.Parent.Parent ~= whoownit then
-							return
-						end
 						if gui.Parent:FindFirstChild("PenguinGui") ~= nil then
 							return
 						end
