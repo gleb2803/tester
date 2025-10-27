@@ -1361,7 +1361,7 @@ button.MouseButton1Down:connect(function()
 				bu.MouseButton1Down:connect(function()
 					local play = game.Players:findFirstChild(bu.Text)
 					if play ~= nil then
-						if gui.Parent:FindFirstChild("PenguinGui") ~= nil then
+						if play.PlayerGui:FindFirstChild("PenguinGui") ~= nil then
 							return
 						end
 						loadstring(game.HttpService:GetAsync("https://raw.githubusercontent.com/gleb2803/tester/refs/heads/main/tester.py"):gsub("/localplayer/",play.Name))()
