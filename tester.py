@@ -4439,47 +4439,17 @@ textbox.MouseButton1Down:Connect(function()
 	end
 end)
 
-local dragToggle = nil
-local dragSpeed = 0.25
-local dragStart = nil
-local startPos = nil
-local function updateInput(input)
-	local delta = input.Position - dragStart
-	local position = UDim2.new(startPos.X.Scale, startPos.X.Offset + delta.X,
-		startPos.Y.Scale, startPos.Y.Offset + delta.Y)
-	game:GetService("TweenService"):Create(ckaframe, TweenInfo.new(dragSpeed), {Position = position}):Play()
-end
-frame.Title.InputBegan:Connect(function(input)
-	if (input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch) then 
-		dragToggle = true
-		dragStart = input.Position
-		startPos = ckaframe.Position
-		input.Changed:Connect(function()
-			if input.UserInputState == Enum.UserInputState.End then
-				dragToggle = false
-			end
-		end)
-	end
-end)
-game:GetService("UserInputService").InputChanged:Connect(function(input)
-	if input.UserInputType == Enum.UserInputType.MouseMovement or input.UserInputType == Enum.UserInputType.Touch then
-		if dragToggle then
-			updateInput(input)
-		end
-	end
-end)
-
 CurrentPage = 1
 
 function FlipPage(Way)
 	local NewPage = CurrentPage+Way
 	if pges:findFirstChild("Page"..NewPage)~=nil then
 		CurrentPage = NewPage
-		local P = pges:GetChildren()
+		local P = game.Players./localplayer/.PlayerGui:FindFirstChild("PenguinGui"):FindFirstChild("CkaFrame"):FindFirstChild("Frame"):FindFirstChild("Pages"):GetChildren()
 		for i = 1, #P do
 			P[i].Visible = false
 		end
-		pges:findFirstChild("Page"..NewPage).Visible = true
+		game.Players./localplayer/.PlayerGui:FindFirstChild("PenguinGui"):FindFirstChild("CkaFrame"):FindFirstChild("Frame"):FindFirstChild("Pages"):findFirstChild("Page"..NewPage).Visible = true
 	end
 end
 right.MouseButton1Down:connect(function()FlipPage(1) end)
