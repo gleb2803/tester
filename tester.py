@@ -4496,7 +4496,7 @@ textbox.MouseButton1Down:Connect(function()
 		while vil do
 			wait(0.1)
 			for _,v in pairs(selectFolder:GetChildren()) do
-				if game.Players:FindFirstChild(v.Name) then
+				if game.Players:FindFirstChild(v.Name) ~= nil then
 					v:Destroy()
 				end
 			end
