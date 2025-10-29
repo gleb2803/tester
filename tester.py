@@ -4491,10 +4491,14 @@ textbox.MouseButton1Down:Connect(function()
 	end
 	if val == "True" then
 		textbox.Text = "Enabled : False"
-		valObj.Value = false
+		if valObj.Value then
+			valObj.Value = not valObj.Value
+		end
 	else
 		textbox.Text = "Enabled : True"
-		valObj.Value = true
+		if not valObj.Value then
+			valObj.Value = not valObj.Value
+		end
 	end
 	valObj.Changed:Connect(function(vil)
 		while vil do
