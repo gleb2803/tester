@@ -4478,7 +4478,7 @@ textbox.FontSize = "Size24"
 textbox.Text = "Enabled : False"
 textbox.TextColor3 = whit
 textbox.MouseButton1Down:Connect(function()
-	local val = string.split(textbox.Text,":"):gsub(" ","")
+	local val = string.split(textbox.Text,":")[2]:gsub(" ","")
 	if val == "True" then
 		textbox.Text = "Enabled : False"
 	else
