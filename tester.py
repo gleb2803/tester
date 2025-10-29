@@ -1374,8 +1374,8 @@ button.MouseButton1Down:connect(function()
 							selectFolder:FindFirstChild(bu.Text):Remove()
 						else
 							local playerValue = Instance.new("IntValue",selectFolder)
-							selectFolder.Name = bu.Text
-							selectFolder.Value = play.UserId
+							playerValue.Name = bu.Text
+							playerValue.Value = play.UserId
 							bu.BackgroundColor3 = Color3.new(0,1,0)
 						end
 					end
