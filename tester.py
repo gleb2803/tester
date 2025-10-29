@@ -4478,14 +4478,31 @@ textbox.FontSize = "Size24"
 textbox.Text = "Enabled : False"
 textbox.TextColor3 = whit
 textbox.MouseButton1Down:Connect(function()
+	local selectFolder = game.ServerStorage:FindFirstChild("SelectedPlayers")
+	if selectFolder == nil then
+		selectFolder = Instance.new("Folder",game.ServerStorage)
+		selectFolder.Name = "SelectedPlayers"
+	end
 	local val = string.split(textbox.Text,":")[2]:gsub(" ","")
+	local valObj = Instance.new("BoolValue",game.ServerStorage)
 	if val == "True" then
 		textbox.Text = "Enabled : False"
+		valObj.Value = False
 	else
 		textbox.Text = "Enabled : True"
+		valObj.Value = True
 	end
+	valObj.Changed:Connect(function(vil)
+		while vil do
+			wait(0.1)
+			for _,v in pairs(selectFolder:GetChildren()) do
+				if game.Players:FindFirstChild(v.Name) then
+					v:Destroy()
+				end
+			end
+		end
+	end)
 end)
-
 
 CurrentPage = 1
 
