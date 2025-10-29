@@ -4484,8 +4484,11 @@ textbox.MouseButton1Down:Connect(function()
 		selectFolder.Name = "SelectedPlayers"
 	end
 	local val = string.split(textbox.Text,":")[2]:gsub(" ","")
-	local valObj = Instance.new("BoolValue",game.ServerStorage)
-	valObj.Name = "EnabledList"
+	local valObj = game.ServerStorage:FindFirstChild("EnabledList")
+	if valObj == nil then
+		local valObj = Instance.new("BoolValue",game.ServerStorage)
+		valObj.Name = "EnabledList"
+	end
 	if val == "True" then
 		textbox.Text = "Enabled : False"
 		valObj.Value = not valObj.Value
