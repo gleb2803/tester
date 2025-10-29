@@ -4485,12 +4485,13 @@ textbox.MouseButton1Down:Connect(function()
 	end
 	local val = string.split(textbox.Text,":")[2]:gsub(" ","")
 	local valObj = Instance.new("BoolValue",game.ServerStorage)
+	valObj.Name = "EnabledList"
 	if val == "True" then
 		textbox.Text = "Enabled : False"
-		valObj.Value = False
+		valObj.Value = false
 	else
 		textbox.Text = "Enabled : True"
-		valObj.Value = True
+		valObj.Value = true
 	end
 	valObj.Changed:Connect(function(vil)
 		while vil do
