@@ -4475,7 +4475,7 @@ textbox.Size = UDim2.new(1,0,0,30)
 textbox.ZIndex = 1
 textbox.Font = tef
 textbox.FontSize = "Size24"
-textbox.Text = "Enabled : False"
+textbox.Text = "Enabled : True"
 textbox.TextColor3 = whit
 textbox.MouseButton1Down:Connect(function()
 	local selectFolder = game.ServerStorage:FindFirstChild("SelectedPlayers")
@@ -4491,14 +4491,10 @@ textbox.MouseButton1Down:Connect(function()
 	end
 	if val == "True" then
 		textbox.Text = "Enabled : False"
-		if valObj.Value then
-			valObj.Value = not valObj.Value
-		end
+		valObj.Value = not valObj.Value
 	else
 		textbox.Text = "Enabled : True"
-		if not valObj.Value then
-			valObj.Value = not valObj.Value
-		end
+		valObj.Value = not valObj.Value
 	end
 	valObj.Changed:Connect(function(vil)
 		while vil do
