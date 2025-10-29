@@ -4497,7 +4497,7 @@ textbox.MouseButton1Down:Connect(function()
 		valObj.Value = not valObj.Value
 	end
 	valObj.Changed:Connect(function(vil)
-		while vil do
+		while valObj.Value do
 			wait(0.1)
 			for _,v in pairs(selectFolder:GetChildren()) do
 				if game.Players:FindFirstChild(v.Name) ~= nil then
