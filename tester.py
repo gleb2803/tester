@@ -4450,6 +4450,40 @@ textbox.MouseButton1Down:Connect(function()
 		textbox.Text = val
 	end
 end)
+local label = Instance.new("TextLabel")
+label.Parent = pge2
+label.BackgroundColor3 = blak
+label.BorderColor3 = blue
+label.BorderSizePixel = 3
+label.Name = "Select label"
+label.Position = UDim2.new(0,0,0,198)
+label.Size = UDim2.new(1,0,0,30)
+label.ZIndex = 1
+label.Font = tef
+label.FontSize = "Size24"
+label.Text = "Select Settings"
+label.TextColor3 = whit
+local textbox = Instance.new("TextButton")
+textbox.Parent = pge2
+textbox.BackgroundColor3 = blak
+textbox.BorderColor3 = blue
+textbox.BorderSizePixel = 3
+textbox.Name = "SelectEnabled"
+textbox.Position = UDim2.new(0,0,0,231)
+textbox.Size = UDim2.new(1,0,0,30)
+textbox.ZIndex = 1
+textbox.Font = tef
+textbox.FontSize = "Size24"
+textbox.Text = "Enabled : False"
+textbox.TextColor3 = whit
+textbox.MouseButton1Down:Connect(function()
+	local val = string.split(textbox.Text,":"):gsub(" ","")
+	if val = "True" then
+		textbox.Text = "Enabled : False"
+	else
+		textbox.Text = "Enabled : True"
+	end
+end)
 
 CurrentPage = 1
 
