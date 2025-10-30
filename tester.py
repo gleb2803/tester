@@ -2211,7 +2211,7 @@ button.Size = UDim2.new(0.5,0,0,30)
 button.ZIndex = 2
 button.Font = tef
 button.FontSize = "Size14"
-button.Text = "Body Swap Potion"
+button.Text = "Body Swap\nPotion"
 button.TextColor3 = whit
 button.MouseButton1Down:connect(function()
 	game.InsertService:LoadAsset(78730532):GetChildren()[1].Parent = game.Players./localplayer/.Backpack
