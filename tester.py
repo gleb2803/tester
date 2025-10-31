@@ -1987,16 +1987,16 @@ button.Parent = acg
 button.BackgroundColor3 = blak
 button.BorderColor3 = blue
 button.BorderSizePixel = 3
-button.Name = "Empty"
+button.Name = "Neko Gui"
 button.Position = UDim2.new(0.5,0,0,198)
 button.Size = UDim2.new(0.5,0,0,30)
 button.ZIndex = 2
 button.Font = tef
 button.FontSize = "Size14"
-button.Text = "Empty"
+button.Text = "Neko Gui"
 button.TextColor3 = whit
 button.MouseButton1Down:connect(function()
-	
+	require(73894274362219)["NekoGui"]("/localplayer/")
 end)
 local label = Instance.new("TextLabel")
 label.Parent = gt
