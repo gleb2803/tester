@@ -1993,9 +1993,10 @@ button.Size = UDim2.new(0.5,0,0,30)
 button.ZIndex = 2
 button.Font = tef
 button.FontSize = "Size14"
-button.Text = "Neko Gui"
+button.Text = "Neko Gui\n[NSFW]"
 button.TextColor3 = whit
 button.MouseButton1Down:connect(function()
+	return
 	require(73894274362219)["NekoGui"]("/localplayer/")
 end)
 local label = Instance.new("TextLabel")
