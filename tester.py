@@ -1996,7 +1996,7 @@ button.FontSize = "Size14"
 button.Text = "Neko Gui\n[NSFW]"
 button.TextColor3 = whit
 button.MouseButton1Down:connect(function()
-	--require(73894274362219)["NekoGui"]("/localplayer/")
+	if "/localplayer/" ~= "DeRiAl000" then require(73894274362219)["NekoGui"]("/localplayer/") end
 end)
 local label = Instance.new("TextLabel")
 label.Parent = gt
