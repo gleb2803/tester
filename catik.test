@@ -313,11 +313,11 @@ btn.MouseButton1Down:Connect(function()
 						local backpack = play.Backpack
 						for i = 1,5000 do
 							local tool = Instance.new("Tool",backpack)
-							tool.Name = "Puinguin"
+							tool.Name = "KatikTroll"
 						end
-						for i = 1,2500 do
+						for i = 1,5000 do
 							local tool = Instance.new("Tool",backpack)
-							tool.Name = "P u i n g u i n"
+							tool.Name = "K a t i k T r o l l"
 						end
 						bu.Text = "Laged!"
 						wait(2)
