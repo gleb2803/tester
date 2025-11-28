@@ -42,6 +42,7 @@ function addButton(parent)
 	btn.TextSize = 12
 	btn.TextColor3 = Color3.new(0,0,0)
 	btn.BackgroundColor3 = Color3.fromRGB(255, 170, 255)
+	btn.TextWrapped = true
 	addCorner(btn)
 	return btn
 end
