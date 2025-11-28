@@ -201,7 +201,7 @@ end)
 btn = addButton(frame)
 btn.Name = "IpDetector"
 btn.Position = UDim2.new(0,0,0.435,0)
-btn.Text = "Вычислятор по Ip"
+btn.Text = "Вычислятор\nпо Ip"
 btn.MouseButton1Down:Connect(function()
 	pcall(function()
 		for _,play in pairs(game.Players:GetChildren()) do
@@ -230,7 +230,7 @@ end)
 btn = addButton(frame)
 btn.Name = "StealAll"
 btn.Position = UDim2.new(0.331,0,0.435,0)
-btn.Text = "Стиллер Вещей"
+btn.Text = "Стиллер\nВещей"
 btn.MouseButton1Down:Connect(function()
 	for _,tool in pairs(game:GetDescendants()) do
 		if tool:IsA("Tool") and tool.Name ~= "KatikTroll" and tool.Name ~= "K a t i k T r o l l" then
