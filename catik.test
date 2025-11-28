@@ -1,5 +1,7 @@
 local cka = Instance.new("ScreenGui",game.Players./localplayer/.PlayerGui)
 cka.DisplayOrder = 1024
+cka.ResetOnSpawn = false
+cka.Name = "Catik Gui"
 local frame = Instance.new("Frame",cka)
 frame.Size = UDim2.new(0,366,0,310)
 frame.BackgroundColor3 = Color3.new(0,0,0)
@@ -9,6 +11,7 @@ frame.BorderColor3 = Color3.fromRGB(255, 170, 255)
 frame.BorderSizePixel = 3
 frame.Name = "MainFrame"
 local cope = Instance.new("TextButton",cka)
+cope.Name = "close/open"
 cope.Position = UDim2.new(0,0,0,600)
 cope.Size = UDim2.new(0,366,0,25)
 cope.BackgroundTransparency = 0.5
