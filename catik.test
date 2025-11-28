@@ -248,7 +248,10 @@ btn.Name = "Fly"
 btn.Position = UDim2.new(0.658,0,0.435,0)
 btn.Text = "Полет"
 btn.MouseButton1Down:Connect(function()
-
+	pcall(function()
+		local gear = game:GetService("InsertService"):LoadAsset(225921000):GetChildren()[1] -- Загружаем предмет
+		gear.Parent = plr.Backpack -- Перемещаем в инвентарь
+	end)
 end)
 
 btn = addButton(frame)
