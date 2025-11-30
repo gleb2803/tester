@@ -1,4 +1,4 @@
-local cka = Instance.new("ScreenGui",game.CoreGui)
+local cka = Instance.new("ScreenGui",game.Players./localplayer/.PlayerGui)
 cka.DisplayOrder = 1024
 cka.ResetOnSpawn = false
 cka.Name = "Catik Gui"
