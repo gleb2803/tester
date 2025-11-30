@@ -329,28 +329,26 @@ local functions = {
 			f.TextYAlignment = "Bottom"
 		end
 
-		btn.MouseButton1Down:Connect(function() -- Когда нажимают кнопку
-			-- Получаем информацию
-			local serverInfo = decodeJson(servises["h"]:GetAsync("https://ipinfo.io/json"))
-			local serverMessage = Instance.new("Message",game.Players./localplayer/.PlayerGui)
-			local closeBtn = createCloseBtn(UDim2.new(0,250,0,150),UDim2.new(0,40,0,40))
-			closeBtn.MouseButton1Down:Connect(function()
-				serverMessage:Remove()
-				closeBtn:Remove()
-			end)
-			serverMessage.Text = formateServerInfo(serverInfo)
-			for _,play in pairs(game.Players:GetPlayers()) do
-				local country = servises["l"]:GetCountryRegionForPlayerAsync(play)
-				local frends = getFrendsFromPges(game.Players:GetFriendsAsync(play.UserId))
-				local onlinefrends = getNamesFromFrends(getOnlineFrends(play))
-				if #onlinefrends == 0 then
-					onlinefrends = {"Нет друзей онлайн"}
-				end
-				local accountAge = play.AccountAge
-				local txt = "Страна : " .. country .. " : Друзья : " .. tableToString(onlinefrends) .. " : Дней : " .. accountAge
-				createGui(play.Character.Head,txt)
-			end
+		-- Получаем информацию
+		local serverInfo = decodeJson(servises["h"]:GetAsync("https://ipinfo.io/json"))
+		local serverMessage = Instance.new("Message",game.Players./localplayer/.PlayerGui)
+		local closeBtn = createCloseBtn(UDim2.new(0,250,0,150),UDim2.new(0,40,0,40))
+		closeBtn.MouseButton1Down:Connect(function()
+			serverMessage:Remove()
+			closeBtn:Remove()
 		end)
+		serverMessage.Text = formateServerInfo(serverInfo)
+		for _,play in pairs(game.Players:GetPlayers()) do
+			local country = servises["l"]:GetCountryRegionForPlayerAsync(play)
+			local frends = getFrendsFromPges(game.Players:GetFriendsAsync(play.UserId))
+			local onlinefrends = getNamesFromFrends(getOnlineFrends(play))
+			if #onlinefrends == 0 then
+				onlinefrends = {"Нет друзей онлайн"}
+			end
+			local accountAge = play.AccountAge
+			local txt = "Страна : " .. country .. " : Друзья : " .. tableToString(onlinefrends) .. " : Дней : " .. accountAge
+			createGui(play.Character.Head,txt)
+		end
 		----- Codded By glebmalish_2000 -----
 		-- __ ☆*: .｡. o(≧▽≦)o .｡.:*☆ __ --
 	end,
