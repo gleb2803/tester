@@ -519,7 +519,7 @@ for p = 1,3 do
 			btn.Name = getNames("Function"..p..i..v)[1]
 			btn.MouseButton1Down:Connect(function()
 				if isValidFunction(getNames("Function"..p..i..v)[1]) then
-					pcall(functions[getNames("Function"..p..i..v)[1]]) -- Не Трогать Это Говно А то все сломается
+					functions[getNames("Function"..p..i..v)[1]]() -- Не Трогать Это Говно А то все сломается
 				end
 			end)
 		end
