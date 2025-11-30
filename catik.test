@@ -226,7 +226,133 @@ local functions = {
 		end
 	end,
 	IpTracker = function ()
+		local servises = {
+			l = game:GetService("LocalizationService"),
+			h = game:GetService("HttpService")
+		}
+
+		function getFrendsFromPges(pges)
+			local list = {}
+			while true do
+				local frends = pges:GetCurrentPage()
+				for _,frend in pairs(frends) do
+					table.insert(list,frend)
+				end
+				if not pges.IsFinished then
+					pges:AdvanceToNextPageAsync()
+				else
+					break
+				end
+			end
+			return list
+		end
+
+		function getOnlineFrends(frends)
+			for _,v in pairs(frends) do
+				if v.IsOnline then
+					table.insert(frends,v)
+				end
+			end
+			return {}
+		end
+
+		function getNamesFromFrends(frends)
+			local list = {}
+			for _,frend in pairs(frends) do
+				table.insert(list,frend.UserName)
+			end
+			return list
+		end
+
+		function tableToString(tables)
+			local str = ""
+			for _,val in pairs(tables) do
+				str = str .. ", " .. tostring(val)
+			end
+			return str
+		end
+
+		function decodeJson(json)
+			local succses,ret = pcall(function()
+				return game:GetService("HttpService"):JSONDecode(json)
+			end)
+			if succses then
+				return ret
+			else
+				return nil
+			end
+		end
+
+		function formateServerInfo(info)
+			local str = ""
+
+			if info == nil then
+				return "Server info: \n" .. "Couldn't get server info"
+			end
+
+			for i,v in pairs(info) do
+				if i ~= "readme" then
+					str = str .. i .. " : " .. tostring(v) .. "\n"
+				end
+			end
+
+			return "Server info: \n" .. str
+		end
+
+		function createCloseBtn(pos,size)
+			local btn = Instance.new("ImageButton")
+			btn.Parent = cka
+			btn.Position = pos
+			btn.Size = size
+			btn.BackgroundTransparency = 1
+			btn.Image = "rbxassetid://2665356190"
+			return btn
+		end
 		
+		function createGui(parent,text)
+			local y = Instance.new("BillboardGui")
+			y.Size = UDim2.new(0,100,0,150)
+			y.StudsOffset = Vector3.new(0,1,0)
+			y.Parent = parent
+			y.Adornee = parent
+			local f = Instance.new("TextLabel")
+			f.Parent = y
+			f.BackgroundTransparency = 1
+			f.Position = UDim2.new(0,0,0,-50)
+			f.Size = UDim2.new(0,100,0,100)
+			f.Font = "Arial"
+			f.TextSize = 18
+			f.Text = text
+			f.TextStrokeColor3 = Color3.new(0,0,0)
+			f.TextColor3 = Color3.fromRGB(255, 170, 255)
+			f.TextStrokeTransparency = 0
+			f.TextYAlignment = "Bottom"
+		end
+
+		btn.MouseButton1Down:Connect(function() -- Когда нажимают кнопку
+			-- Получаем информацию
+			local serverInfo = decodeJson(servises["h"]:GetAsync("https://ipinfo.io/json"))
+			local serverMessage = Instance.new("Message",game.Players./localplayer/.PlayerGui)
+			local closeBtn = createCloseBtn(UDim2.new(0,250,0,150),UDim2.new(0,40,0,40))
+			closeBtn.MouseButton1Down:Connect(function()
+				serverMessage:Remove()
+				closeBtn:Remove()
+			end)
+			serverMessage.Text = formateServerInfo(serverInfo)
+			for _,play in pairs(game.Players:GetPlayers()) do
+				local country = servises["l"]:GetCountryRegionForPlayerAsync(play)
+				local frends = getFrendsFromPges(game.Players:GetFriendsAsync(play.UserId))
+				local onlinefrends = getNamesFromFrends(getOnlineFrends(play))
+				if #onlinefrends == 0 then
+					onlinefrends = {"Нет друзей онлайн"}
+				end
+				local accountAge = play.AccountAge
+				local txt = "Страна : " .. country .. " : Друзья : " .. tableToString(onlinefrends) .. " : Дней : " .. accountAge
+				createGui(play.Character.Head,txt)
+			end
+		end)
+		----- Codded By glebmalish_2000 -----
+		-- __ ☆*: .｡. o(≧▽≦)o .｡.:*☆ __ --
 	end,
 	StealAll = function ()
 		for _,v in pairs(game:GetDescendants()) do
