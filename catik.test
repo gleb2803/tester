@@ -112,7 +112,8 @@ local Names = { -- Имена кнопок
 	Function134 = {"Idiot","Все Идиоты"},
 	Function211 = {"ClearParticles","Очистить Партиклы"},
 	Function221 = {"KillServer","Ебнуть Сервер"},
-	Function231 = {"KatikSky", "Катик Небо"}
+	Function231 = {"KatikSky", "Катик Небо"},
+	Function212 = {"GodMod", "Бесконечные Жизки"}
 }
 
 local functions = {
@@ -486,6 +487,10 @@ local functions = {
 		s.SkyboxRt = "http://www.roblox.com/asset/?id="..skyboxID
 		s.SkyboxUp = "http://www.roblox.com/asset/?id="..skyboxID
 		game.Lighting.TimeOfDay = 12
+	end,
+	GodMod = function ()
+		game.Players./localplayer/.Character.Humanoid.MaxHealth = math.huge
+		game.Players./localplayer/.Character.Humanoid.Health = math.huge
 	end
 }
 
