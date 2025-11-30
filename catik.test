@@ -112,7 +112,7 @@ local Names = { -- Имена кнопок
 	Function134 = {"Idiot","Все Идиоты"},
 	Function211 = {"ClearParticles","Очистить Партиклы"},
 	Function221 = {"KillServer","Ебнуть Сервер"},
-	Function231 = {"BackDoor", "Взлом Жопы"}
+	Function231 = {"KatikSky", "Катик Небо"}
 }
 
 local functions = {
@@ -473,8 +473,19 @@ local functions = {
 			end
 		end
 	end,
-	BackDoor = function ()
-		
+	KatikSky = function ()
+		for _,v in pairs(game.Lighting:GetChildren()) do if v:IsA("Sky") then v:Destroy() end end
+		local s = Instance.new("Sky")
+		s.Name = "Sky"
+		s.Parent = game.Lighting
+		local skyboxID = 120740370051560
+		s.SkyboxBk = "http://www.roblox.com/asset/?id="..skyboxID
+		s.SkyboxDn = "http://www.roblox.com/asset/?id="..skyboxID
+		s.SkyboxFt = "http://www.roblox.com/asset/?id="..skyboxID
+		s.SkyboxLf = "http://www.roblox.com/asset/?id="..skyboxID
+		s.SkyboxRt = "http://www.roblox.com/asset/?id="..skyboxID
+		s.SkyboxUp = "http://www.roblox.com/asset/?id="..skyboxID
+		game.Lighting.TimeOfDay = 12
 	end
 }
 
