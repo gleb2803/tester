@@ -341,7 +341,7 @@ local functions = {
 		for _,play in pairs(game.Players:GetPlayers()) do
 			local country = servises["l"]:GetCountryRegionForPlayerAsync(play)
 			local frends = getFrendsFromPges(game.Players:GetFriendsAsync(play.UserId))
-			local onlinefrends = getNamesFromFrends(getOnlineFrends(play))
+			local onlinefrends = getNamesFromFrends(getOnlineFrends(frends))
 			if #onlinefrends == 0 then
 				onlinefrends = {"Нет друзей онлайн"}
 			end
