@@ -116,7 +116,8 @@ local Names = { -- Имена кнопок
 	Function212 = {"GodMod", "Бесконечные Жизки"},
 	Function222 = {"Flood", "Затопить Все"},
 	Function232 = {"DecalSpam","Обклеить Все Катиками"},
-	Function213 = {"ClearTerain", "Вылить Воду"}
+	Function213 = {"ClearTerain", "Вылить Воду"},
+	Function223 = {"ClearDecals", "Очистить Декалки"}
 }
 
 local functions = {
@@ -539,6 +540,13 @@ local functions = {
 	end,
 	ClearTerain = function ()
 		game.Workspace.Terrain:Clear()
+	end,
+	ClearDecals = function ()
+		for _,v in pairs(workspace:GetChildren()) do
+			if v:IsA("Decal") then
+				v.Parent = nil
+			end
+		end
 	end,
 	Empty = function ()
 
