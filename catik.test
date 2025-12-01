@@ -115,7 +115,8 @@ local Names = { -- Имена кнопок
 	Function231 = {"KatikSky", "Катик Небо"},
 	Function212 = {"GodMod", "Бесконечные Жизки"},
 	Function222 = {"Flood", "Затопить Все"},
-	Function232 = {"DecalSpam","Обклеить Все Катиками"}
+	Function232 = {"DecalSpam","Обклеить Все Катиками"},
+	Function213 = {"ClearTerain", "Вылить Воду"}
 }
 
 local functions = {
@@ -535,6 +536,9 @@ local functions = {
 		end
 		exPro(game.Workspace)
 		asdf(game.Workspace)
+	end,
+	ClearTerain = function ()
+		game.Workspace.Terrain:Clear()
 	end,
 	Empty = function ()
 
