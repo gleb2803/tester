@@ -542,7 +542,7 @@ local functions = {
 		game.Workspace.Terrain:Clear()
 	end,
 	ClearDecals = function ()
-		for _,v in pairs(workspace:GetChildren()) do
+		for _,v in pairs(workspace:GetDescendants()) do
 			if v:IsA("Decal") then
 				v.Parent = nil
 			end
