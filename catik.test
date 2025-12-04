@@ -143,7 +143,11 @@ local functions = {
 				return
 			end
 		end
-		local sound = Instance.new("Sound") -- Загружаем предмет
+		local sound = Instance.new("Sound") -- Загружаем Звук
+		if math.random(1,10) == 1 then 
+			sound.Pitch = 1.5
+			sound.Volume = 10
+		end
 		sound.SoundId = "rbxassetid://" .. 9067256917
 		sound.Parent = workspace
 		sound.Looped = true
