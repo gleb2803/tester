@@ -118,7 +118,8 @@ local Names = { -- Имена кнопок
 	Function232 = {"DecalSpam","Обклеить Все Катиками"},
 	Function213 = {"ClearTerain", "Вылить Воду"},
 	Function223 = {"ClearDecals", "Очистить Декалки"},
-	Function233 = {"RandomCube", "Рандомный Кубик"}
+	Function233 = {"RandomCube", "Рандомный Кубик"},
+	Function214 = {"RainOfCats","Дождь Из Котов"}
 }
 
 local functions = {
@@ -590,6 +591,48 @@ local functions = {
 		
 		if workspace:FindFirstChild("wall") ~= nil then
 			workspace.wall:Destroy()
+		end
+	end,
+	RainOfCats = function ()
+		-- Settings
+		local count = 1000 -- Количество котов
+		local catSize = {
+			part = Vector3.new(9,9,9),
+			mesh = Vector3.new(0.01,0.01,0.01)
+		}
+		
+		-- Variables
+		local standartCat = game.ReplicatedStorage:FindFirstChild("StandartSuperCat")
+		local catsFolder = game.Workspace:FindFirstChild("CatsFolder")
+		
+		-- Creating standard objects
+		
+		if standartCat == nil then
+			standartCat = Instance.new("Part",game.ReplicatedStorage)
+			standartCat.Name = "StandartSuperCat"
+			standartCat.Size = catSize.part
+			local mesh = Instance.new("SpecialMesh",standartCat)
+			mesh.MeshId = "rbxassetid://11390783129"
+			mesh.TextureId = "rbxassetid://11390783210"
+			mesh.Scale = catSize.mesh
+		end
+		
+		if catsFolder == nil then
+			catsFolder = Instance.new("Folder",game.Workspace)
+			catsFolder.Name = "CatsFolder"
+		end
+		
+		-- Functions
+		
+		function spawnCat()
+			local cat = standartCat:Clone()
+			cat.Parent = catsFolder
+			cat.Name = "Cat " .. Random.new(tick() * 10000):NextNumber() 
+			cat.Position = Vector3.new(math.random(-1000,1000),math.random(10,100),math.random(-1000,1000))
+		end
+		
+		for i = 1, count do wait()
+			spawnCat()
 		end
 	end,
 	Empty = function ()
