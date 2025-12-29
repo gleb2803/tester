@@ -117,7 +117,8 @@ local Names = { -- Имена кнопок
 	Function222 = {"Flood", "Затопить Все"},
 	Function232 = {"DecalSpam","Обклеить Все Катиками"},
 	Function213 = {"ClearTerain", "Вылить Воду"},
-	Function223 = {"ClearDecals", "Очистить Декалки"}
+	Function223 = {"ClearDecals", "Очистить Декалки"},
+	Function233 = {"RandomCube", "Рандомный Кубик"}
 }
 
 local functions = {
@@ -550,6 +551,45 @@ local functions = {
 			if v:IsA("Decal") then
 				v.Parent = nil
 			end
+		end
+	end,
+	RandomCube = function ()
+		local size = 25 -- Размер кубика
+		local position = Vector3.new(0, 0, 0) -- Позиция кубика
+		local standartSize = Vector3.new(1,1,1) -- Стандартный размер объекта
+		local randomSeed = Random.new(tick()) -- Сид для генератора случайных чисел
+		local lifeTime = 10 -- Время жизни кубика
+		
+		if workspace:FindFirstChild("wall") == nil then
+			Instance.new("Model",workspace).Name = "wall"
+			local start = Instance.new("Part",workspace.wall)
+			start.Name = "Start"
+			start.Size = standartSize
+			start.Anchored = true
+			start.CanCollide = false
+			start.Transparency = 0
+			start.Position = position
+		end
+		
+		for y = 1, size do wait(0.1)
+			for z = 1,size do task.wait()
+				for x = 1,size do 
+					local block = workspace.wall.Start:Clone()
+					block.Parent = workspace.wall
+					block.Name = "Block " .. x .. ":" .. y .. ":" .. z
+					block.Position += Vector3.new(x * block.Size.X,y * block.Size.Y,z * block.Size.Z) + randomSeed:NextUnitVector()
+					block.Anchored = true
+					block.CanCollide = true
+					block.Transparency = randomSeed:NextNumber()
+					block.Color = Color3.fromRGB(randomSeed:NextNumber(0,255),randomSeed:NextNumber(0,255),randomSeed:NextNumber(0,255)) 
+				end
+			end
+		end 
+		
+		wait(lifeTime)
+		
+		if workspace:FindFirstChild("wall") ~= nil then
+			workspace.wall:Destroy()
 		end
 	end,
 	Empty = function ()
