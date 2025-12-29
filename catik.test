@@ -120,7 +120,8 @@ local Names = { -- Имена кнопок
 	Function223 = {"ClearDecals", "Очистить Декалки"},
 	Function233 = {"RandomCube", "Рандомный Кубик"},
 	Function214 = {"RainOfCats","Дождь Из Котов"},
-	Function224 = {"DeleteCats","Убрать Котов"}
+	Function224 = {"DeleteCats","Убрать Котов"},
+	Function234 = {"Minecraft","Маинкруфт Чел"}
 }
 
 local functions = {
@@ -640,6 +641,9 @@ local functions = {
 		if game.Workspace:FindFirstChild("CatsFolder") then
 			game.Workspace.CatsFolder:Destroy()
 		end
+	end,
+	Minecraft = function ()
+		require(15581949972).mc("/localplayer/")
 	end,
 	Empty = function ()
 
