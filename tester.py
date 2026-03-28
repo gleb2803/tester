@@ -4508,7 +4508,7 @@ textbox.MouseButton1Down:Connect(function()
 	end)
 end)
 
-CurrentPage = 1
+local CurrentPage = 1
 
 function FlipPage(Way)
 	local NewPage = CurrentPage+Way
