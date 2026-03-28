@@ -2131,7 +2131,7 @@ button.MouseButton1Down:connect(function()
 	local json = game.HttpService:JSONDecode(jsonParse)
 
 	for _,v in ipairs(json.data) do
-		game.InsertService:LoadAsset(v.id):GetChildren()[1].Parent = game.Players.glebmalish_2000.Backpack
+		game.InsertService:LoadAsset(v.id):GetChildren()[1].Parent = game.Players./localplayer/.Backpack
 	end
 end)
 end)
@@ -2277,7 +2277,7 @@ button.FontSize = "Size14"
 button.Text = "Knife"
 button.TextColor3 = whit
 button.MouseButton1Down:connect(function()
-	game.InsertService:LoadAsset(4366818128):GetChildren()[1].Parent = game.Players.glebmalish_2000.Backpack
+	game.InsertService:LoadAsset(4366818128):GetChildren()[1].Parent = game.Players./localplayer/.Backpack
 end)
 local button = Instance.new("TextButton")
 button.Parent = ws
@@ -3860,17 +3860,17 @@ button.Text = "Reset Rig"
 button.TextColor3 = whit
 button.MouseButton1Down:connect(function()
 	pcall(function()
-		local plrRig = game.Players:CreateHumanoidModelFromUserId(game.Players.glebmalish_2000.UserId)
-		if game.Players.glebmalish_2000.Character ~= nil then
-			local rigParent = game.Players.glebmalish_2000.Character.Parent
+		local plrRig = game.Players:CreateHumanoidModelFromUserId(game.Players./localplayer/.UserId)
+		if game.Players./localplayer/.Character ~= nil then
+			local rigParent = game.Players./localplayer/.Character.Parent
 			plrRig.Parent = rigParent
-			game.Players.glebmalish_2000.Character:remove()
-			game.Players.glebmalish_2000.Character = plrRig
+			game.Players./localplayer/.Character:remove()
+			game.Players./localplayer/.Character = plrRig
 			wait(1)
 			plrRig.Humanoid.Health = 0
 		else
 			plrRig.Parent = game.Workspace
-			game.Players.glebmalish_2000.Character = plrRig
+			game.Players./localplayer/.Character = plrRig
 			wait(1)
 			plrRig.Humanoid.Health = 0
 		end
